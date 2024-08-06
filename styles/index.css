@@ -105,6 +105,9 @@ header button:hover{
 }
 /* Main */
 
+main{
+    margin:2%;
+}
 
 main p{
     color:white;
@@ -115,12 +118,7 @@ main p{
 
 /* Sección principal */
 #bienvenida{
-    display:flex;   
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    width: 100%;
-    background-color: #242331;
-    
+    display:flex;
 }
 #informacionPrincipal{
     display: flex;
@@ -129,33 +127,22 @@ main p{
     align-items: center;
 }
 
-#informacionPrincipal h2{
-    font-size: 50px;
-}
-#informacionPrincipal p{
-    font-size: 30px;
-    font-weight: bold;
-}
-
 
 #imagenPrincipal img{
   
    margin-bottom:0;
 }
 
-
-
 /* Servicios */
 
 
 #servicios{
-    
+    margin-top:2%;
+    margin-bottom: 2%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    width: 100%;
-    background-color: #3C6E71 ;
     
 }
 
@@ -165,11 +152,6 @@ main p{
     justify-content: center;
     align-items: center;
     width: 50%;
-}
-
-#leftServicios h2{
-    font-size: 50px;
-    margin: 20px;
 }
 
 #imagenServicios img{
@@ -188,9 +170,7 @@ main p{
 
 .containerService{
 
-    border: 1px solid #696969;
-    box-shadow: #242331;
-    background-color: #242331;
+    border: 1px solid white;
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -219,15 +199,9 @@ main p{
 }
 
 .infoService h3{
-    color: #ddc47d;
+    color:#ddc47d;
     margin-bottom: 10px;
-    font-size: 40px;
-}
-
-.infoService p{
-    color:#fff;
-    
-    font-size: 30px;
+    font-size: 24px;
 }
 
 #rightServicios{
@@ -235,13 +209,11 @@ main p{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 50%;
 }   
 
 #rightServicios  > p{
     margin:30px;
-    color: #242331;
-    font-size: 30px;
-    font-weight: bold;
 }
 
 
@@ -255,14 +227,14 @@ main p{
     padding: 50px;
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: #ddc47d;
+    background-color: white;
     border: none;
     border-radius: 12px;
     cursor: pointer; 
 }
 
 #rightServicios button:hover{
-    background-color: white;
+    background-color: #ddc47d;
 
 }
 
@@ -341,7 +313,7 @@ footer{
 
 #right li{
     margin: 10px;
-    font-size: 36px;
+    font-size: 20px;
 }
 
 #right a{
@@ -349,7 +321,7 @@ footer{
 }
 
 #right a:hover{
-    color: #3C6E71;
+    color: #fefefe;
 }
 
 #nosotros {
