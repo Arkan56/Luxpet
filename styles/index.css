@@ -438,14 +438,14 @@ footer{
 }
 
 #leftNosotros p {
-    font-size: 18px; /* Ajusta el tamaño del texto para el párrafo */
+    font-size: 28px; /* Ajusta el tamaño del texto para el párrafo */
     margin: 20px;
     line-height: 1.5; /* Mejora la legibilidad del texto */
 }
 
 #encuentranos {
     display: flex;
-    justify-content: space-between; /* Asegura que los elementos estén separados */
+    justify-content: space-evenly; /* Asegura que los elementos estén separados */
     align-items: center; /* Centra verticalmente los elementos */
     flex-direction: row-reverse; /* Invierte el orden de los elementos */
     width: 100%;
@@ -469,7 +469,17 @@ footer{
     align-items: flex-start; /* Alinea el contenido al inicio (izquierda) */
     padding-left: 15%; /* Añade espacio a la izquierda para mover el texto hacia el centro */
 }
+
+
+.info h2 {
+    font-size: 50px;
+}
+
+.info p{
+    font-size: 28px;
+}
 .mapa {
+    margin-right: 50px;
     width: 40%; /* Ajusta el ancho del contenedor del mapa */
     height: 500px; /* Ajusta la altura del mapa */
 }
@@ -518,7 +528,7 @@ footer{
 }
 
 #leftmisionyvision p {
-    font-size: 18px; /* Ajusta el tamaño del texto para el párrafo */
+    font-size: 28px; /* Ajusta el tamaño del texto para el párrafo */
     margin: 20px;
     line-height: 1.5; /* Mejora la legibilidad del texto */
 }
