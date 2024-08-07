@@ -62,6 +62,7 @@ header ul{
     display: flex;
     list-style: none;
     margin-right: 20px;
+    
     align-items: center;
 }
 
@@ -155,7 +156,7 @@ main p{
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-    background-color: #3C6E71 ;
+    background-color: #25494b ;
     
 }
 
@@ -352,8 +353,7 @@ footer{
     color: #3C6E71;
 }
 
-#nosotros {
-}
+
 
 .contenido{
     display: flex;
@@ -395,4 +395,130 @@ footer{
     display: flex;
 }
 
+#nosotros {
+    display: flex;
+    justify-content: space-between; /* Asegura que los elementos estén separados */
+    align-items: center; /* Centra verticalmente los elementos */
+    flex-wrap: nowrap; /* Evita que los elementos se envuelvan */
+    width: 100%;
+    background-color: #242331;
+    padding: 20px; /* Añade un poco de espacio alrededor del contenido */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+}
 
+#imagenNosotros {
+    width: 60%; /* Ajusta el ancho del contenedor de la imagen */
+    display: flex;
+    justify-content: center; /* Centra la imagen horizontalmente */
+    align-items: center; /* Centra la imagen verticalmente */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+}
+
+#imagenNosotros img {
+    width: 40%;
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 50px;
+}
+
+#leftNosotros {
+    width: 50%; /* Ajusta el ancho del contenedor del texto */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinea el contenido al principio (parte superior) */
+    align-items: center; /* Centra el contenido horizontalmente */
+    text-align: center; /* Asegura que el texto esté centrado */
+    height: 100%; /* Asegura que el contenedor ocupe toda la altura disponible */
+    color: white; /* Asegura que el texto sea legible sobre el fondo oscuro */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+}
+
+#leftNosotros h2 {
+    font-size: 50px;
+    margin: 20px;
+}
+
+#leftNosotros p {
+    font-size: 18px; /* Ajusta el tamaño del texto para el párrafo */
+    margin: 20px;
+    line-height: 1.5; /* Mejora la legibilidad del texto */
+}
+
+#encuentranos {
+    display: flex;
+    justify-content: space-between; /* Asegura que los elementos estén separados */
+    align-items: center; /* Centra verticalmente los elementos */
+    flex-direction: row-reverse; /* Invierte el orden de los elementos */
+    width: 100%;
+    background-color: #25494b;
+    padding: 20px; /* Añade un poco de espacio alrededor del contenido */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+}
+
+.contenido {
+    display: flex;
+    width: 100%;
+}
+
+.info {
+    width: 60%; /* Ajusta el ancho del contenedor del texto */
+    text-align: left; /* Alinea el texto a la izquierda */
+    font-size: 7em; /* Agranda el tamaño del texto */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente el contenido */
+    align-items: flex-start; /* Alinea el contenido al inicio (izquierda) */
+    padding-left: 15%; /* Añade espacio a la izquierda para mover el texto hacia el centro */
+}
+.mapa {
+    width: 40%; /* Ajusta el ancho del contenedor del mapa */
+    height: 500px; /* Ajusta la altura del mapa */
+}
+
+
+#misionyvision {
+    display: flex;
+    justify-content: space-between; /* Asegura que los elementos estén separados */
+    align-items: center; /* Centra verticalmente los elementos */
+    flex-wrap: nowrap; /* Evita que los elementos se envuelvan */
+    width: 100%;
+    background-color: #242331;
+    padding: 20px; /* Añade un poco de espacio alrededor del contenido */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+}
+
+#imagenmisionyvision {
+    width: 60%; /* Ajusta el ancho del contenedor de la imagen */
+    display: flex;
+    justify-content: center; /* Centra la imagen horizontalmente */
+    align-items: center; /* Centra la imagen verticalmente */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+}
+
+#imagenmisionyvision img {
+    width: 60%;
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 50px;
+}
+
+#leftmisionyvision {
+    width: 50%; /* Ajusta el ancho del contenedor del texto */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinea el contenido al principio (parte superior) */
+    align-items: center; /* Centra el contenido horizontalmente */
+    text-align: center; /* Asegura que el texto esté centrado */
+    height: 100%; /* Asegura que el contenedor ocupe toda la altura disponible */
+    color: white; /* Asegura que el texto sea legible sobre el fondo oscuro */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+}
+
+#leftmisionyvision h2 {
+    font-size: 50px;
+    margin: 20px;
+}
+
+#leftmisionyvision p {
+    font-size: 18px; /* Ajusta el tamaño del texto para el párrafo */
+    margin: 20px;
+    line-height: 1.5; /* Mejora la legibilidad del texto */
+}
