@@ -541,3 +541,7 @@ footer{
 .carousel-inner{
  height: 800px;
 }
+
+#servicios h2, #misionyvision h2, #nosotros h2, #encuentranos h2, #bienvenida h2 {
+    color:#ddc47d
+}
