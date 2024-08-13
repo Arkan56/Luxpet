@@ -7,7 +7,7 @@
 ## Nuestro logo
 
 
-<img src="/images/Logo.jpg" alt="Logo de LuxPet" height="200">
+<img src="demo/src/main/resources/static/images/Logo.jpg" alt="Logo de LuxPet" height="200">
 
 
 ## ¿Quienes somos?
