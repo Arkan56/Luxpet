@@ -22,7 +22,7 @@ public class MascotaController {
     @GetMapping("/all")
     public String mostrarMascotas(Model model) {
         model.addAttribute("mascotas", service.searchAll());
-        return "mostrar_todas_mascotas";
+        return "listadoMascotas";
     }
 
     @GetMapping("/find/{id}")

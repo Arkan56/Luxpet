@@ -3,15 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mascotas</title>
+    <link rel="stylesheet" href="/styles/datos_mascota.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <title>Mascota individual</title>
 </head>
 <body>
-    <h1>Mascota</h1>
-    <p th:text="${mascota.nombre}"></p>
-    <p th:text="${mascota.raza}"></p>
-    <p th:text="${mascota.edad}"></p>
-    <p th:text="${mascota.foto}"></p>
-    <p th:text="${mascota.enfermedad}"></p>
-    <p th:text="${mascota.estado}"></p>
+
+    <header>
+        <h1><a href="../templates/index.html">Lux<span>Pet</span></a></h1>
+    </header>
+
+    <main>
+        <div id="container">
+            <div id="titulo">
+                <h1>Información de la mascota</h1>
+            </div>
+            <div id="info">
+                <p><strong>Nombre:</strong> <span th:text="${mascota.nombre}"></span></p>
+                <p><strong>Raza:</strong> <span th:text="${mascota.raza}"></span></p>
+                <p><strong>Edad:</strong> <span th:text="${mascota.edad}"></span></p>
+                <p><strong>Foto:</strong> 
+                    <a th:href="${mascota.foto}" target="_blank" th:text="${mascota.foto}"></a>
+                </p>
+                <p><strong>Enfermedad:</strong> <span th:text="${mascota.enfermedad}"></span></p>
+                <p><strong>Estado:</strong> <span th:text="${mascota.estado}"></span></p>
+            </div>
+        </div>
+    </main>
+
+    
 </body>
 </html>

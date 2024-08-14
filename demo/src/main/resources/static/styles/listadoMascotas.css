@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+/* Colores: 
+amarillo #ddc47d
+  azul oscuro: 242331*/
+
+
+  
+
+*{
+    margin:0;
+    box-sizing: border-box;
+}
+/*
+*/
+html, body{     
+    min-height: 100%;
+    background-color:#242331;
+}
+
+
+/* Header */
+header{
+    display: flex;
+    border: 1px solid black;
+    background-color:#e4d9bc ;
+    justify-content: center;
+    align-items: center;
+}
+
+header span{
+    color:white;
+}
+
+header a{
+    align-items: center;
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    font-size: 75px;
+    font-family: "Courgette", cursive;
+    text-decoration: none;
+    color:#242331
+}
+
+header ul{
+    display: flex;
+    list-style: none;
+    margin-right: 20px;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+header li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+
+/* Main */
+
+
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+main h2 {
+    font-family: "Acme", sans-serif;
+    color: #ddc47d;
+    font-size: 30px;
+    margin-bottom: 20px;
+    text-align: center; /* Centra el texto dentro del elemento h2 */
+}
+
+#mascotasTitle{
+    display: flex;
+    justify-content: center;
+}
+
+main table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+
+main th{
+    font-family: "Acme", sans-serif;
+    border: 2px solid black;
+    font-size: 20px;
+    margin-bottom: 20px;
+    background-color: #ddc47d;
+}
+
+main td{
+    font-family: "Nunito", sans-serif;
+    border: 2px solid black;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    background-color: #e4d9bc;
+}
+
+main td a{
+    text-decoration: none;
+    color: #242331
+}
+
+main td a:hover{
+    color: #ddc47d;
+}
+
+main button{
+    font-family: "Nunito", sans-serif;
+    align-items: center;
+    font-size: 16px;
+    padding: 8px;
+    background-color: #ddc47d;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer; 
+}
+
+main button:hover{
+    background-color: #efefef;
+}
+
+
+main{
+    margin: 30px;
+}
+main h1{
+    font-family: "Acme", sans-serif;
+    color: #ddc47d;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+
+
+
+/* Footer */
+
+footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e4d9bc;
+    padding: 10px;
+    border-top: 1px solid black;
+    position:static;
+    position: relative;
+    bottom: 0;
+    margin-top:auto;
+    padding-top: 20px;
+    
+}
+
+
+#left{
+    display:flex;
+    align-items: center;
+    margin-left: 20px;
+    justify-content: center;
+}
+
+#logoFooter{
+    font-size: 60px;
+    margin-right: 20px;
+    font-family: "Courgette", cursive;
+    color: #242331;
+}
+
+#left #info{
+    display: inline;
+    justify-content: center;
+    align-items: center;
+}
+
+#info h3{
+    font-family: "Courgette", cursive;
+}
+
+#left ul{
+    display:inline;
+    list-style: none;
+    color: #242331;
+    text-decoration: none;
+    font-family: "Nunito", sans-serif;
+}
+
+#right{
+    display:flex;
+    align-items: center;
+    margin-right: 20px;
+    justify-content: center;
+}
+
+#right h3{
+    justify-content: center;
+    color: #242331;
+}
+
+
+#right ul{
+    display:flex;
+    padding:20px;
+    list-style: none;
+    color: #242331;
+    text-decoration: none;
+    font-family: "Nunito", sans-serif;
+}
+
+#right li{
+    margin: 10px;
+    font-size: 36px;
+}
+
+#right a{
+    color: #242331;
+}
+
+#right a:hover{
+    color: #3C6E71;
+}
