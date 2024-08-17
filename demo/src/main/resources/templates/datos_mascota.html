@@ -19,14 +19,15 @@
                 <h1>Información de la mascota</h1>
             </div>
             <div id="info">
+                <img th:src="${mascota.foto}" alt="Foto"></img>
                 <p><strong>Nombre:</strong> <span th:text="${mascota.nombre}"></span></p>
                 <p><strong>Raza:</strong> <span th:text="${mascota.raza}"></span></p>
                 <p><strong>Edad:</strong> <span th:text="${mascota.edad}"></span></p>
-                <p><strong>Foto:</strong> 
-                    <a th:href="${mascota.foto}" target="_blank" th:text="${mascota.foto}"></a>
-                </p>
                 <p><strong>Enfermedad:</strong> <span th:text="${mascota.enfermedad}"></span></p>
                 <p><strong>Estado:</strong> <span th:text="${mascota.estado}"></span></p>
+                <a th:href="@{/mascota/all}">
+                    <button><strong>Volver</strong></button>
+                </a>
             </div>
         </div>
     </main>
