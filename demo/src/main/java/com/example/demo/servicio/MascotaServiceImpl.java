@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.entidades.Mascota;
 import com.example.demo.repositorio.MascotaRepository;
 
-@Service    
-public class MascotaServiceImpl implements MascotaService{
+@Service
+public class MascotaServiceImpl implements MascotaService {
     @Autowired
     MascotaRepository repo;
 
@@ -22,5 +22,20 @@ public class MascotaServiceImpl implements MascotaService{
     public Collection<Mascota> searchAll() {
         return repo.findAll();
     }
-    
+
+    @Override
+    public void deleteById(int id) {
+        repo.deleteById(id);
+    }
+
+    @Override
+    public void update(Mascota mascota) {
+        repo.update(mascota);
+    }
+
+    @Override
+    public void add(Mascota mascota) {
+        repo.add(mascota);
+    }
+
 }
