@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+*{
+    margin:0;
+    box-sizing: border-box;
+}
+
+html, body{     
+    min-height: 100%;
+    background-color:#242331;
+}
+
+/* Main */
+
+#container{
+    margin: auto;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    border-radius: 12px;
+    width: 50%;
+    
+}
+
+
+h2{
+    font-family: "Acme", sans-serif;
+    color: #ddc47d;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+
+#titulo-container{
+    margin: 20px;
+}
+
+label{
+    color:white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+input{
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+}
+
+#botones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+#botones a{
+    font-family: "Nunito", sans-serif;
+    align-items: center;
+    background-color: #ddc47d;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; 
+    color:#242331;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px;  
+    margin-right: 10px;
+    margin-left: 10px;
+    
+
+}
+#botones a:hover{
+    background-color: #efefef;
+}
+button{ 
+    background-color: #ddc47d;
+    color: #242331;
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    
+}
+
+
+
+button:hover{
+    background-color: white;
+}
+
+
+#enviarBtn button{
+    background-color: #3C6E71;
+    color: white;
+}
+
+#enviarBtn button:hover{
+      background-color: #50888b;
+}
+.form-group {
+    margin-bottom: 20px; /* Espacio entre cada grupo de label e input */
+}
