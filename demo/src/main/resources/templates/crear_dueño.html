@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/crear_entidad.css">
-    <title>Modificar mascota</title>
+    <title>Agregar mascota</title>
 </head>
 <body>
-    <div id="container">
-        <div id="titulo-container">
-            <h2>Modificar mascota</h2>
-        </div>
-        <div id="formulario-container">
-                <form  th:object="${cliente}"th:action="@{/cliente/update/{id}(id=${cliente.id})}" method="post"> 
+
+        <div id="container">
+            <div id="titulo-container">
+                <h2>Agregar Dueño</h2>
+            </div>
+            <div id="formulario-container">
+                <form  th:object="${cliente}"th:action="@{/cliente/agregar}" method="post"> 
                     
                     <div class="form-group">
                         <label for="foto">Foto:</label>
@@ -39,16 +40,16 @@
                     </div>
                             
                     <div id="botones">
-                       <a th:href="@{/mascota/all}">Volver</a>
+                       <a th:href="@{/due$o/all}">Volver</a>
                         <div id="enviarBtn">
                             <button type="submit">Crear</button>
                         </div>
                     </div>
 
                 </form>
+            </div>
         </div>
-    </div>
-    
-    
+        
+        
 </body>
 </html>

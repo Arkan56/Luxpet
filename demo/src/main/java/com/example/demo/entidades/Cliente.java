@@ -1,7 +1,7 @@
 package com.example.demo.entidades;
 
 public class Cliente {
-    private String cedula,
+    private String cedula;
     private String nombre;
     private String correo;
     private String celular;

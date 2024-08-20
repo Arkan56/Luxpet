@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/datos_individuales.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <title>Dueño individual</title>
+</head>
+<body>
+
+    <main>
+        <div id="container">
+            <div id="titulo">
+                <h1>Información del dueño</h1>
+            </div>
+            <div id="info">
+                <img th:src="${cliente.foto}" alt="Foto del dueño"></img>
+                <p><strong>Nombre:</strong> <span th:text="${cliente.nombre}"></span></p>
+                <p><strong>Cedula:</strong> <span th:text="${cliente.cedula}"></span></p>
+                <p><strong>Correo:</strong> <span th:text="${cliente.correo}"></span></p>
+                <p><strong>Celular:</strong> <span th:text="${cliente.celular}"></span></p>
+                <a th:href="@{/dueño/all}">
+                    <button><strong>Volver</strong></button>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    
+</body>
+</html>
