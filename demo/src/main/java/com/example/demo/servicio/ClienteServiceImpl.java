@@ -5,21 +5,23 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.Mascota;
+import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
 
 @Service
-public class MascotaServiceImpl implements MascotaService {
+public class ClienteServiceImpl implements ClienteService {
     @Autowired
-    MascotaRepository repo;
+    ClienteRepository repo;
 
     @Override
-    public Mascota searchById(int id) {
+    public Cliente searchById(int id) {
         return repo.findById(id);
     }
 
     @Override
-    public Collection<Mascota> searchAll() {
+    public Collection<Cliente> searchAll() {
         return repo.findAll();
     }
 
@@ -29,13 +31,12 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public void update(Mascota mascota) {
-        repo.update(mascota);
+    public void update(Cliente cliente) {
+        repo.update(cliente);
     }
 
     @Override
-    public void add(Mascota mascota) {
-        repo.add(mascota);
+    public void add(Cliente cliente) {
+        repo.add(cliente);
     }
-
 }
