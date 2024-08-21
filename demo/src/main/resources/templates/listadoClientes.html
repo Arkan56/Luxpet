@@ -27,15 +27,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="mascota : ${mascotas}">
+                <tr th:each="cliente : ${clientes}">
                     <td th:text="${cliente.nombre}"></td>
                     <td th:text="${cliente.cedula}"></td>
                     <td>
-                        <a th:href="@{/mascota/find/{id}(id=${mascota.id})}"> <button>Ver detalles</button></a>
-                        <a th:href="@{/mascota/update/{id}(id=${mascota.id})}"><button id="editarBtn">Editar</button></a>
-                        <a th:href="@{/mascota/delete/{id}(id=${mascota.id})}"><button id="eliminarBtn">Eliminar</button></a>
-                        
-                
+                        <a th:href="@{/cliente/find/{id}(id=${cliente.id})}"> <button>Ver detalles</button></a>
+                        <a th:href="@{/cliente/update/{id}(id=${cliente.id})}"><button id="editarBtn">Editar</button></a>
+                        <a th:href="@{/cliente/delete/{id}(id=${cliente.id})}"><button id="eliminarBtn">Eliminar</button></a>
                     </td>
                 </tr>
             </tbody>
@@ -43,7 +41,7 @@
     </div>
     
     <div id="botonAgregar">
-        <a type="button" th:href="@{/mascota/add}">Agregar dueño</a>
+        <a type="button" th:href="@{/cliente/add}">Agregar dueño</a>
     </div>
     
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
