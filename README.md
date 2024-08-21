@@ -4,7 +4,12 @@
 
 # LuxPet 
 
-/* Logo */ 
+## Nuestro logo
+
+
+<img src="demo/src/main/resources/static/images/Logo.jpg" alt="Logo de LuxPet" height="200">
+
+
 ## ¿Quienes somos?
 
 En nuestra clínica veterinaria, nos comprometemos a proporcionar el más alto nivel de cuidado y atención para asegurar el bienestar integral de su perro. Creemos que cada mascota merece un trato personalizado y afectuoso, y trabajamos con esmero para ofrecer soluciones adaptadas a sus necesidades específicas.

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/crear_entidad.css">
+    <title>Modificar mascota</title>
+</head>
+<body>
+    <div id="container">
+        <div id="titulo-container">
+            <h2>Modificar mascota</h2>
+        </div>
+        <div id="formulario-container">
+                <form  th:object="${cliente}"th:action="@{/cliente/update/{id}(id=${cliente.id})}" method="post"> 
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input th:field="*{nombre}" type="text" id="nombre" placeholder="Ingresa el nombre" required>    
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cedula">Cedula:</label>
+                        <input th:field="*{cedula}" type="text" id="cedula" placeholder="Ingresa la cedula" required>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="correo">Correo:</label>
+                        <input th:field="*{correo}" type="email" id="correo" placeholder="Ingresa el correo" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="celular">Celular:</label>
+                        <input th:field="*{celular}" type="number" id="celular" placeholder="Ingresa el número celular">
+                    </div>
+                            
+                    <div id="botones">
+                       <a th:href="@{/cliente/all}">Volver</a>
+                        <div id="enviarBtn">
+                            <button type="submit">Crear</button>
+                        </div>
+                    </div>
+
+                </form>
+        </div>
+    </div>
+    
+    
+</body>
+</html>

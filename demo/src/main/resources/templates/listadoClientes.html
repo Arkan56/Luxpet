@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/listadoEntidades.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <title>Mascotas</title>
+</head>
+<body>
+
+    <main>
+
+    <div id="Title">
+        <h1>Listado de dueños de mascotas</h1>
+    </div>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cedula</th>
+                    <th>Acciones</th> <!-- Nueva columna para el botón -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cliente : ${clientes}">
+                    <td th:text="${cliente.nombre}"></td>
+                    <td th:text="${cliente.cedula}"></td>
+                    <td>
+                        <a th:href="@{/cliente/find/{id}(id=${cliente.id})}"> <button>Ver detalles</button></a>
+                        <a th:href="@{/cliente/update/{id}(id=${cliente.id})}"><button id="editarBtn">Editar</button></a>
+                        <a th:href="@{/cliente/delete/{id}(id=${cliente.id})}"><button id="eliminarBtn">Eliminar</button></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div id="botonAgregar">
+        <a type="button" th:href="@{/cliente/add}">Agregar dueño</a>
+    </div>
+    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </main>
+
+</body>
+</html>
