@@ -15,12 +15,11 @@
                 <h1>Información del dueño</h1>
             </div>
             <div id="info">
-                <img th:src="${cliente.foto}" alt="Foto del dueño"></img>
                 <p><strong>Nombre:</strong> <span th:text="${cliente.nombre}"></span></p>
                 <p><strong>Cedula:</strong> <span th:text="${cliente.cedula}"></span></p>
                 <p><strong>Correo:</strong> <span th:text="${cliente.correo}"></span></p>
                 <p><strong>Celular:</strong> <span th:text="${cliente.celular}"></span></p>
-                <a th:href="@{/dueño/all}">
+                <a th:href="@{/cliente/all}">
                     <button><strong>Volver</strong></button>
                 </a>
             </div>
