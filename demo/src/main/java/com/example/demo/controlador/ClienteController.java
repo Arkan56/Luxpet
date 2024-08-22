@@ -73,4 +73,10 @@ public class ClienteController {
         service.update(cliente);
         return "redirect:/cliente/all"; //Falta mirar
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "inicioSesion";
+    }
+
 }

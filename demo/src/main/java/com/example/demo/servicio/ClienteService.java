@@ -13,4 +13,6 @@ public interface ClienteService  {
     public void update(Cliente mascota);
 
     public void add(Cliente mascota);
+
+    public Cliente searchByCedula(String cedula);
 }

@@ -41,5 +41,12 @@ public class ClienteRepository {
         data.put(cliente.getId(), cliente);
     }
 
-    
+    public Cliente findByCedula(String cedula) {
+        for(Cliente cliente : data.values()) {
+            if(cliente.getCedula().equals(cedula)) {
+                return cliente;
+            }
+        }
+        return null;
+    }    
 }
