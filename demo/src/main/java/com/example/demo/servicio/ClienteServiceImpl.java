@@ -39,4 +39,9 @@ public class ClienteServiceImpl implements ClienteService {
     public void add(Cliente cliente) {
         repo.add(cliente);
     }
+
+    @Override
+    public Cliente searchByCedula(String cedula) {
+        return repo.findByCedula(cedula);
+    }
 }
