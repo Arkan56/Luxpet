@@ -75,8 +75,22 @@ public class ClienteController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String mostrarLogin(Model model) {
+        model.addAttribute("cedula", "");
         return "inicioSesion";
+    }
+
+    @PostMapping("/login")
+    public String confirmarLogin(@ModelAttribute("cedula") String cedula, Model model) {
+        System.out.println("Todos los atributos del modelo: " + model.asMap());
+        System.out.println("La cedula es: "+cedula);
+        //Cliente aux = service.searchByCedula(cedula);
+        /*System.out.println(aux.getCedula());
+        if(aux != null)
+        {
+            return "redirect:/cliente/all";
+        }*/ 
+        return "redirect:/cliente/all";
     }
 
 }

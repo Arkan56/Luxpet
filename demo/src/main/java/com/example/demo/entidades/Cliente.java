@@ -11,15 +11,6 @@ public class Cliente {
     private String celular;
     private List<Mascota> mascotas;
 
-    public Cliente(Integer id,String cedula, String nombre, String correo, String celular, List<Mascota> mascotas) {
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.correo = correo;
-        this.celular = celular;
-        this.mascotas = mascotas;
-        this.id = id;
-    }
-
     public Cliente(Integer id, String cedula, String nombre, String correo, String celular) {
         this.cedula = cedula;
         this.nombre = nombre;

@@ -16,37 +16,21 @@
 
     <div class="center-container">  
     <div class="containerlogin">
-        <div class="login_container">
-            <div class="login_tittle">
-                <span>  Iniciar sesión</span>
-            </div>
-
-            <div class="input_wrapper">
-                <input type="text" id="cedula" class="input_field" required>
-                <label for="cedula" class="label">Cédula</label>
-                <i class="fa-regular fa-id-card icon"></i>
-            </div>
-
-           
-
-            <div class="remenber-forgot">
-                <div class="remenber-me">
-                    <input type="checkbox" id="remenber">
-                    <label for="remenber">Recordarme</label>
+        <form th:action="@{/cliente/login}" method="post">
+            <div class="login_container">
+                <div class="login_tittle">
+                    <span>  Iniciar sesión</span>
                 </div>
-               
-                <div class="forgot">
-                    <a href="">Olvidaste tu cedula?</a>
+    
+                <div class="input_wrapper">
+                    <input type="text" th:value="${cedula}" class="input_field" required>
+                </div>
+    
+                <div class="input_wrapper">
+                    <button type="submit" >Iniciar Sesión</button>
                 </div>
             </div>
-
-            <div class="input_wrapper">
-                <input type="submit" class="input-submit" value="Iniciar Sesión">
-            </div>
-            <div class="signup">
-                <span>¿No eres usuario?<a href="../templates/registrarse.html">Regístrate</a></span>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
     <footer>
