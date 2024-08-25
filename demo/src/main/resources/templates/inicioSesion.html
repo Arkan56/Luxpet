@@ -5,59 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/inicioSesion.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <title>Document</title>
+    <title>Inicio de Sesión - LuxPet</title>
 </head>
 <body>
     <header>
-       
-            <h1><a th:href="@{/}">Lux<span>Pet</span></a></h1>
-       
+        <h1><a th:href="@{/}">Lux<span>Pet</span></a></h1>
     </header>
 
     <div class="center-container">  
-    <div class="containerlogin">
-        <form th:action="@{/cliente/login}" method="post">
-            <div class="login_container">
-                <div class="login_tittle">
-                    <span>  Iniciar sesión</span>
-                </div>
-    
-                <div class="input_wrapper">
-                    <input type="text" th:value="${cedula}" class="input_field" required>
-                </div>
-    
-                <div class="input_wrapper">
-                    <button type="submit" >Iniciar Sesión</button>
-                </div>
-            </div>
+        <form action="/cliente/login" method="post"> 
+            <h1 class="tittlelogin">Iniciar sesión</h1>
+            <label for="cedula">
+                <i class="fa-solid fa-user"></i>
+                <input placeholder="Ingresa la cédula" type="text" id="cedula" name="cedula"> 
+            </label>
+            <a href="#" class="link">¿Olvidaste tu cédula?</a>
+            <button id="button" type="submit">Iniciar sesión</button> 
         </form>
     </div>
-</div>
+
     <footer>
         <div id="left">
             <div id="logoFooter">
                 <img src="/images/footer.jpeg" alt="Logo Luxpet">
             </div>
-    
             <div id="info">
                 <h3>Contacto</h3>
                 <ul>
-                    <li><b>Telefono:</b> 1234567</li>
+                    <li><b>Teléfono:</b> 1234567</li>
                     <li><b>Email:</b> VeterinariaLux@luxpet.com</li>
                     <li><b>Dirección:</b> Javeriana</li>
                 </ul>
             </div>
-           
-          </div>  
-            <div id="right">
-                <ul>
-                    <li><a href=""><i class="fa-brands fa-facebook"></i></a></li>
-                    <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
-                    <li><a href=""><i class="fa-brands fa-x-twitter"></i></a></li>
-                    <li><a href=""><i class="fa-brands fa-tiktok"></i></a></li>
-                </ul>
-            </div>
+        </div>
+        <div id="right">
+            <ul>
+                <li><a href=""><i class="fa-brands fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
+                <li><a href=""><i class="fa-brands fa-x-twitter"></i></a></li>
+                <li><a href=""><i class="fa-brands fa-tiktok"></i></a></li>
+            </ul>
+        </div>
     </footer>
-    
 </body>
 </html>
