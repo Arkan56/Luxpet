@@ -64,6 +64,7 @@ header ul{
     margin-right: 20px;
     align-items: center;
     margin-bottom: 0;
+    font-family: "Nunito", sans-serif;
 }
 
 header li{
@@ -71,6 +72,7 @@ header li{
     justify-content: center;
     align-items: center;
     margin: 10px;
+    font-family: "Nunito", sans-serif;
 }
 
 header i{
@@ -79,6 +81,7 @@ header i{
     margin: 10px;
     justify-content: center;
     align-items: center;
+    font-family: "Nunito", sans-serif;
 }
 
 header a{
@@ -86,6 +89,7 @@ header a{
     text-decoration: none;
     color: #242331;
     font-size: 25px;
+    font-family: "Nunito", sans-serif;
 }
 
 nav a:hover{
@@ -107,11 +111,57 @@ header button{
     border: none;
     border-radius: 12px;
     cursor: pointer; 
+    font-family: "Nunito", sans-serif;
 }
 header button:hover{
     background-color: #efefef;
 
 }
+/* From Uiverse.io by gharsh11032000 */ 
+.button {
+    cursor: pointer;
+    position: relative;
+    padding: 10px 24px;
+    font-size: 18px;
+    color: rgb(8, 8, 8);
+    border: 2px solid rgb(193, 163, 98);
+    border-radius: 34px;
+    background-color: transparent;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    overflow: hidden;
+  }
+  
+  .button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 50px;
+    height: 50px;
+    border-radius: inherit;
+    scale: 0;
+    z-index: -1;
+    background-color: rgb(193, 163, 98);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  }
+  
+  .button:hover::before {
+    scale: 3;
+  }
+  
+  .button:hover {
+    color: #212121;
+    scale: 1.1;
+    box-shadow: 0 0px 20px rgba(193, 163, 98,0.4);
+  }
+  
+  .button:active {
+    scale: 1;
+  }
+  
+  
+  
 /* Main */
 
 
@@ -165,6 +215,7 @@ main p{
     flex-wrap: wrap;
     width: 100%;
     background-color: #25494b ;
+    font-family: "Nunito", sans-serif;
     
 }
 
@@ -174,11 +225,13 @@ main p{
     justify-content: center;
     align-items: center;
     width: 50%;
+    font-family: "Nunito", sans-serif;
 }
 
 #leftServicios h2{
     font-size: 50px;
     margin: 20px;
+    font-family: "Nunito", sans-serif;
 }
 
 #imagenServicios img{
@@ -231,11 +284,12 @@ main p{
     color: #ddc47d;
     margin-bottom: 10px;
     font-size: 40px;
+    font-family: "Nunito", sans-serif;
 }
 
 .infoService p{
     color:#fff;
-    
+    font-family: "Nunito", sans-serif;
     font-size: 30px;
 }
 
@@ -251,6 +305,7 @@ main p{
     color: #242331;
     font-size: 30px;
     font-weight: bold;
+    font-family: "Nunito", sans-serif;
 }
 
 
@@ -272,6 +327,7 @@ main p{
 
 #rightServicios button:hover{
     background-color: white;
+    font-family: "Nunito", sans-serif;
 
 }
 
@@ -336,6 +392,7 @@ footer{
 #right h3{
     justify-content: center;
     color: #242331;
+    font-family: "Nunito", sans-serif;
 }
 
 
@@ -351,10 +408,12 @@ footer{
 #right li{
     margin: 10px;
     font-size: 36px;
+    font-family: "Nunito", sans-serif;
 }
 
 #right a{
     color: #242331;
+    font-family: "Nunito", sans-serif;
 }
 
 #right a:hover{
@@ -378,11 +437,13 @@ footer{
     font-size: 1.5em;
     margin-bottom: 20px;
     color: #fff;
+    font-family: "Nunito", sans-serif;
 }
 .services {
     font-size: 1.2em;
     margin-bottom: 20px;
     color: #fff;
+    font-family: "Nunito", sans-serif;
 }
 .mapa {
     width: 300px;
@@ -393,10 +454,12 @@ footer{
 
 .info{
     width: 60%;
+    font-family: "Nunito", sans-serif;
 }
 
 #nosotros h2{
     padding: 50px 0px 2px 0px;
+    font-family: "Nunito", sans-serif;
 }
 
 .ubicacion{
@@ -415,6 +478,7 @@ footer{
     box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
     padding-bottom: 50px;
     padding-top: 50px;
+    font-family: "Nunito", sans-serif;
 }
 
 #imagenNosotros {
@@ -444,6 +508,7 @@ footer{
     box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
     margin:auto;
     padding-right: 40px;
+    font-family: "Nunito", sans-serif;
 }
 
 #leftNosotros h2 {
@@ -451,12 +516,16 @@ footer{
     margin-bottom:  10px;
     margin-top: 0px;
     padding-top: 0;
+    font-family: "Nunito", sans-serif;
 }
 
 #leftNosotros p {
     font-size: 28px; /* Ajusta el tamaño del texto para el párrafo */
     line-height: 1.5; /* Mejora la legibilidad del texto */
+    font-family: "Nunito", sans-serif;
+    text-align: justify; /* Justifica el texto */
 }
+
 
 #encuentranos {
     display: flex;
@@ -472,6 +541,7 @@ footer{
 .contenido {
     display: flex;
     width: 100%;
+    font-family: "Nunito", sans-serif;
 }
 
 .info {
@@ -483,15 +553,18 @@ footer{
     justify-content: center; /* Centra verticalmente el contenido */
     align-items: flex-start; /* Alinea el contenido al inicio (izquierda) */
     padding-left: 15%; /* Añade espacio a la izquierda para mover el texto hacia el centro */
+    font-family: "Nunito", sans-serif;
 }
 
 
 .info h2 {
     font-size: 50px;
+    font-family: "Nunito", sans-serif;
 }
 
 .info p{
     font-size: 28px;
+    font-family: "Nunito", sans-serif;
 }
 .mapa {
     margin-right: 50px;
@@ -535,20 +608,112 @@ footer{
     height: 100%; /* Asegura que el contenedor ocupe toda la altura disponible */
     color: white; /* Asegura que el texto sea legible sobre el fondo oscuro */
     box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+
 }
 
 #leftmisionyvision h2 {
     font-size: 50px;
     margin: 20px;
+    font-family: "Nunito", sans-serif;
+    
 }
 
 #leftmisionyvision p {
     font-size: 28px; /* Ajusta el tamaño del texto para el párrafo */
     margin: 20px;
     line-height: 1.5; /* Mejora la legibilidad del texto */
+    font-family: "Nunito", sans-serif;
+    text-align: justify; /* Justifica el texto */
 }
 
 
 #servicios h2, #misionyvision h2, #nosotros h2, #encuentranos h2, #bienvenida h2 {
     color:#ddc47d
 }
+/* From Uiverse.io by david-mohseni */ 
+.wrapper {
+    display: inline-flex;
+    list-style: none;
+    height: 120px;
+    width: 100%;
+    padding-top: 40px;
+    font-family: "Poppins", sans-serif;
+    justify-content: center;
+  }
+  
+  .wrapper .icon {
+    position: relative;
+    background: #fff;
+    border-radius: 50%;
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .wrapper .tooltip {
+    position: absolute;
+    top: 0;
+    font-size: 14px;
+    background: #fff;
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 5px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .wrapper .tooltip::before {
+    position: absolute;
+    content: "";
+    height: 8px;
+    width: 8px;
+    background: #fff;
+    bottom: -3px;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .wrapper .icon:hover .tooltip {
+    top: -45px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  
+  .wrapper .icon:hover span,
+  .wrapper .icon:hover .tooltip {
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  .wrapper .facebook:hover,
+  .wrapper .facebook:hover .tooltip,
+  .wrapper .facebook:hover .tooltip::before {
+    background: #1877f2;
+    color: #fff;
+  }
+  
+  .wrapper .twitter:hover,
+  .wrapper .twitter:hover .tooltip,
+  .wrapper .twitter:hover .tooltip::before {
+    background: #1da1f2;
+    color: #fff;
+  }
+  
+  .wrapper .instagram:hover,
+  .wrapper .instagram:hover .tooltip,
+  .wrapper .instagram:hover .tooltip::before {
+    background: #e4405f;
+    color: #fff;
+  }
+  

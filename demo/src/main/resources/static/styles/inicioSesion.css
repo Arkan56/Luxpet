@@ -131,7 +131,7 @@ body{
     font-weight: 900;
     font-size: 40px;
     font-family: "Nunito", sans-serif;
-    color:  #000000;
+    color:  #161616;
   }
   
   .form {
@@ -334,7 +334,7 @@ footer{
 #right li{
     margin: 10px;
     font-size: 36px;
-    align-items: ;
+    align-items: center ;
 }
 
 #right a{
