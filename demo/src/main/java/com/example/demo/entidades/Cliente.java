@@ -8,10 +8,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-
 @Entity
 public class Cliente {
-   
+
     private String cedula;
     private String nombre;
     private String correo;
@@ -25,7 +24,7 @@ public class Cliente {
     private Long id;
 
     public Cliente(Long id, String cedula, String nombre, String correo, String celular) {
-        
+
         this.id = id;
         this.cedula = cedula;
         this.nombre = nombre;
@@ -40,10 +39,10 @@ public class Cliente {
         this.correo = correo;
         this.celular = celular;
         this.mascotas = new ArrayList<>();
-    
+
     }
 
-    public Cliente(){
+    public Cliente() {
 
     }
 
