@@ -5,11 +5,11 @@ import com.example.demo.entidades.Mascota;
 
 
 public interface ClienteService  {
-    public Cliente searchById(int id);
+    public Cliente searchById(Long id);
 
     public Collection<Cliente> searchAll();
 
-    public void deleteById(int id);
+    public void deleteById(Long id);
 
     public void update(Cliente cliente);
 
@@ -19,5 +19,5 @@ public interface ClienteService  {
 
     public void addMascota(String cedula, Mascota mascota);
 
-    public void deleteMascota(String cedula, int id);
+    public void deleteMascota(String cedula, Long id);
 }

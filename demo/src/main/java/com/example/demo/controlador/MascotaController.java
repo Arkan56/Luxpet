@@ -40,7 +40,7 @@ public class MascotaController {
             model.addAttribute("mascota", service.searchById(identificacion));
             Cliente cliente = service2.searchByCedula(mascota.getDueño());
             if(cliente == null) {
-                cliente = new Cliente(0, "", "", "", "");
+                cliente = new Cliente( "", "", "", "");
             }
             model.addAttribute("cliente", cliente);
         } else {
@@ -84,7 +84,7 @@ public class MascotaController {
     }
 
     @PostMapping("/update/{id}")
-    public String modificarMascota(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") int id, @ModelAttribute("dueño") String dueño) {
+    public String modificarMascota(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long id, @ModelAttribute("dueño") String dueño) {
         service2.deleteMascota(dueño, id);
         service.update(mascota);
         service2.addMascota(mascota.getDueño(), mascota);
