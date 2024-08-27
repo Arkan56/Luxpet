@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/inicioSesion.css">
+    <link rel="stylesheet" href="/demo/src/main/resources/static/styles/inicioSesion.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <title>Inicio de Sesión - LuxPet</title>
 </head>
@@ -13,21 +13,21 @@
     </header>
 
     <div class="center-container">  
-        <form action="/cliente/login" method="post"> 
-            <h1 class="tittlelogin">Iniciar sesión</h1>
-            <label for="cedula">
-                <i class="fa-solid fa-user"></i>
-                <input placeholder="Ingresa la cédula" type="text" id="cedula" name="cedula"> 
-            </label>
-            <a href="#" class="link">¿Olvidaste tu cédula?</a>
-            <button id="button" type="submit">Iniciar sesión</button> 
-        </form>
+        <div class="container">
+            <div class="heading">Iniciar Sesión</div>
+            <form action="/cliente/login" method="post" class="form">
+                <input required="" class="input" type="text" name="cedula" id="cedula" placeholder="Ingresa tu cédula">
+                
+                <input class="login-button" type="submit" value="Iniciar Sesión">
+            </form>
+        </div>
+        
     </div>
 
     <footer>
         <div id="left">
             <div id="logoFooter">
-                <img src="/images/footer.jpeg" alt="Logo Luxpet">
+                <img src="/demo/src/main/resources/static/images/footer.jpeg" alt="Logo Luxpet">
             </div>
             <div id="info">
                 <h3>Contacto</h3>
