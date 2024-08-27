@@ -48,5 +48,17 @@ public class ClienteRepository {
             }
         }
         return null;
-    }    
+    }
+
+    public void addMascota(String cedula, Mascota mascota) {
+        findByCedula(cedula).getMascotas().add(mascota);
+    }
+
+    public void deleteMascota(String cedula, int id) {
+        for (Mascota mascota : findByCedula(cedula).getMascotas()) {
+            if (mascota.getId() == id) { 
+                findByCedula(cedula).getMascotas().remove(mascota);
+            }
+        }
+    }
 }

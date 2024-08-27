@@ -44,4 +44,14 @@ public class ClienteServiceImpl implements ClienteService {
     public Cliente searchByCedula(String cedula) {
         return repo.findByCedula(cedula);
     }
+
+    @Override
+    public void addMascota(String cedula, Mascota mascota){
+        repo.addMascota(cedula, mascota);
+    }
+
+    @Override
+    public void deleteMascota(String cedula, int id){
+        repo.deleteMascota(cedula, id);
+    }
 }

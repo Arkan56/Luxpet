@@ -21,6 +21,8 @@ import com.example.demo.servicio.MascotaService;
 public class ClienteController {
     @Autowired
     ClienteService service;
+    @Autowired
+    MascotaService service2;
 
     @GetMapping("/all")
     public String mostrarClientes(Model model) {
@@ -86,12 +88,11 @@ public class ClienteController {
     public String confirmarLogin(@ModelAttribute("cedula") String cedula, Model model) {
         System.out.println("Todos los atributos del modelo: " + model.asMap());
         System.out.println("La cedula es: "+cedula);
-        //Cliente aux = service.searchByCedula(cedula);
-        /*System.out.println(aux.getCedula());
+        Cliente aux = service.searchByCedula(cedula);
         if(aux != null)
         {
-            return "redirect:/cliente/all";
-        }*/ 
+            return "redirect:/cliente/find/" + aux.getId();
+        }
         return "redirect:/cliente/all";
     }
 

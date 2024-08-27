@@ -9,8 +9,9 @@ public class Mascota {
     private String foto;
     private String enfermedad;
     private String estado;
+    private String dueño;
 
-    public Mascota(Integer id, String nombre, String raza, int edad, float peso, String foto, String enfermedad, String estado) {
+    public Mascota(Integer id, String nombre, String raza, int edad, float peso, String foto, String enfermedad, String estado, String dueño) {
         this.id = id;
         this.nombre = nombre;
         this.raza = raza;
@@ -19,6 +20,7 @@ public class Mascota {
         this.foto = foto;
         this.enfermedad = enfermedad;
         this.estado = estado;
+        this.dueño = dueño;
     }
 
     
@@ -89,6 +91,14 @@ public class Mascota {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getDueño() {
+        return dueño;
+    }
+
+    public void setDueño(String dueño) {
+        this.dueño = dueño;
     }
 
     

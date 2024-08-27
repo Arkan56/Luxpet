@@ -13,7 +13,7 @@
                 <h2>Agregar Mascota</h2>
             </div>
             <div id="formulario-container">
-                <form  th:object="${mascota}"th:action="@{/mascota/agregar}" method="post"> 
+                <form  th:object="${mascota}" th:action="@{/mascota/agregar}" method="post"> 
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
                         <input th:field="*{nombre}" type="text" id="nombre" placeholder="Ingresa el nombre" required>    
@@ -46,7 +46,14 @@
 
                     <div class="form-group">
                         <label for="estado">Enfermedad:</label>
-                        <input th:field="*{enfermedad}" type="text" id="enfermedad" placeholder="Ingresa la enfermedad">
+                        <input th:field="*{estado}" type="text" id="estado" placeholder="Ingresa la enfermedad">
+                    </div>
+
+                    <div>
+                        <select id="clientes" name="dueño" th:field="*{dueño}">
+                            <option value="" disabled selected>Seleccione un cliente</option>
+                            <option th:each="cliente : ${clientes}" th:value="${cliente.cedula}" th:text="${cliente.nombre} + ' - ' + ${cliente.cedula}"></option>
+                        </select>
                     </div>
                             
                     <div id="botones">

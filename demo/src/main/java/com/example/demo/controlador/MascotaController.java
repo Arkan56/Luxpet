@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.Mascota;
+import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.MascotaService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,8 @@ public class MascotaController {
 
     @Autowired
     MascotaService service;
+    @Autowired
+    ClienteService service2;
 
     @GetMapping("/all")
     public String mostrarMascotas(Model model) {
@@ -34,6 +38,11 @@ public class MascotaController {
 
         if (mascota != null) {
             model.addAttribute("mascota", service.searchById(identificacion));
+            Cliente cliente = service2.searchByCedula(mascota.getDueño());
+            if(cliente == null) {
+                cliente = new Cliente(0, "", "", "", "");
+            }
+            model.addAttribute("cliente", cliente);
         } else {
             throw new NotFoundException(identificacion);
         }
@@ -44,16 +53,19 @@ public class MascotaController {
     @GetMapping("/add")
     public String mostrarFormularioCrear(Model model) {
 
-        Mascota mascota = new Mascota(0, "", "", 0, 0, "", "", "");
+        Mascota mascota = new Mascota(0, "", "", 0, 0, "", "", "", "");
 
         model.addAttribute("mascota", mascota);
+        model.addAttribute("clientes", service2.searchAll());
 
         return "crear_mascota";
     }
 
     @PostMapping("/agregar")
-    public String agregarMascota(@ModelAttribute("mascota") Mascota mascota) {
+    public String agregarMascota(@ModelAttribute("mascota") Mascota mascota, @ModelAttribute("cliente") Cliente cliente) {
+        System.out.println("Mascota: " + mascota.toString());
         service.add(mascota);
+        service2.addMascota(mascota.getDueño(), mascota);
         return "redirect:/mascota/all";
     }
 
@@ -66,12 +78,16 @@ public class MascotaController {
     @GetMapping("/update/{id}")
     public String mostrarFormularioUpdate(Model model, @PathVariable("id") int id) {
         model.addAttribute("mascota", service.searchById(id));
+        model.addAttribute("clientes", service2.searchAll());
+        model.addAttribute("dueño", service.searchById(id).getDueño());
         return "modificar_mascota";
     }
 
     @PostMapping("/update/{id}")
-    public String modificarMascota(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") int id) {
+    public String modificarMascota(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") int id, @ModelAttribute("dueño") String dueño) {
+        service2.deleteMascota(dueño, id);
         service.update(mascota);
+        service2.addMascota(mascota.getDueño(), mascota);
         return "redirect:/mascota/all";
     }
 

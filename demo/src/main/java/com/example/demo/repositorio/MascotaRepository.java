@@ -15,12 +15,12 @@ public class MascotaRepository {
         data.put(1,
                 new Mascota(1, "Pepe", "Pitbull", 10, 10.f,
                         "https://d2yoo3qu6vrk5d.cloudfront.net/pulzo-lite/images-resized/PP2804546A-s-o.webp",
-                        "ninguna", "bien"));
-        data.put(2, new Mascota(2, "Luna", "Labrador", 5, 15.f, "luna.jpg", "ninguna", "excelente"));
-        data.put(3, new Mascota(3, "Rocky", "Bulldog", 8, 12.f, "rocky.jpg", "alergia al polvo", "bueno"));
-        data.put(4, new Mascota(4, "Bella", "Beagle", 3, 7.5f, "bella.jpg", "ninguna", "muy bien"));
-        data.put(5, new Mascota(5, "Max", "Pastor alemán", 6, 20.f, "max.jpg", "displasia de cadera", "regular"));
-        data.put(6, new Mascota(6, "Toby", "Chihuahua", 2, 4.f, "toby.jpg", "ninguna", "excelente"));
+                        "ninguna", "bien", ""));
+        data.put(2, new Mascota(2, "Luna", "Labrador", 5, 15.f, "luna.jpg", "ninguna", "excelente", ""));
+        data.put(3, new Mascota(3, "Rocky", "Bulldog", 8, 12.f, "rocky.jpg", "alergia al polvo", "bueno", ""));
+        data.put(4, new Mascota(4, "Bella", "Beagle", 3, 7.5f, "bella.jpg", "ninguna", "muy bien", ""));
+        data.put(5, new Mascota(5, "Max", "Pastor alemán", 6, 20.f, "max.jpg", "displasia de cadera", "regular", ""));
+        data.put(6, new Mascota(6, "Toby", "Chihuahua", 2, 4.f, "toby.jpg", "ninguna", "excelente", ""));
     }
 
     public Mascota findById(int id) {

@@ -1,6 +1,7 @@
 package com.example.demo.servicio;
 import java.util.Collection;
 import com.example.demo.entidades.Cliente;
+import com.example.demo.entidades.Mascota;
 
 
 public interface ClienteService  {
@@ -10,9 +11,13 @@ public interface ClienteService  {
 
     public void deleteById(int id);
 
-    public void update(Cliente mascota);
+    public void update(Cliente cliente);
 
-    public void add(Cliente mascota);
+    public void add(Cliente cliente);
 
     public Cliente searchByCedula(String cedula);
+
+    public void addMascota(String cedula, Mascota mascota);
+
+    public void deleteMascota(String cedula, int id);
 }
