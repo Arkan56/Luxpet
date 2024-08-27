@@ -38,7 +38,7 @@ public class MascotaController {
 
         if (mascota != null) {
             model.addAttribute("mascota", service.searchById(identificacion));
-            Cliente cliente = service2.searchByCedula(mascota.getDueño());
+            Cliente cliente = service2.searchByCedula(mascota.getCliente().getCedula());
             if(cliente == null) {
                 cliente = new Cliente( "", "", "", "");
             }
@@ -53,7 +53,7 @@ public class MascotaController {
     @GetMapping("/add")
     public String mostrarFormularioCrear(Model model) {
 
-        Mascota mascota = new Mascota(0, "", "", 0, 0, "", "", "", "");
+        Mascota mascota = new Mascota("", "", 0, 0, "", "", "");
 
         model.addAttribute("mascota", mascota);
         model.addAttribute("clientes", service2.searchAll());
@@ -65,7 +65,7 @@ public class MascotaController {
     public String agregarMascota(@ModelAttribute("mascota") Mascota mascota, @ModelAttribute("cliente") Cliente cliente) {
         System.out.println("Mascota: " + mascota.toString());
         service.add(mascota);
-        service2.addMascota(mascota.getDueño(), mascota);
+        service2.addMascota(mascota.getCliente().getCedula(), mascota);
         return "redirect:/mascota/all";
     }
 
@@ -79,7 +79,7 @@ public class MascotaController {
     public String mostrarFormularioUpdate(Model model, @PathVariable("id") int id) {
         model.addAttribute("mascota", service.searchById(id));
         model.addAttribute("clientes", service2.searchAll());
-        model.addAttribute("dueño", service.searchById(id).getDueño());
+        model.addAttribute("dueño", service.searchById(id).getCliente());
         return "modificar_mascota";
     }
 
@@ -87,7 +87,7 @@ public class MascotaController {
     public String modificarMascota(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long id, @ModelAttribute("dueño") String dueño) {
         service2.deleteMascota(dueño, id);
         service.update(mascota);
-        service2.addMascota(mascota.getDueño(), mascota);
+        service2.addMascota(mascota.getCliente().getCedula(), mascota);
         return "redirect:/mascota/all";
     }
 

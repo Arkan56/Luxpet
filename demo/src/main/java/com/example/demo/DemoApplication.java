@@ -9,10 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.example.demo.entidades.Mascota;
 
-//@SpringBootApplication
-@Configuration
-@EnableAutoConfiguration
-@ComponentScan
+@SpringBootApplication
 public class DemoApplication {
 
 	public static void main(String[] args) {
