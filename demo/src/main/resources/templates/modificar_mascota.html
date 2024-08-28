@@ -3,69 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/crear_entidad.css">
+    <link rel="stylesheet" href="/demo/src/main/resources/static/styles/crear_entidad.css">
     <title>Modificar mascota</title>
 </head>
 <body>
-    <div id="container">
-        <div id="titulo-container">
-            <h2>Modificar mascota</h2>
-        </div>
+    <div class="container">
+        <div class="form_area">
+            <h2 class="title">Modificar mascota</h2>
+       
         <div id="formulario-container">
-            <form  th:object="${mascota}"th:action="@{/mascota/update/{id}(id=${mascota.id})}" method="post"> 
-        
+            <form th:object="${mascota}" th:action="@{/mascota/update/{id}(id=${mascota.id})}" method="post"> 
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
-                    <input th:field="*{nombre}" type="text" id="nombre" placeholder="Ingresa el nombre" required>    
+                    <input th:field="*{nombre}" type="text" id="nombre" placeholder="Ingresa el nombre" required class="form_style">    
                 </div>
                 
                 <div class="form-group">
                     <label for="raza">Raza:</label>
-                    <input th:field="*{raza}" type="text" id="raza" placeholder="Ingresa la raza" required>
+                    <input th:field="*{raza}" type="text" id="raza" placeholder="Ingresa la raza" required class="form_style">
                 </div>
-               
+                
                 <div class="form-group">
                     <label for="edad">Edad:</label>
-                    <input th:field="*{edad}" type="number" id="edad" placeholder="Ingresa la edad" required>
+                    <input th:field="*{edad}" type="number" id="edad" placeholder="Ingresa la edad" required class="form_style">
                 </div>
                 
                 <div class="form-group">
                     <label for="peso">Peso:</label>
-                    <input th:field="*{peso}" type="number" id="peso" placeholder="Ingresa el peso" required>
+                    <input th:field="*{peso}" type="number" id="peso" placeholder="Ingresa el peso" required class="form_style">
                 </div>
                     
                 <div class="form-group">
                     <label for="foto">Foto:</label>
-                    <input th:field="*{foto}" type="text" id="foto" placeholder="Ingresa la URL de la foto" required>
+                    <input th:field="*{foto}" type="text" id="foto" placeholder="Ingresa la URL de la foto" required class="form_style">
                 </div>
                 
                 <div class="form-group">
                     <label for="enfermedad">Enfermedad:</label>
-                    <input th:field="*{enfermedad}" type="text" id="enfermedad" placeholder="Ingresa la enfermedad">
+                    <input th:field="*{enfermedad}" type="text" id="enfermedad" placeholder="Ingresa la enfermedad" class="form_style">
                 </div>
-
+    
                 <div class="form-group">
-                    <label for="estado">Enfermedad:</label>
-                    <input th:field="*{estado}" type="text" id="estado" placeholder="Ingresa la enfermedad">
+                    <label for="estado">Estado:</label>
+                    <input th:field="*{estado}" type="text" id="estado" placeholder="Ingresa el estado" class="form_style">
                 </div>
-
-                <div>
-                    <select id="clientes" name="dueño" th:field="*{dueño}">
+    
+                <div class="form-group">
+                    <label for="dueño">Dueño:</label>
+                    <select id="clientes" name="dueño" th:field="*{dueño}" class="form_style">
                         <option value="" disabled selected>Seleccione un cliente</option>
                         <option th:each="cliente : ${clientes}" th:value="${cliente.cedula}" th:text="${cliente.nombre} + ' - ' + ${cliente.cedula}"></option>
                     </select>
                 </div>
                
                 <div id="botones">
-                    <a th:href="@{/mascota/all}">Volver</a>
+                    <a th:href="@{/mascota/all}" class="btn">Volver</a>
                     <div id="enviarBtn">
-                        <button type="submit">Modificar</button>
+                        <button type="submit" class="btn">Modificar</button>
                     </div>
                 </div>
-             
             </form>
         </div>
     </div>
+</div>
+    
     
     
 </body>
