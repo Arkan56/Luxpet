@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/datos_individuales.css">
+    <link rel="stylesheet" href="/demo/src/main/resources/static/styles/datos_individuales.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <title>Mascota individual</title>
 </head>
@@ -15,22 +15,20 @@
 
     <main>
         <div id="container">
-            <div id="titulo">
-                <h1>Información de la mascota</h1>
-            </div>
-            <div id="info">
-                <img th:src="${mascota.foto}" alt="Foto"></img>
-                <p><strong>Nombre:</strong> <span th:text="${mascota.nombre}"></span></p>
-                <p><strong>Raza:</strong> <span th:text="${mascota.raza}"></span></p>
-                <p><strong>Edad:</strong> <span th:text="${mascota.edad}"></span></p>
-                <p><strong>Enfermedad:</strong> <span th:text="${mascota.enfermedad}"></span></p>
-                <p><strong>Estado:</strong> <span th:text="${mascota.estado}"></span></p>
-                <p><strong>Dueño:</strong> <span th:text="${cliente.nombre}"></span></p>
-                <a th:href="@{/mascota/all}">
-                    <button><strong>Volver</strong></button>
-                </a>
-            </div>
+    <div id="info" class="form_area">
+        <h1 class="title">Información de la mascota</h1>
+        <img th:src="${mascota.foto}" alt="Foto" class="form_style">
+        <p class="form_group"><strong>Nombre:</strong> <span th:text="${mascota.nombre}"></span></p>
+        <p class="form_group"><strong>Raza:</strong> <span th:text="${mascota.raza}"></span></p>
+        <p class="form_group"><strong>Edad:</strong> <span th:text="${mascota.edad}"></span></p>
+        <p class="form_group"><strong>Enfermedad:</strong> <span th:text="${mascota.enfermedad}"></span></p>
+        <p class="form_group"><strong>Estado:</strong> <span th:text="${mascota.estado}"></span></p>
+        <p class="form_group"><strong>Dueño:</strong> <span th:text="${cliente.nombre}"></span></p>
+        <div id="botones">
+            <a th:href="@{/mascota/all}" class="btn"><strong>Volver</strong></a>
         </div>
+    </div>
+</div>
     </main>
 
     

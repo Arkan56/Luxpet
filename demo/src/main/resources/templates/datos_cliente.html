@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/datos_individuales.css">
+    <link rel="stylesheet" href="/demo/src/main/resources/static/styles/datos_individuales.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <title>Dueño individual</title>
 </head>
 <body>
 
     <main>
-        <div id="container">
+        <div id="container" class="form_area">
             <div id="titulo">
-                <h1>Información del dueño</h1>
+                <h1 class="title">Información del dueño</h1>
             </div>
             <div id="info">
-                <p><strong>Nombre:</strong> <span th:text="${cliente.nombre}"></span></p>
-                <p><strong>Cedula:</strong> <span th:text="${cliente.cedula}"></span></p>
-                <p><strong>Correo:</strong> <span th:text="${cliente.correo}"></span></p>
-                <p><strong>Celular:</strong> <span th:text="${cliente.celular}"></span></p>
-                <a th:href="@{/cliente/all}">
-                    <button><strong>Volver</strong></button>
-                </a>
-                <p><strong>Mascotas:</strong></p>
-                <table>
+                <p class="form_group"><strong>Nombre:</strong> <span th:text="${cliente.nombre}"></span></p>
+                <p class="form_group"><strong>Cedula:</strong> <span th:text="${cliente.cedula}"></span></p>
+                <p class="form_group"><strong>Correo:</strong> <span th:text="${cliente.correo}"></span></p>
+                <p class="form_group"><strong>Celular:</strong> <span th:text="${cliente.celular}"></span></p>
+                <div id="botones">
+                    <a th:href="@{/cliente/all}" class="btn"><strong>Volver</strong></a>
+                </div>
+                <p class="form_group"><strong>Mascotas:</strong></p>
+                <table class="form_style">
                     <thead>
                         <tr>
                             <th>Nombre</th>
@@ -36,7 +36,7 @@
                             <td th:text="${mascota.nombre}"></td>
                             <td th:text="${mascota.raza}"></td>
                             <td>
-                                <a th:href="@{/mascota/find/{id}(id=${mascota.id})}"> <button>Ver detalles</button></a>
+                                <a th:href="@{/mascota/find/{id}(id=${mascota.id})}" class="btn"> <strong>Ver detalles</strong></a>
                             </td>
                         </tr>
                     </tbody>
@@ -44,6 +44,7 @@
             </div>
         </div>
     </main>
+    
 
     
 </body>
