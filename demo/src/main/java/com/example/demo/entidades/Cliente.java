@@ -39,7 +39,6 @@ public class Cliente {
         this.correo = correo;
         this.celular = celular;
         this.mascotas = new ArrayList<>();
-
     }
 
     public Cliente() {

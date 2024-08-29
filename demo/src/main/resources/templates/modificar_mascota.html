@@ -50,9 +50,8 @@
                 </div>
 
                 <div>
-                    <select id="clientes" name="cliente" th:field="*{cliente}">
-                        <option value="" disabled selected>Seleccione un cliente</option>
-                        <option th:each="cliente : ${clientes}" th:value="${cliente}" th:text="${cliente.nombre} + ' - ' + ${cliente.cedula}"></option>
+                    <select id="clientes" name="clienteSeleccionado" th.value="${clienteSeleccionado}">
+                        <option th:each="cliente : ${clientes}" th:value="${cliente.cedula}" th:text="${cliente.nombre} + ' - ' + ${cliente.cedula}"></option>
                     </select>
                 </div>
                

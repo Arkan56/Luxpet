@@ -23,9 +23,9 @@ public class DatabaseInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        clienteRepository.save(new Cliente("123", "Miguel", "mangel@example.com", "123456"));
-        clienteRepository.save(new Cliente("123", "Juan", "juan@example.com", "123456"));
-        clienteRepository.save(new Cliente("123", "Sebastian", "sebastian@example.com", "123456"));
+        clienteRepository.save(new Cliente("1234", "Miguel", "mangel@example.com", "123456"));
+        clienteRepository.save(new Cliente("1243", "Juan", "juan@example.com", "123456"));
+        clienteRepository.save(new Cliente("1235", "Sebastian", "sebastian@example.com", "123456"));
 
         mascotaRepository.save(
                 new Mascota("Pepe", "Pitbull", 10, 10.f,

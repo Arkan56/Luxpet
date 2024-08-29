@@ -61,12 +61,16 @@ public class MascotaController {
         model.addAttribute("mascota", mascota);
         model.addAttribute("clientes", service2.searchAll());
 
+        model.addAttribute("clienteSeleccionado", "");
+
+
         return "crear_mascota";
     }
 
     @PostMapping("/agregar")
-    public String agregarMascota(@ModelAttribute("mascota") Mascota mascota) {
-        System.out.println("Mascota: " + mascota.toString());
+    public String agregarMascota(@ModelAttribute("mascota") Mascota mascota, @ModelAttribute("clienteSeleccionado") String cliente) throws Exception { 
+        Cliente aux = service2.searchByCedula(cliente);
+        mascota.setCliente(aux);
         service.add(mascota);
         service2.addMascota(mascota.getCliente().getCedula(), mascota);
         return "redirect:/mascota/all";
@@ -83,14 +87,21 @@ public class MascotaController {
         model.addAttribute("mascota", service.searchById(id));
         model.addAttribute("clientes", service2.searchAll());
         model.addAttribute("cliente", service.searchById(id).getCliente());
+        model.addAttribute("clienteSeleccionado", "");
         return "modificar_mascota";
     }
 
     @PostMapping("/update/{id}")
-    public String modificarMascota(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long id, @ModelAttribute("cliente") Cliente cliente) {
-        service2.deleteMascota(cliente.getCedula(), id);
+    public String modificarMascota(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long id, @ModelAttribute("cliente") Cliente cliente, @ModelAttribute("clienteSeleccionado") String clienteSeleccionado) {
+        if(cliente.getCedula() != null)
+        {
+            System.out.println("entra");
+            service2.deleteMascota(cliente.getCedula(), id);
+        }
+        Cliente aux = service2.searchByCedula(clienteSeleccionado);
+        mascota.setCliente(aux);
         service.update(mascota);
-        service2.addMascota(mascota.getCliente().getCedula(), mascota);
+        service2.addMascota(clienteSeleccionado, mascota);
         return "redirect:/mascota/all";
     }
 
