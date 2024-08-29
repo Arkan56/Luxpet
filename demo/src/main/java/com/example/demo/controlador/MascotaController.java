@@ -32,19 +32,22 @@ public class MascotaController {
     }
 
     @GetMapping("/find/{id}")
-    public String mostrarMascota(Model model, @PathVariable("id") int identificacion) {
+    public String mostrarMascota(Model model, @PathVariable("id") Long identificacion) {
 
         Mascota mascota = service.searchById(identificacion);
 
         if (mascota != null) {
             model.addAttribute("mascota", service.searchById(identificacion));
-            Cliente cliente = service2.searchByCedula(mascota.getCliente().getCedula());
-            if(cliente == null) {
+            Cliente cliente;
+            if(mascota.getCliente() == null) {
                 cliente = new Cliente( "", "", "", "");
+            }
+            else {
+                cliente = service2.searchByCedula(mascota.getCliente().getCedula());
             }
             model.addAttribute("cliente", cliente);
         } else {
-            throw new NotFoundException(identificacion);
+            //throw new NotFoundException(identificacion);
         }
 
         return "datos_mascota";
@@ -62,7 +65,7 @@ public class MascotaController {
     }
 
     @PostMapping("/agregar")
-    public String agregarMascota(@ModelAttribute("mascota") Mascota mascota, @ModelAttribute("cliente") Cliente cliente) {
+    public String agregarMascota(@ModelAttribute("mascota") Mascota mascota) {
         System.out.println("Mascota: " + mascota.toString());
         service.add(mascota);
         service2.addMascota(mascota.getCliente().getCedula(), mascota);
@@ -70,22 +73,22 @@ public class MascotaController {
     }
 
     @GetMapping("/delete/{id}")
-    public String eliminarMascota(@PathVariable("id") int id) {
+    public String eliminarMascota(@PathVariable("id") Long id) {
         service.deleteById(id);
         return "redirect:/mascota/all";
     }
 
     @GetMapping("/update/{id}")
-    public String mostrarFormularioUpdate(Model model, @PathVariable("id") int id) {
+    public String mostrarFormularioUpdate(Model model, @PathVariable("id") Long id) {
         model.addAttribute("mascota", service.searchById(id));
         model.addAttribute("clientes", service2.searchAll());
-        model.addAttribute("dueño", service.searchById(id).getCliente());
+        model.addAttribute("cliente", service.searchById(id).getCliente());
         return "modificar_mascota";
     }
 
     @PostMapping("/update/{id}")
-    public String modificarMascota(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long id, @ModelAttribute("dueño") String dueño) {
-        service2.deleteMascota(dueño, id);
+    public String modificarMascota(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long id, @ModelAttribute("cliente") Cliente cliente) {
+        service2.deleteMascota(cliente.getCedula(), id);
         service.update(mascota);
         service2.addMascota(mascota.getCliente().getCedula(), mascota);
         return "redirect:/mascota/all";

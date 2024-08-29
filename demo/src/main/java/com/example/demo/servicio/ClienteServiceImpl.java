@@ -17,41 +17,45 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente searchById(Long id) {
-        return null; //repo.findById(id).get();
+        return repo.findById(id).get();
     }
 
     @Override
     public Collection<Cliente> searchAll() {
-        return null; //repo.findAll();
+        return repo.findAll();
     }
 
     @Override
     public void deleteById(Long id) {
-        //repo.deleteById(id);
+        repo.deleteById(id);
     }
 
     @Override
     public void update(Cliente cliente) {
-        //repo.save(cliente);
+        repo.save(cliente);
     }
 
     @Override
     public void add(Cliente cliente) {
-        //repo.save(cliente);
+        repo.save(cliente);
     }
 
     @Override
     public Cliente searchByCedula(String cedula) {
-        return null;// repo.findByCedula(cedula);
+        return repo.findByCedula(cedula);
     }
 
     @Override
     public void addMascota(String cedula, Mascota mascota){
-        //repo.addMascota(cedula, mascota);
+        Cliente cliente = repo.findByCedula(cedula);
+        cliente.getMascotas().add(mascota);
+        repo.save(cliente);
     }
 
     @Override
     public void deleteMascota(String cedula, Long id){
-        //repo.deleteMascota(cedula, id);
+        Cliente cliente = repo.findByCedula(cedula);
+        cliente.getMascotas().removeIf(mascota -> mascota.getId() == id);
+        repo.save(cliente);
     }
 }
