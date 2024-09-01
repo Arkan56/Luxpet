@@ -225,7 +225,7 @@ main h1{
     cursor: pointer; 
     color:#242331;
     text-decoration: none;
-
+    margin-bottom: 20px;
 }
 #botonAgregar a:hover{
     background-color: #efefef;

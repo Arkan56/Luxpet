@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/demo/src/main/resources/static/styles/crear_entidad.css">
+    <link rel="stylesheet" href="/styles/crear_entidad.css">
     <title>Modificar mascota</title>
 </head>
+
+
 <body>
+    <header>
+        <h1><a href="../templates/index.html">Lux<span>Pet</span></a></h1>
+    </header>
     <div class="container">
         <div class="form_area">
             <p class="title">Modificar mascota</p>
@@ -34,7 +39,7 @@
                 <!-- Contenedor único para ambos botones -->
                 <div id="botones" class="form_group">
                     <a th:href="@{/cliente/all}" class="btn link-btn">Volver</a>
-                    <button type="submit" class="btn">Crear</button>
+                    <button type="submit" class="btn">Modificar</button>
                 </div>
             </form>
         </div>
