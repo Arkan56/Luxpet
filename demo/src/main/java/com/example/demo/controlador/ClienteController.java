@@ -37,9 +37,23 @@ public class ClienteController {
         if (cliente != null) {
             model.addAttribute("cliente", clienteService.searchById(identificacion));
         } else {
-            //throw new NotFoundException(identificacion);
+            // throw new NotFoundException(identificacion);
         }
         return "datosCliente";
+    }
+
+    @GetMapping("/portal/{id}")
+    public String mostrarClientePortal(Model model, @PathVariable("id") Long identificacion) {
+
+        Cliente cliente = clienteService.searchById(identificacion);
+        System.out.println(cliente.toString());
+
+        if (cliente != null) {
+            model.addAttribute("cliente", clienteService.searchById(identificacion));
+        } else {
+            // throw new NotFoundException(identificacion);
+        }
+        return "portalCliente";
     }
 
     @GetMapping("/add")

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/datosMascota.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <title>Mascota individual</title>
+</head>
+<body>
+
+    <header>
+        <h1><a href="/">Lux<span>Pet</span></a></h1>
+    </header>
+
+    <main>
+        <div id="container">
+    <div id="info" class="form_area">
+        <h1 class="title">Información de la mascota</h1>
+        <img th:src="${mascota.foto}" alt="Foto" class="form_style">
+        <p class="form_group"><strong>Nombre:</strong> <span th:text="${mascota.nombre}"></span></p>
+        <p class="form_group"><strong>Raza:</strong> <span th:text="${mascota.raza}"></span></p>
+        <p class="form_group"><strong>Edad:</strong> <span th:text="${mascota.edad}"></span></p>
+        <p class="form_group"><strong>Enfermedad:</strong> <span th:text="${mascota.enfermedad}"></span></p>
+        <p class="form_group"><strong>Estado:</strong> <span th:text="${mascota.estado}"></span></p>
+        <p class="form_group"><strong>Dueño:</strong> <span th:text="${cliente.nombre}"></span></p>
+        <div id="botones">
+            <a th:href="@{/cliente/portal/{id}(id=${mascota.cliente.id})}" class="btn"><strong>Volver</strong></a>
+        </div>
+    </div>
+</div>
+    </main>
+
+    
+</body>
+</html>

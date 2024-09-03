@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/inicioSesion.css">
+    <link rel="stylesheet" href="/styles/inicioSesionVeterinario.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <title>Inicio de Sesión - LuxPet</title>
 </head>
@@ -15,12 +15,11 @@
     <div class="center-container">  
         <div class="container">
             <div class="heading">Iniciar Sesión</div>
-            <form action="/login/" method="post" class="form">
+            <form action="/login/loginVeterinario" method="post" class="form">
                 <input required="" class="input" type="text" name="cedula" id="cedula" placeholder="Ingresa tu cédula">
-                
-                <input class="login-button" type="submit" value="Iniciar Sesión">
+                <input required="" class="input" type="password" name="cedula" id="cedula" placeholder="Ingresa su contraseña">
 
-                <p>Eres Veterinario? <a href="/login/loginVeterinario">Ingresa aquí</a></p>
+                <input class="login-button" type="submit" value="Iniciar Sesión">
             </form>
             <div id="alerta" style="color: red;">
               <p th:if="${error}" th:text="${error}"></p>

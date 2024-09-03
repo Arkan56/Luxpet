@@ -14,23 +14,35 @@ import com.example.demo.servicio.ClienteService;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-    
+
     @Autowired
     ClienteService service;
+
     @GetMapping("/")
     public String mostrarLogin(Model model) {
         model.addAttribute("cedula", "");
         return "inicioSesion";
     }
 
+    @GetMapping("/loginVeterinario")
+    public String mostrarPortalVet(Model model) {
+        model.addAttribute("cedula", "");
+        model.addAttribute("password", "");
+        return "inicioSesionVeterinario";
+    }
+
+    @PostMapping("/loginVeterinario")
+    public String confirmarLoginVet() {
+        return "redirect:/cliente/all";
+    }
+
     @PostMapping("/")
     public String confirmarLogin(@ModelAttribute("cedula") String cedula, Model model) {
         System.out.println("Todos los atributos del modelo: " + model.asMap());
-        System.out.println("La cedula es: "+cedula);
+        System.out.println("La cedula es: " + cedula);
         Cliente aux = service.searchByCedula(cedula);
-        if(aux != null)
-        {
-            return "redirect:/cliente/find/" + aux.getId();
+        if (aux != null) {
+            return "redirect:/cliente/portal/" + aux.getId();
         }
         model.addAttribute("error", "No se encontró el cliente");
         return "inicioSesion";

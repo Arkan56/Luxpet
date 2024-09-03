@@ -39,18 +39,38 @@ public class MascotaController {
         if (mascota != null) {
             model.addAttribute("mascota", mascotaService.searchById(identificacion));
             Cliente cliente;
-            if(mascota.getCliente() == null) {
-                cliente = new Cliente( "", "", "", "");
-            }
-            else {
+            if (mascota.getCliente() == null) {
+                cliente = new Cliente("", "", "", "");
+            } else {
                 cliente = clienteService.searchByCedula(mascota.getCliente().getCedula());
             }
             model.addAttribute("cliente", cliente);
         } else {
-            //throw new NotFoundException(identificacion);
+            // throw new NotFoundException(identificacion);
         }
 
         return "datosMascota";
+    }
+
+    @GetMapping("/portal/{id}")
+    public String mostrarMascotaPortal(Model model, @PathVariable("id") Long identificacion) {
+
+        Mascota mascota = mascotaService.searchById(identificacion);
+
+        if (mascota != null) {
+            model.addAttribute("mascota", mascotaService.searchById(identificacion));
+            Cliente cliente;
+            if (mascota.getCliente() == null) {
+                cliente = new Cliente("", "", "", "");
+            } else {
+                cliente = clienteService.searchByCedula(mascota.getCliente().getCedula());
+            }
+            model.addAttribute("cliente", cliente);
+        } else {
+            // throw new NotFoundException(identificacion);
+        }
+
+        return "portalMascota";
     }
 
     @GetMapping("/add")
@@ -63,12 +83,12 @@ public class MascotaController {
 
         model.addAttribute("clienteSeleccionado", "");
 
-
         return "crearMascota";
     }
 
     @PostMapping("/add")
-    public String agregarMascota(@ModelAttribute("mascota") Mascota mascota, @ModelAttribute("clienteSeleccionado") String cliente) throws Exception { 
+    public String agregarMascota(@ModelAttribute("mascota") Mascota mascota,
+            @ModelAttribute("clienteSeleccionado") String cliente) throws Exception {
         Cliente aux = clienteService.searchByCedula(cliente);
         mascota.setCliente(aux);
         mascotaService.add(mascota);
@@ -92,9 +112,10 @@ public class MascotaController {
     }
 
     @PostMapping("/update/{id}")
-    public String modificarMascota(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long id, @ModelAttribute("cliente") Cliente cliente, @ModelAttribute("clienteSeleccionado") String clienteSeleccionado) {
-        if(cliente.getCedula() != null)
-        {
+    public String modificarMascota(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long id,
+            @ModelAttribute("cliente") Cliente cliente,
+            @ModelAttribute("clienteSeleccionado") String clienteSeleccionado) {
+        if (cliente.getCedula() != null) {
             clienteService.deleteMascota(cliente.getCedula(), id);
         }
         Cliente aux = clienteService.searchByCedula(clienteSeleccionado);
