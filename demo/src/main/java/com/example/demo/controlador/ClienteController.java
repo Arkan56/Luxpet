@@ -20,28 +20,26 @@ import com.example.demo.servicio.MascotaService;
 @RequestMapping("/cliente")
 public class ClienteController {
     @Autowired
-    ClienteService service;
-    @Autowired
-    MascotaService service2;
+    ClienteService clienteService;
 
     @GetMapping("/all")
     public String mostrarClientes(Model model) {
-        model.addAttribute("clientes", service.searchAll());
+        model.addAttribute("clientes", clienteService.searchAll());
         return "listadoClientes";
     }
 
     @GetMapping("/find/{id}")
     public String mostrarCliente(Model model, @PathVariable("id") Long identificacion) {
 
-        Cliente cliente = service.searchById(identificacion);
+        Cliente cliente = clienteService.searchById(identificacion);
         System.out.println(cliente.toString());
 
         if (cliente != null) {
-            model.addAttribute("cliente", service.searchById(identificacion));
+            model.addAttribute("cliente", clienteService.searchById(identificacion));
         } else {
             //throw new NotFoundException(identificacion);
         }
-        return "datos_cliente"; //Falta mirar
+        return "datosCliente";
     }
 
     @GetMapping("/add")
@@ -51,49 +49,30 @@ public class ClienteController {
 
         model.addAttribute("cliente", cliente);
 
-        return "crear_cliente";
+        return "crearCliente";
     }
 
-    @PostMapping("/agregar")
+    @PostMapping("/add")
     public String agregarCliente(@ModelAttribute("cliente") Cliente cliente) {
-        service.add(cliente);
-        return "redirect:/cliente/all"; //Falta mirar
+        clienteService.add(cliente);
+        return "redirect:/cliente/all";
     }
 
     @GetMapping("/delete/{id}")
     public String eliminarCliente(@PathVariable("id") Long id) {
-        service.deleteById(id);
-        return "redirect:/cliente/all";//Falta mirar
+        clienteService.deleteById(id);
+        return "redirect:/cliente/all";
     }
 
     @GetMapping("/update/{id}")
     public String mostrarFormularioUpdate(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("cliente", service.searchById(id));
-        return "modificar_cliente"; //Falta mirar
+        model.addAttribute("cliente", clienteService.searchById(id));
+        return "modificarCliente";
     }
 
     @PostMapping("/update/{id}")
     public String modificarCliente(@ModelAttribute("cliente") Cliente cliente, @PathVariable("id") int id) {
-        service.update(cliente);
-        return "redirect:/cliente/all"; //Falta mirar
-    }
-
-    @GetMapping("/login")
-    public String mostrarLogin(Model model) {
-        model.addAttribute("cedula", "");
-        return "inicioSesion";
-    }
-
-    @PostMapping("/login")
-    public String confirmarLogin(@ModelAttribute("cedula") String cedula, Model model) {
-        System.out.println("Todos los atributos del modelo: " + model.asMap());
-        System.out.println("La cedula es: "+cedula);
-        Cliente aux = service.searchByCedula(cedula);
-        if(aux != null)
-        {
-            return "redirect:/cliente/find/" + aux.getId();
-        }
+        clienteService.update(cliente);
         return "redirect:/cliente/all";
     }
-
 }

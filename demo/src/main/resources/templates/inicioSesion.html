@@ -20,8 +20,10 @@
                 
                 <input class="login-button" type="submit" value="Iniciar Sesión">
             </form>
+            <div id="alerta" style="color: red;">
+              <p th:if="${error}" th:text="${error}"></p>
+          </div>
         </div>
-        
     </div>
 
     <footer>

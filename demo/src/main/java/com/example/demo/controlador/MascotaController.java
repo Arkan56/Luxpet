@@ -21,36 +21,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MascotaController {
 
     @Autowired
-    MascotaService service;
+    MascotaService mascotaService;
     @Autowired
-    ClienteService service2;
+    ClienteService clienteService;
 
     @GetMapping("/all")
     public String mostrarMascotas(Model model) {
-        model.addAttribute("mascotas", service.searchAll());
+        model.addAttribute("mascotas", mascotaService.searchAll());
         return "listadoMascotas";
     }
 
     @GetMapping("/find/{id}")
     public String mostrarMascota(Model model, @PathVariable("id") Long identificacion) {
 
-        Mascota mascota = service.searchById(identificacion);
+        Mascota mascota = mascotaService.searchById(identificacion);
 
         if (mascota != null) {
-            model.addAttribute("mascota", service.searchById(identificacion));
+            model.addAttribute("mascota", mascotaService.searchById(identificacion));
             Cliente cliente;
             if(mascota.getCliente() == null) {
                 cliente = new Cliente( "", "", "", "");
             }
             else {
-                cliente = service2.searchByCedula(mascota.getCliente().getCedula());
+                cliente = clienteService.searchByCedula(mascota.getCliente().getCedula());
             }
             model.addAttribute("cliente", cliente);
         } else {
             //throw new NotFoundException(identificacion);
         }
 
-        return "datos_mascota";
+        return "datosMascota";
     }
 
     @GetMapping("/add")
@@ -59,49 +59,48 @@ public class MascotaController {
         Mascota mascota = new Mascota("", "", 0, 0, "", "", "");
 
         model.addAttribute("mascota", mascota);
-        model.addAttribute("clientes", service2.searchAll());
+        model.addAttribute("clientes", clienteService.searchAll());
 
         model.addAttribute("clienteSeleccionado", "");
 
 
-        return "crear_mascota";
+        return "crearMascota";
     }
 
-    @PostMapping("/agregar")
+    @PostMapping("/add")
     public String agregarMascota(@ModelAttribute("mascota") Mascota mascota, @ModelAttribute("clienteSeleccionado") String cliente) throws Exception { 
-        Cliente aux = service2.searchByCedula(cliente);
+        Cliente aux = clienteService.searchByCedula(cliente);
         mascota.setCliente(aux);
-        service.add(mascota);
-        service2.addMascota(mascota.getCliente().getCedula(), mascota);
+        mascotaService.add(mascota);
+        clienteService.addMascota(mascota.getCliente().getCedula(), mascota);
         return "redirect:/mascota/all";
     }
 
     @GetMapping("/delete/{id}")
     public String eliminarMascota(@PathVariable("id") Long id) {
-        service.deleteById(id);
+        mascotaService.deleteById(id);
         return "redirect:/mascota/all";
     }
 
     @GetMapping("/update/{id}")
     public String mostrarFormularioUpdate(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("mascota", service.searchById(id));
-        model.addAttribute("clientes", service2.searchAll());
-        model.addAttribute("cliente", service.searchById(id).getCliente());
+        model.addAttribute("mascota", mascotaService.searchById(id));
+        model.addAttribute("clientes", clienteService.searchAll());
+        model.addAttribute("cliente", mascotaService.searchById(id).getCliente());
         model.addAttribute("clienteSeleccionado", "");
-        return "modificar_mascota";
+        return "modificarMascota";
     }
 
     @PostMapping("/update/{id}")
     public String modificarMascota(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long id, @ModelAttribute("cliente") Cliente cliente, @ModelAttribute("clienteSeleccionado") String clienteSeleccionado) {
         if(cliente.getCedula() != null)
         {
-            System.out.println("entra");
-            service2.deleteMascota(cliente.getCedula(), id);
+            clienteService.deleteMascota(cliente.getCedula(), id);
         }
-        Cliente aux = service2.searchByCedula(clienteSeleccionado);
+        Cliente aux = clienteService.searchByCedula(clienteSeleccionado);
         mascota.setCliente(aux);
-        service.update(mascota);
-        service2.addMascota(clienteSeleccionado, mascota);
+        mascotaService.update(mascota);
+        clienteService.addMascota(clienteSeleccionado, mascota);
         return "redirect:/mascota/all";
     }
 

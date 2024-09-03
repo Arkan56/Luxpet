@@ -4,6 +4,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.example.demo.entidades.NotFoundException;
+
 @ControllerAdvice
 public class ErrorController {
 
@@ -12,6 +14,6 @@ public class ErrorController {
 
         model.addAttribute("id", ex.getId());
 
-        return "pagina_error";
+        return "paginaError";
     }
 }
