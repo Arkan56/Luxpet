@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <h1><a href="../templates/index.html">Lux<span>Pet</span></a></h1>
+        <h1><a href="/">Lux<span>Pet</span></a></h1>
     </header>
 
     <main>
@@ -22,9 +22,7 @@
                 <p class="form_group"><strong>Cedula:</strong> <span th:text="${cliente.cedula}"></span></p>
                 <p class="form_group"><strong>Correo:</strong> <span th:text="${cliente.correo}"></span></p>
                 <p class="form_group"><strong>Celular:</strong> <span th:text="${cliente.celular}"></span></p>
-                <div id="botones">
-                    <a th:href="@{/cliente/all}" class="btn"><strong>Volver</strong></a>
-                </div>
+              
                 <p class="form_group"><strong>Mascotas:</strong></p>
                 <table class="form_style">
                     <thead>
@@ -44,6 +42,10 @@
                         </tr>
                     </tbody>
                 </table>
+
+                <div id="botones">
+                    <a th:href="@{/cliente/all}" class="btn"><strong>Volver</strong></a>
+                </div>
             </div>
         </div>
     </main>
