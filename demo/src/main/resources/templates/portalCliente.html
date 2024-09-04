@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/datosCliente.css">
+    <link rel="stylesheet" href="/styles/portalCliente.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <title>Dueño individual</title>
 </head>
 <body>
-    <header>
+   <!--  <header>
         <h1><a href="/">Lux<span>Pet</span></a></h1>
     </header>
 
@@ -29,7 +29,7 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Raza</th>
-                            <th>Acciones</th> <!-- Nueva columna para el botón -->
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,8 +47,53 @@
             </div>
         </div>
     </main>
-    
 
+    -->
+
+  <nav>
+        <div class="logo">
+            <h4>Lux<span>Pet</span></h4>
+        </div>  
+
+
+        <div id="infoCliente">
+            <p class="form_group"><span th:text="${cliente.nombre}"></span></p>
+            <p class="form_group"><span th:text="${cliente.cedula}"></span></p>
+            <p class="form_group"><span th:text="${cliente.correo}"></span></p>
+            <p class="form_group"><span th:text="${cliente.celular}"></span></p>
+        </div>
+       
+
+   <a href="/login/" class="btn">Cerrar Sesión</a>
+        
+  </nav>
+
+
+  <main>
+   
+    <h2>Tus mascotas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Nombre</th>
+                <th>Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="mascota : ${cliente.mascotas}">
+                <td><img th:src="${mascota.foto}" alt="Foto" width="150px"></td>                
+                <td th:text="${mascota.nombre}"></td>
+                
+                <td>
+                    <a th:href="@{/mascota/portal/{id}(id=${mascota.id})}"> <button id="detallesMascota">Ver detalles</button></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+       
+  </main>
+       
     
 </body>
 </html>

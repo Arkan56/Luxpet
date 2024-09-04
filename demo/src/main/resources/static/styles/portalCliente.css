@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+html, body{ 
+    min-height: 100%;
+    background-color:#242331;
+
+}
+
+/* Barra de navegación */
+
+nav{
+    display: flex;
+    border: 1px solid white;
+    width: 250px;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    background-color:#e4d9bc ;
+}   
+
+nav .logo{
+    margin-top: 10px;
+    font-size: 50px;
+
+    font-family: "Courgette", cursive;
+}
+
+nav .logo span{
+    color:white
+}
+
+
+nav #infoCliente{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    font-family: "Nunito", sans-serif;
+    font-weight: bold;
+}
+
+#infoCliente p{
+    margin-top: 10px;
+}
+
+
+
+nav a {
+    display: flex;
+    
+    width: 95%;
+    font-weight: bold;
+    background-color: rgb(228, 66, 99);
+    color: white;
+    padding-block: 15px;
+    margin-top: auto;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    box-shadow: #daceb1 0px 20px 10px -15px;
+    border: none;
+    transition: all 0.2s ease-in-out;
+    justify-content: center;
+    text-decoration: none;
+  }
+  
+  nav a:hover {
+    transform: scale(1.01);
+    background-color:rgb(241, 74, 107) ;
+    box-shadow:#4b3f3f 0px 23px 10px -20px;
+    cursor:pointer;
+  }
+
+  body {
+    display: flex;
+    
+}
+  main {
+  display: flex;
+  flex-direction: column;
+    width: calc(100% - 250px);
+    height: 100vh;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+  }
+
+  main h2{
+    font-family: "Nunito", sans-serif;
+    color: #e4d9bc;
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+
+  table{
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: "Nunito", sans-serif;
+   
+  }
+
+  table th{
+    border: 2px solid black;
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #e4d9bc;
+  }
+
+    table td{
+        border: 2px solid black;
+        font-size: 20px;
+        text-align: center;
+        padding: 10px;
+        background-color: #f2ebdb;
+    }
+
+    #detallesMascota{
+        font-family: "Nunito", sans-serif;
+        align-items: center;
+        font-size: 16px;
+        padding: 8px;
+        background-color: #e4d9bc;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer; 
+    }
+
+    #detallesMascota:hover{
+        background-color: #ddc47d;
+    }
