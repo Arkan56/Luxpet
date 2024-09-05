@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Mascota {
@@ -22,6 +23,12 @@ public class Mascota {
 
     @ManyToOne
     private Cliente cliente;
+
+    @ManyToOne
+    private Veterinario veterinario;
+
+    @OneToOne (mappedBy = "mascota")
+    private Tratamiento tratamiento;
 
     public Mascota(String nombre, String raza, int edad, float peso, String foto, String enfermedad, String estado) {
         this.nombre = nombre;
@@ -106,6 +113,14 @@ public class Mascota {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public Veterinario getVeterinario() {
+        return veterinario;
+    }
+
+    public void setVeterinario(Veterinario veterinario) {
+        this.veterinario = veterinario;
     }
 
 }
