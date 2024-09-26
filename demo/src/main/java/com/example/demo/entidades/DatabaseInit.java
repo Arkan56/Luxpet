@@ -1,5 +1,6 @@
 package com.example.demo.entidades;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.TratamientoRepository;
+import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.entidades.Cliente;
 
 import jakarta.transaction.Transactional;
@@ -21,6 +24,12 @@ public class DatabaseInit implements ApplicationRunner {
 
         @Autowired
         MascotaRepository mascotaRepository;
+
+        @Autowired 
+        TratamientoRepository tratamientoRepository;
+
+        @Autowired
+        DrogaRepository drogaRepository;
 
         @Override
         public void run(ApplicationArguments args) throws Exception {
@@ -394,8 +403,57 @@ public class DatabaseInit implements ApplicationRunner {
                                 "https://www.orchardroadanimalhospital.com/sites/default/files/styles/large/public/shih-tzu-dog-breed-info.jpg?itok=CwWMOPs2",
                                 "ninguna", "Activo"));
 
+                                drogaRepository.save(new Droga("Carprofeno", 200000, 180000, 50, 30));
+                                drogaRepository.save(new Droga("Tramadol", 150000, 140000, 40, 25));
+                                drogaRepository.save(new Droga("Apoquel (Oclacitinib)", 300000, 290000, 60, 35));
+                                drogaRepository.save(new Droga("Gabapentina", 120000, 110000, 45, 20));
+                                drogaRepository.save(new Droga("Metronidazol", 100000, 95000, 35, 15));
+                                drogaRepository.save(new Droga("Prednisona", 180000, 170000, 55, 25));
+                                drogaRepository.save(new Droga("Cerenia (Maropitant)", 250000, 240000, 50, 30));
+                                drogaRepository.save(new Droga("Benazepril", 220000, 210000, 60, 40));
+                                drogaRepository.save(new Droga("Fluoxetina", 170000, 160000, 45, 20));
+                                drogaRepository.save(new Droga("Fenobarbital", 190000, 180000, 50, 25));
+                              
+                                
+        ArrayList<Droga> drogas = new ArrayList<>(drogaRepository.findAll());
+
+        for (int i = 0; i < 10; i++) {
+                Tratamiento tratamiento = new Tratamiento();
+                tratamiento.setFecha(LocalDate.now().minusDays(i));
+                tratamientoRepository.save(tratamiento);
+            }
+
+
+            ArrayList<Tratamiento> tratamientos = new ArrayList<>(tratamientoRepository.findAll());
+
+            
+            int drogaIndex = 0;
+
+                        for (Tratamiento tratamiento : tratamientos) {
+                                if (drogaIndex < drogas.size()) {
+                                    Droga droga = drogas.get(drogaIndex++);
+                                    tratamiento.setDroga(droga);
+                                    tratamientoRepository.save(tratamiento);
+                                }
+
+
+
+
+
                 ArrayList<Cliente> clientes = new ArrayList<>(clienteRepository.findAll());
                 ArrayList<Mascota> mascotas = new ArrayList<>(mascotaRepository.findAll());
+
+
+                
+                int mascotaTratamientoIndex = 0;
+
+                                for(Tratamiento tratamiento2 : tratamientos){   
+                                        if (mascotaTratamientoIndex < mascotas.size()) {
+                                        Mascota mascota = mascotas.get(mascotaTratamientoIndex++);
+                                        tratamiento2.setMascota(mascota);
+                                        tratamientoRepository.save(tratamiento2);
+                                        }
+                                }
 
                 int mascotaIndex = 0;
                 for (Cliente cliente : clientes) {
@@ -411,5 +469,6 @@ public class DatabaseInit implements ApplicationRunner {
                         }
                 }
 
+        }
         }
 }

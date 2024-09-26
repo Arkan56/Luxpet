@@ -11,7 +11,7 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Droga {
-    private String nommbre;
+    private String nombre;
     private float precioCompra;
     private float precioVenta;
     private int unidadesDisponibles;
@@ -26,13 +26,15 @@ public class Droga {
     @GeneratedValue
     private Long id;
 
-    public Droga(String nommbre, float precioCompra, float precioVenta, int unidadesDisponibles, int unidadesVendidas) {
-        this.nommbre = nommbre;
+    public Droga(String nombre, float precioCompra, float precioVenta, int unidadesDisponibles, int unidadesVendidas) {
+        this.nombre = nombre;
         this.precioCompra = precioCompra;
         this.precioVenta = precioVenta;
         this.unidadesDisponibles = unidadesDisponibles;
         this.unidadesVendidas = unidadesVendidas;
     }
+
+ 
 
     public Droga() {
 
@@ -40,12 +42,12 @@ public class Droga {
 
     
 
-    public String getNommbre() {
-        return nommbre;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNommbre(String nommbre) {
-        this.nommbre = nommbre;
+    public void setNombre(String nommbre) {
+        this.nombre = nommbre;
     }
 
     public float getPrecioCompra() {

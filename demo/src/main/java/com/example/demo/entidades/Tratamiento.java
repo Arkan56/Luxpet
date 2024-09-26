@@ -48,6 +48,24 @@ public class Tratamiento {
         this.id = id;
     }
 
+
+    public Droga getDroga() {
+        return droga;
+    }
+
+    public void setDroga(Droga droga) {
+        this.droga = droga;
+    }
+
+    
+    public Mascota getMascota() {
+        return mascota;
+    }
+
+    public void setMascota(Mascota mascota) {
+        this.mascota = mascota;
+    }
+
     
 
     
