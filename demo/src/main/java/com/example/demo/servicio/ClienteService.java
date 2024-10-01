@@ -1,5 +1,7 @@
 package com.example.demo.servicio;
 import java.util.Collection;
+import java.util.List;
+
 import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.Mascota;
 
@@ -7,7 +9,7 @@ import com.example.demo.entidades.Mascota;
 public interface ClienteService  {
     public Cliente searchById(Long id);
 
-    public Collection<Cliente> searchAll();
+    public List<Cliente> searchAll();
 
     public void deleteById(Long id);
 

@@ -1,5 +1,7 @@
 package com.example.demo.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -20,13 +22,16 @@ public class Mascota {
     private String foto;
     private String enfermedad;
     private String estado;
-
+    
+    @JsonIgnore
     @ManyToOne
     private Cliente cliente;
 
+    @JsonIgnore
     @ManyToOne
     private Veterinario veterinario;
 
+    @JsonIgnore
     @OneToOne (mappedBy = "mascota")
     private Tratamiento tratamiento;
 

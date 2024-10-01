@@ -27,7 +27,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Collection<Cliente> searchAll() {
+    public List<Cliente> searchAll() {
         return clienteRepository.findAll();
     }
 
