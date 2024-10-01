@@ -1,5 +1,7 @@
 package com.example.demo.controlador;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +16,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("/mascota")
 public class MascotaController {
 
@@ -26,32 +30,19 @@ public class MascotaController {
     ClienteService clienteService;
 
     @GetMapping("/all")
-    public String mostrarMascotas(Model model) {
-        model.addAttribute("mascotas", mascotaService.searchAll());
-        return "listadoMascotas";
+    public List<Mascota> mostrarMascotas() {
+        //model.addAttribute("mascotas", mascotaService.searchAll());
+        return mascotaService.searchAll();
     }
 
     @GetMapping("/find/{id}")
-    public String mostrarMascota(Model model, @PathVariable("id") Long identificacion) {
+    public Mascota mostrarMascota(@PathVariable("id") Long identificacion) {
 
         Mascota mascota = mascotaService.searchById(identificacion);
-
-        if (mascota != null) {
-            model.addAttribute("mascota", mascotaService.searchById(identificacion));
-            Cliente cliente;
-            if (mascota.getCliente() == null) {
-                cliente = new Cliente("", "", "", "");
-            } else {
-                cliente = clienteService.searchByCedula(mascota.getCliente().getCedula());
-            }
-            model.addAttribute("cliente", cliente);
-        } else {
-            // throw new NotFoundException(identificacion);
-        }
-
-        return "datosMascota";
+        return mascota;
     }
 
+    /* 
     @GetMapping("/portal/{id}")
     public String mostrarMascotaPortal(Model model, @PathVariable("id") Long identificacion) {
 
@@ -71,8 +62,9 @@ public class MascotaController {
         }
 
         return "portalMascota";
-    }
+    }*/
 
+    /*
     @GetMapping("/add")
     public String mostrarFormularioCrear(Model model) {
 
@@ -84,16 +76,16 @@ public class MascotaController {
         model.addAttribute("clienteSeleccionado", "");
 
         return "crearMascota";
-    }
+    }*/
 
     @PostMapping("/add")
-    public String agregarMascota(@ModelAttribute("mascota") Mascota mascota,
-            @ModelAttribute("clienteSeleccionado") String cliente) throws Exception {
+    public void agregarMascota(@RequestBody Mascota mascota,
+            @RequestParam String cliente) throws Exception {
         Cliente aux = clienteService.searchByCedula(cliente);
         mascota.setCliente(aux);
         mascotaService.add(mascota);
         clienteService.addMascota(mascota.getCliente().getCedula(), mascota);
-        return "redirect:/mascota/all";
+        return;
     }
 
     @GetMapping("/delete/{id}")
@@ -102,6 +94,7 @@ public class MascotaController {
         return "redirect:/mascota/all";
     }
 
+    /*
     @GetMapping("/update/{id}")
     public String mostrarFormularioUpdate(Model model, @PathVariable("id") Long id) {
         model.addAttribute("mascota", mascotaService.searchById(id));
@@ -109,12 +102,12 @@ public class MascotaController {
         model.addAttribute("cliente", mascotaService.searchById(id).getCliente());
         model.addAttribute("clienteSeleccionado", "");
         return "modificarMascota";
-    }
+    }*/
 
     @PostMapping("/update/{id}")
-    public String modificarMascota(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long id,
-            @ModelAttribute("cliente") Cliente cliente,
-            @ModelAttribute("clienteSeleccionado") String clienteSeleccionado) {
+    public void modificarMascota(@RequestBody Mascota mascota, @PathVariable("id") Long id,
+            @RequestBody Cliente cliente,
+            @RequestBody String clienteSeleccionado) {
         if (cliente.getCedula() != null) {
             clienteService.deleteMascota(cliente.getCedula(), id);
         }
@@ -122,7 +115,7 @@ public class MascotaController {
         mascota.setCliente(aux);
         mascotaService.update(mascota);
         clienteService.addMascota(clienteSeleccionado, mascota);
-        return "redirect:/mascota/all";
+        return;
     }
 
 }
