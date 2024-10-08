@@ -1,5 +1,4 @@
 package com.example.demo.servicio;
-import java.util.Collection;
 import java.util.List;
 
 import com.example.demo.entidades.Cliente;
