@@ -17,39 +17,40 @@ public class Droga {
     private float precioVenta;
     private int unidadesDisponibles;
     private int unidadesVendidas;
-    
+
+    // Nuevos campos añadidos
+    private String dosis;
+    private String descripcion;
+
     @JsonIgnore
     @OneToMany(mappedBy = "droga")
     private List<Tratamiento> tratamientos = new ArrayList<>();
-
-
 
     @Id
     @GeneratedValue
     private Long id;
 
-    public Droga(String nombre, float precioCompra, float precioVenta, int unidadesDisponibles, int unidadesVendidas) {
+    // Constructor completo con todos los campos
+    public Droga(String nombre, float precioCompra, float precioVenta, int unidadesDisponibles, int unidadesVendidas, String dosis, String descripcion) {
         this.nombre = nombre;
         this.precioCompra = precioCompra;
         this.precioVenta = precioVenta;
         this.unidadesDisponibles = unidadesDisponibles;
         this.unidadesVendidas = unidadesVendidas;
+        this.dosis = dosis;
+        this.descripcion = descripcion;
     }
 
- 
+    // Constructor vacío
+    public Droga() {}
 
-    public Droga() {
-
-    }
-
-    
-
+    // Getters y setters para todos los campos
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nommbre) {
-        this.nombre = nommbre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public float getPrecioCompra() {
@@ -84,6 +85,22 @@ public class Droga {
         this.unidadesVendidas = unidadesVendidas;
     }
 
+    public String getDosis() {
+        return dosis;
+    }
+
+    public void setDosis(String dosis) {
+        this.dosis = dosis;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public Long getId() {
         return id;
     }
@@ -93,12 +110,10 @@ public class Droga {
     }
 
     public List<Tratamiento> getTratamientos() {
-        return this.tratamientos;
+        return tratamientos;
     }
 
     public void setTratamientos(List<Tratamiento> tratamientos) {
         this.tratamientos = tratamientos;
     }
-
-    
 }
