@@ -1,35 +1,50 @@
 package com.example.demo.entidades;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import org.hibernate.mapping.List;
+import java.io.InputStream;
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
 import com.example.demo.repositorio.ClienteRepository;
+import com.example.demo.repositorio.ConsultaRepository;
 import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.TratamientoRepository;
+import com.example.demo.repositorio.VeterinarioRepository;
 import com.example.demo.repositorio.DrogaRepository;
-import com.example.demo.entidades.Cliente;
 
 import jakarta.transaction.Transactional;
 
 @Controller
 @Transactional
 public class DatabaseInit implements ApplicationRunner {
-        @Autowired
-        ClienteRepository clienteRepository;
+    
+    @Autowired
+    ClienteRepository clienteRepository;
 
-        @Autowired
-        MascotaRepository mascotaRepository;
+    @Autowired
+    MascotaRepository mascotaRepository;
 
-        @Autowired 
-        TratamientoRepository tratamientoRepository;
+    @Autowired
+    VeterinarioRepository veterinarioRepository;    
 
-        @Autowired
-        DrogaRepository drogaRepository;
+    @Autowired 
+    TratamientoRepository tratamientoRepository;
+
+    @Autowired
+    DrogaRepository drogaRepository;
+
+    @Autowired
+    ConsultaRepository consultaRepository;
 
         @Override
         public void run(ApplicationArguments args) throws Exception {
@@ -402,73 +417,111 @@ public class DatabaseInit implements ApplicationRunner {
                 mascotaRepository.save(new Mascota("Logan", "Shih Tzu", 4, 5.7f,
                                 "https://www.orchardroadanimalhospital.com/sites/default/files/styles/large/public/shih-tzu-dog-breed-info.jpg?itok=CwWMOPs2",
                                 "ninguna", "Activo"));
+                                // Cargar datos desde el archivo Excel
+        InputStream inputStream = getClass().getResourceAsStream("/static/excel/MEDICAMENTOS_VETERINARIA.xlsx");
 
-                                drogaRepository.save(new Droga("Carprofeno", 200000, 180000, 50, 30));
-                                drogaRepository.save(new Droga("Tramadol", 150000, 140000, 40, 25));
-                                drogaRepository.save(new Droga("Apoquel (Oclacitinib)", 300000, 290000, 60, 35));
-                                drogaRepository.save(new Droga("Gabapentina", 120000, 110000, 45, 20));
-                                drogaRepository.save(new Droga("Metronidazol", 100000, 95000, 35, 15));
-                                drogaRepository.save(new Droga("Prednisona", 180000, 170000, 55, 25));
-                                drogaRepository.save(new Droga("Cerenia (Maropitant)", 250000, 240000, 50, 30));
-                                drogaRepository.save(new Droga("Benazepril", 220000, 210000, 60, 40));
-                                drogaRepository.save(new Droga("Fluoxetina", 170000, 160000, 45, 20));
-                                drogaRepository.save(new Droga("Fenobarbital", 190000, 180000, 50, 25));
-                              
-                                
-        ArrayList<Droga> drogas = new ArrayList<>(drogaRepository.findAll());
+        // Leer el archivo Excel
+        Workbook workbook = new XSSFWorkbook(inputStream);
+        Sheet sheet = workbook.getSheetAt(0); // Leer la primera hoja
 
-        for (int i = 0; i < 10; i++) {
-                Tratamiento tratamiento = new Tratamiento();
-                tratamiento.setFecha(LocalDate.now().minusDays(i));
-                tratamientoRepository.save(tratamiento);
+        // Iterar sobre las filas del archivo Excel
+        Iterator<Row> rows = sheet.iterator();
+        while (rows.hasNext()) {
+            Row row = rows.next();
+
+            // Omitir la fila de encabezados
+            if (row.getRowNum() == 0) {
+                continue;
             }
 
+            // Leer los valores de las celdas
+            String nombre = row.getCell(0).getStringCellValue();
+            double precioVenta = row.getCell(1).getNumericCellValue();
+            double precioCompra = row.getCell(2).getNumericCellValue();
+            int unidadesDisponibles = (int) row.getCell(3).getNumericCellValue();
+            int unidadesVendidas = (int) row.getCell(4).getNumericCellValue();
 
-            ArrayList<Tratamiento> tratamientos = new ArrayList<>(tratamientoRepository.findAll());
+            // Crear una nueva instancia de Droga
+            Droga droga = new Droga();
+            droga.setNombre(nombre);
+            droga.setPrecioVenta(precioVenta);
+            droga.setPrecioCompra(precioCompra);
+            droga.setUnidadesDisponibles(unidadesDisponibles);
+            droga.setUnidadesVendidas(unidadesVendidas);
 
-            
-            int drogaIndex = 0;
+            // Guardar la droga en la base de datos
+            drogaRepository.save(droga);
+        }
 
-                        for (Tratamiento tratamiento : tratamientos) {
-                                if (drogaIndex < drogas.size()) {
-                                    Droga droga = drogas.get(drogaIndex++);
-                                    tratamiento.setDroga(droga);
-                                    tratamientoRepository.save(tratamiento);
-                                }
+        // Cerrar el workbook y el InputStream
+        workbook.close();
+        inputStream.close();
 
+        // Asociar mascotas a clientes
+        List<Mascota> mascotas = mascotaRepository.findAll();
+        List<Cliente> clientes = clienteRepository.findAll();
+        
+        int indiceMascota = 0;
+        for (Cliente cliente : clientes) {
+            for (int i = 0; i < 2 && indiceMascota < mascotas.size(); i++) {
+                Mascota mascota = mascotas.get(indiceMascota);
+                mascota.setCliente(cliente);
+                mascotaRepository.save(mascota);
+                indiceMascota++;
+            }
+        }
 
+        // Crear instancias de Consulta con fechas fijas
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2023, Calendar.MAY, 10);
+        consultaRepository.save(new Consulta(calendar.getTime()));
 
+        calendar.set(2023, Calendar.JUNE, 15);
+        consultaRepository.save(new Consulta(calendar.getTime()));
 
+        calendar.set(2023, Calendar.JULY, 20);
+        consultaRepository.save(new Consulta(calendar.getTime()));
 
-                ArrayList<Cliente> clientes = new ArrayList<>(clienteRepository.findAll());
-                ArrayList<Mascota> mascotas = new ArrayList<>(mascotaRepository.findAll());
+        calendar.set(2023, Calendar.AUGUST, 25);
+        consultaRepository.save(new Consulta(calendar.getTime()));
 
+        calendar.set(2023, Calendar.SEPTEMBER, 30);
+        consultaRepository.save(new Consulta(calendar.getTime()));
 
+        // Crear consultas futuras
+        calendar.set(2024, Calendar.JANUARY, 20);
+        consultaRepository.save(new Consulta(calendar.getTime()));
+
+        calendar.set(2024, Calendar.FEBRUARY, 25);
+        consultaRepository.save(new Consulta(calendar.getTime()));
+
+        // Asignar aleatoriamente veterinarios, mascotas y drogas a las consultas
+        int cantidadMascotas = mascotaRepository.findAll().size();
+        int cantidadVeterinarios = veterinarioRepository.findAll().size();
+        int cantidadDrogas = drogaRepository.findAll().size();
+
+        for (Consulta consulta : consultaRepository.findAll()) {
+            int mascotaId = ThreadLocalRandom.current().nextInt(1, cantidadMascotas);
+            int vetId = ThreadLocalRandom.current().nextInt(1, cantidadVeterinarios);
+            int drogaId = ThreadLocalRandom.current().nextInt(1, cantidadDrogas);
+
+            Mascota mascota = mascotaRepository.findById(Long.valueOf(mascotaId)).orElse(null);
+            Veterinario veterinario = veterinarioRepository.findById(Long.valueOf(vetId)).orElse(null);
+            Droga droga = drogaRepository.findById(Long.valueOf(drogaId)).orElse(null);
+
+            consulta.setMascota(mascota);
+            consulta.setVeterinario(veterinario);
+            consulta.setDroga(droga);
+            consulta.setCantidad(1); // Asigna una cantidad por defecto
+            consultaRepository.save(consulta);
+        }
+    }
+                                
                 
-                int mascotaTratamientoIndex = 0;
+ }
 
-                                for(Tratamiento tratamiento2 : tratamientos){   
-                                        if (mascotaTratamientoIndex < mascotas.size()) {
-                                        Mascota mascota = mascotas.get(mascotaTratamientoIndex++);
-                                        tratamiento2.setMascota(mascota);
-                                        tratamientoRepository.save(tratamiento2);
-                                        }
-                                }
 
-                int mascotaIndex = 0;
-                for (Cliente cliente : clientes) {
-                        if (mascotaIndex < mascotas.size()) {
-                                Mascota mascota1 = mascotas.get(mascotaIndex++);
-                                mascota1.setCliente(cliente);
-                                mascotaRepository.save(mascota1);
-                        }
-                        if (mascotaIndex < mascotas.size()) {
-                                Mascota mascota2 = mascotas.get(mascotaIndex++);
-                                mascota2.setCliente(cliente);
-                                mascotaRepository.save(mascota2);
-                        }
-                }
 
-        }
-        }
-}
+
+
+

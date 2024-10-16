@@ -1,20 +1,7 @@
 package com.example.demo.entidades;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-
-@Entity
 public class Mascota {
-
-    @Id
-    @GeneratedValue
-    private Long id;
-
+    private Integer id;
     private String nombre;
     private String raza;
     private int edad;
@@ -22,20 +9,9 @@ public class Mascota {
     private String foto;
     private String enfermedad;
     private String estado;
-    
-    @JsonIgnore
-    @ManyToOne
-    private Cliente cliente;
-
-    @JsonIgnore
-    @ManyToOne
-    private Veterinario veterinario;
-
-    @JsonIgnore
-    @OneToOne (mappedBy = "mascota")
-    private Tratamiento tratamiento;
-
+     
     public Mascota(String nombre, String raza, int edad, float peso, String foto, String enfermedad, String estado) {
+        this.id = id;
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
@@ -43,10 +19,10 @@ public class Mascota {
         this.foto = foto;
         this.enfermedad = enfermedad;
         this.estado = estado;
+      
     }
 
-    public Mascota() {
-    }
+    
 
     public String getNombre() {
         return nombre;
@@ -104,28 +80,35 @@ public class Mascota {
         this.estado = estado;
     }
 
-    public Long getId() {
+
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+
+
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
+
 
     public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setCliente'");
     }
 
-    public Veterinario getVeterinario() {
-        return veterinario;
-    }
 
-    public void setVeterinario(Veterinario veterinario) {
-        this.veterinario = veterinario;
-    }
 
+    public Cliente getCliente() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getCliente'");
+    }
+    
+
+    
+
+    
+    
 }

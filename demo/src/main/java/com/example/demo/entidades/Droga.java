@@ -65,9 +65,7 @@ public class Droga {
         return precioVenta;
     }
 
-    public void setPrecioVenta(float precioVenta) {
-        this.precioVenta = precioVenta;
-    }
+   
 
     public int getUnidadesDisponibles() {
         return unidadesDisponibles;
@@ -115,5 +113,15 @@ public class Droga {
 
     public void setTratamientos(List<Tratamiento> tratamientos) {
         this.tratamientos = tratamientos;
+    }
+
+    public void setPrecioVenta(double precioVenta2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setPrecioVenta'");
+    }
+
+    public void setPrecioCompra(double precioCompra2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setPrecioCompra'");
     }
 }
