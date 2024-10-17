@@ -12,9 +12,13 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Droga {
+    @Id
+    @GeneratedValue
+    private Long id;
+
     private String nombre;
-    private float precioCompra;
-    private float precioVenta;
+    private double precioCompra;
+    private double precioVenta;
     private int unidadesDisponibles;
     private int unidadesVendidas;
 
@@ -22,23 +26,19 @@ public class Droga {
     private String dosis;
     private String descripcion;
 
-    @JsonIgnore
+    @JsonIgnoreProperties("droga")
     @OneToMany(mappedBy = "droga")
-    private List<Tratamiento> tratamientos = new ArrayList<>();
-
-    @Id
-    @GeneratedValue
-    private Long id;
+    private List<Consulta> consulta = new ArrayList<>();
+    
 
     // Constructor completo con todos los campos
-    public Droga(String nombre, float precioCompra, float precioVenta, int unidadesDisponibles, int unidadesVendidas, String dosis, String descripcion) {
+    public Droga(String nombre, double precioCompra, double precioVenta, int unidadesDisponibles, int unidadesVendidas, String dosis, String descripcion) {
         this.nombre = nombre;
         this.precioCompra = precioCompra;
         this.precioVenta = precioVenta;
         this.unidadesDisponibles = unidadesDisponibles;
         this.unidadesVendidas = unidadesVendidas;
-        this.dosis = dosis;
-        this.descripcion = descripcion;
+        
     }
 
     // Constructor vacío
@@ -53,15 +53,15 @@ public class Droga {
         this.nombre = nombre;
     }
 
-    public float getPrecioCompra() {
+    public double getPrecioCompra() {
         return precioCompra;
     }
 
-    public void setPrecioCompra(float precioCompra) {
+    public void setPrecioCompra(double precioCompra) {
         this.precioCompra = precioCompra;
     }
 
-    public float getPrecioVenta() {
+    public double getPrecioVenta() {
         return precioVenta;
     }
 

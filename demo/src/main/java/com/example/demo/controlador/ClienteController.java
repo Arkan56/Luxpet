@@ -26,72 +26,71 @@ import com.example.demo.servicio.MascotaService;
 @CrossOrigin(origins = "http://localhost:4200")
 public class ClienteController {
     @Autowired
-    ClienteService clienteService;
+    private ClienteService service;
+
+    @Autowired
+    private MascotaService mascotaService;
 
     @GetMapping("/all")
-    public List<Cliente> mostrarClientes(Model model) {
-        //model.addAttribute("clientes", clienteService.searchAll());
-        return clienteService.searchAll();
+    public List<Cliente> mostrarClientes() {
+        return service.findAll();
     }
 
+    
     @GetMapping("/find/{id}")
-    public Cliente mostrarCliente(Model model, @PathVariable("id") Long identificacion) {
-
-        Cliente cliente = clienteService.searchById(identificacion);
-        System.out.println(cliente.toString());
-
-        if (cliente != null) {
-            //model.addAttribute("cliente", clienteService.searchById(identificacion));
-            //return clienteService.searchById(identificacion);
-        } else {
-            // throw new NotFoundException(identificacion);
-        }
-        return cliente;
+    public Cliente mostrarCliente(@PathVariable("id") Long identificacion) {
+        return service.findById(identificacion);
     }
 
+    // http://localhost:8080/clientes/ver/{id}
+    @GetMapping("/cedula/{cedula}")
+    public Cliente mostrarClienteByCedula(@PathVariable("cedula") int cedula) {
+        return service.findByCedula(cedula);
+    }
 
-/*    @GetMapping("/portal/{id}")
-    public String mostrarClientePortal(Model model, @PathVariable("id") Long identificacion) {
+    // http://localhost:8080/clientes/ver/{id}/mascotas
+    @GetMapping("/ver/{id}/mascotas")
+    public List<Mascota> mostrarMascotasCliente(@PathVariable("id") Long identificacion) {
+        return mascotaService.findByDuenoId(identificacion);
+    }
 
-        Cliente cliente = clienteService.searchById(identificacion);
-        System.out.println(cliente.toString());
+    // http://localhost:8080/clientes/agregar
+    @GetMapping("/add")
+    public String agregarCliente(Model model, @RequestParam("veterinarioId") Long veterinarioId) {
+        Cliente cliente = new Cliente(0, "", "", 0);
 
-        if (cliente != null) {
-            model.addAttribute("cliente", clienteService.searchById(identificacion));
-        } else {
-            // throw new NotFoundException(identificacion);
-        }
-        return "portalCliente";
-    } */
-
-    /*@GetMapping("/add")
-    public String mostrarFormularioCrear(Model model) {
-
-        Cliente cliente = new Cliente("", "", "", "");
-
+        model.addAttribute("veterinarioId", veterinarioId);
         model.addAttribute("cliente", cliente);
 
-        return "crearCliente";
-    }*/
+        return "agregar_cliente";
+    }
 
+    // http://localhost:8080/clientes/agregar
     @PostMapping("/add")
     public void agregarCliente(@RequestBody Cliente cliente) {
-        clienteService.add(cliente);
+        service.add(cliente);
     }
 
-    @GetMapping("/delete/{id}")
-    public void eliminarCliente(@PathVariable("id") Long id) {
-        clienteService.deleteById(id);
+    // http://localhost:8080/clientes/eliminar/{id}
+    @DeleteMapping("/delete/{id}")
+    public void eliminarCliente(@PathVariable("id") Long identificacion) {
+        service.deleteById(identificacion);
     }
 
-    /*@GetMapping("/update/{id}")
-    public String mostrarFormularioUpdate(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("cliente", clienteService.searchById(id));
-        return "modificarCliente";
-    }*/
+    // http://localhost:8080/clientes/modificar/{id}
+    @GetMapping("/update/{id}")
+    public String modificarCliente(Model model, @PathVariable("id") Long identificacion,
+            @RequestParam("veterinarioId") Long veterinarioId) {
+        model.addAttribute("veterinarioId", veterinarioId);
+        model.addAttribute("cliente", service.findById(identificacion));
+        return "modificar_cliente";
+    }
 
-    @PostMapping("/update/{id}")
-    public void modificarCliente(@RequestBody Cliente cliente, @PathVariable("id") int id) {
-        clienteService.update(cliente);
+    // http://localhost:8080/clientes/modificar/{id}
+    @PutMapping("/update")
+    public void modificarCliente(@RequestBody Cliente cliente) {
+        Cliente original = service.findById(cliente.getId());
+        cliente.setMascotas(original.getMascotas());
+        service.update(cliente);
     }
 }

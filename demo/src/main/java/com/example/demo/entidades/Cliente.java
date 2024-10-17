@@ -13,42 +13,36 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Cliente {
 
-    private String cedula;
+    private int cedula;
     private String nombre;
     private String correo;
-    private String celular;
+    private int celular;
     
-    @JsonIgnore
-    @OneToMany(mappedBy = "cliente")
-    private List<Mascota> mascotas;
+     @JsonIgnoreProperties("cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Mascota> mascotas = new ArrayList<>();
 
     @Id
     @GeneratedValue
     private Long id;
 
-    public Cliente(Long id, String cedula, String nombre, String correo, String celular) {
+    public Cliente(Long id, int cedula, String nombre, String correo, int celular) {
 
         this.id = id;
         this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
         this.celular = celular;
-        this.mascotas = new ArrayList<>();
+        
     }
 
-    public Cliente(String cedula, String nombre, String correo, String celular) {
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.correo = correo;
-        this.celular = celular;
-        this.mascotas = new ArrayList<>();
-    }
+   
 
     public Cliente() {
 
     }
 
-    public String getCedula() {
+    public int getCedula() {
         return cedula;
     }
 
@@ -72,7 +66,7 @@ public class Cliente {
         this.correo = correo;
     }
 
-    public String getCelular() {
+    public int getCelular() {
         return celular;
     }
 
@@ -88,9 +82,6 @@ public class Cliente {
         this.mascotas = mascotas;
     }
 
-    public void addMascota(Mascota mascota) {
-        this.mascotas.add(mascota);
-    }
 
     public Long getId() {
         return id;

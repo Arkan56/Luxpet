@@ -1,16 +1,27 @@
 package com.example.demo.entidades;
 
 public class Mascota {
-    private Integer id;
+    
     private String nombre;
     private String raza;
     private int edad;
     private float peso;
     private String foto;
     private String enfermedad;
-    private String estado;
-     
-    public Mascota(String nombre, String raza, int edad, float peso, String foto, String enfermedad, String estado) {
+    private boolean estado;
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @JsonIgnoreProperties("mascotas")
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+
+    @JsonIgnoreProperties("mascota")
+    @OneToMany(mappedBy = "mascota")
+    private List<Consulta> consulta = new ArrayList<>();
+    public Mascota(String nombre, String raza, int edad, float peso, String foto, String enfermedad, boolean estado) {
         this.id = id;
         this.nombre = nombre;
         this.raza = raza;
@@ -72,11 +83,11 @@ public class Mascota {
         this.enfermedad = enfermedad;
     }
 
-    public String getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 
