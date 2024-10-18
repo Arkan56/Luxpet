@@ -17,46 +17,77 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import java.util.Map;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/veterinario")
 @CrossOrigin(origins = "http://localhost:4200")
 public class VeterinarioController {
     @Autowired
-    VeterinarioService veterinarioService;
+    VeterinarioService veterinarioService; @GetMapping("/{id}")
+    public Veterinario home(@PathVariable("id") Long id) {
+        return veterinarioService.findById(id);
+    }
+
+   
+
     @GetMapping("/all")
     public List<Veterinario> mostrarVeterinarios() {
-        return veterinarioService.searchAll();
+        return veterinarioService.findAll();
     }
 
-    @GetMapping("/find/{id}")
-    public Veterinario mostrarVeterinario(@PathVariable("id") Long identificacion) {
-        Veterinario veterinario = veterinarioService.searchById(identificacion);
-        if (veterinario != null) {
-            //model.addAttribute("cliente", clienteService.searchById(identificacion));
-            //return clienteService.searchById(identificacion);
-        } else {
-            // throw new NotFoundException(identificacion);
-        }
-        return veterinario;
+    
+    @GetMapping("/find/{cedula}")
+    public Veterinario mostrarClienteByCedula(@PathVariable("cedula") int cedula) {
+        return veterinarioService.findByCedula(cedula);
     }
 
+    
+    @GetMapping("/add")
+    public String agregar(Model model) {
+        Veterinario veterinario = new Veterinario("", 0, "", "", "", 0);
+
+        model.addAttribute("veterinario", veterinario);
+
+        return "agregar_vet";
+    }
+
+    
     @PostMapping("/add")
-    public void agregarVeterinario(@RequestBody Veterinario veterinario) {
+    public void agregar(@RequestBody Veterinario veterinario) {
         veterinarioService.add(veterinario);
     }
 
-    @GetMapping("/delete/{id}")
-    public void eliminarVeterinario(@PathVariable("id") Long id) {
-        veterinarioService.deleteById(id);
+    
+    @GetMapping("/update/{id}")
+    public String modificar(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("veterinario", veterinarioService.findById(id));
+        return "modificar_vet";
     }
 
-    @PostMapping("/update/{id}")
-    public void modificarVeterinario(@RequestBody Veterinario veterinario, @PathVariable("id") int id) {
+    
+    @PutMapping("/update")
+    public void modificar(@RequestBody Veterinario veterinario) {
+        Veterinario original = veterinarioService.findById(veterinario.getId());
+        veterinario.setConsulta(original.getConsulta());
         veterinarioService.update(veterinario);
     }
 
     
+    @DeleteMapping("/delete/{id}")
+    public void eliminar(@PathVariable("id") Long id) {
+        veterinarioService.deleteById(id);
+    }
 
+   
+    @GetMapping("/activosInactivos")
+    public Map<String, Integer> getActivosInactivos() {
+        Map<String, Integer> response = new HashMap<>();
+        response.put("activos", veterinarioService.countByEstado(true));
+        response.put("inactivos", veterinarioService.countByEstado(false));
+        return response;
+    }
 }

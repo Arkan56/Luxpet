@@ -3,7 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -11,37 +13,59 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 @Entity
 public class Veterinario {
-    private String cedula;
+    private String nombre;  
+    private int cedula;
     private String contrasenia;
     private String especialidad;
     private String foto;
     private int numAtenciones;
+    private boolean estado;
 
-    @JsonIgnore
-    @OneToMany (mappedBy = "veterinario")
-    private List<Mascota> mascotas = new ArrayList<>();
+    @JsonIgnoreProperties("veterinario")
+    @OneToMany(mappedBy = "veterinario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Consulta> consulta = new ArrayList<>();
 
     @Id
     @GeneratedValue
     private Long id;
 
-    public Veterinario(String cedula, String contrasenia, String especialidad, String foto, int numAtenciones) {
+    public Veterinario(String nombre, int cedula, String contrasenia, String especialidad, String fotoURL,
+            int numAtenciones) {
+        this.nombre = nombre;
         this.cedula = cedula;
         this.contrasenia = contrasenia;
         this.especialidad = especialidad;
-        this.foto = foto;
+        this.foto = fotoURL;
         this.numAtenciones = numAtenciones;
+        this.estado = true;
     }
+
 
     public Veterinario() {
 
     }
 
-    public String getCedula() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getCedula() {
         return cedula;
     }
 
-    public void setCedula(String cedula) {
+    public void setCedula(int cedula) {
         this.cedula = cedula;
     }
 
@@ -65,7 +89,7 @@ public class Veterinario {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFotoURL(String foto) {
         this.foto = foto;
     }
 
@@ -77,19 +101,21 @@ public class Veterinario {
         this.numAtenciones = numAtenciones;
     }
 
-    public Long getId() {
-        return id;
+    public List<Consulta> getConsulta() {
+        return consulta;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setConsulta(List<Consulta> consulta) {
+        this.consulta = consulta;
     }
 
-    public List<Mascota> getMascotas() {
-        return mascotas;
+    public boolean getEstado() {
+        return estado;
     }
 
-    public void setMascotas(List<Mascota> mascotas) {
-        this.mascotas = mascotas;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
+
+
 }

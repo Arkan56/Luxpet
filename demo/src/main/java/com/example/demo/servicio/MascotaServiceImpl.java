@@ -1,6 +1,5 @@
 package com.example.demo.servicio;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +10,28 @@ import com.example.demo.repositorio.MascotaRepository;
 
 @Service
 public class MascotaServiceImpl implements MascotaService {
+
     @Autowired
     MascotaRepository repo;
 
     @Override
-    public Mascota searchById(Long id) {
-        return repo.findById(id).get(); 
+    public Mascota findById(Long id) {
+        return repo.findById(id).get();
     }
 
     @Override
-    public List<Mascota> searchAll() {
-        return repo.findAll(); //repo.findAll();
+    public List<Mascota> findAll() {
+        return repo.findAll();
+    }
+
+    @Override
+    public List<Mascota> findByDuenoId(Long clienteId) {
+        return repo.findByClienteId(clienteId);
+    }
+
+    @Override
+    public void add(Mascota mascota) {
+        repo.save(mascota);
     }
 
     @Override
@@ -30,13 +40,18 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public void update(Mascota mascota) {
-        repo.save(mascota);
+    public Mascota update(Mascota mascota) {
+        return repo.save(mascota);  // Retorna la mascota actualizada
+    } 
+
+    @Override
+    public int mascotasEnTratamiento() {
+        return repo.mascotasEnTratamiento();
     }
 
     @Override
-    public void add(Mascota mascota) {
-        repo.save(mascota);
+    public long getTotalMascotas() {
+        return repo.getTotalMascotas();
     }
 
 }

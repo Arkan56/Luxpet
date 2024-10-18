@@ -8,12 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entidades.Cliente;
@@ -42,19 +45,18 @@ public class ClienteController {
         return service.findById(identificacion);
     }
 
-    // http://localhost:8080/clientes/ver/{id}
     @GetMapping("/cedula/{cedula}")
     public Cliente mostrarClienteByCedula(@PathVariable("cedula") int cedula) {
         return service.findByCedula(cedula);
     }
 
-    // http://localhost:8080/clientes/ver/{id}/mascotas
-    @GetMapping("/ver/{id}/mascotas")
+    
+    @GetMapping("/all/{id}/mascotas")
     public List<Mascota> mostrarMascotasCliente(@PathVariable("id") Long identificacion) {
         return mascotaService.findByDuenoId(identificacion);
     }
 
-    // http://localhost:8080/clientes/agregar
+    
     @GetMapping("/add")
     public String agregarCliente(Model model, @RequestParam("veterinarioId") Long veterinarioId) {
         Cliente cliente = new Cliente(0, "", "", 0);
@@ -65,19 +67,19 @@ public class ClienteController {
         return "agregar_cliente";
     }
 
-    // http://localhost:8080/clientes/agregar
+    
     @PostMapping("/add")
     public void agregarCliente(@RequestBody Cliente cliente) {
         service.add(cliente);
     }
 
-    // http://localhost:8080/clientes/eliminar/{id}
+   
     @DeleteMapping("/delete/{id}")
     public void eliminarCliente(@PathVariable("id") Long identificacion) {
         service.deleteById(identificacion);
     }
 
-    // http://localhost:8080/clientes/modificar/{id}
+    
     @GetMapping("/update/{id}")
     public String modificarCliente(Model model, @PathVariable("id") Long identificacion,
             @RequestParam("veterinarioId") Long veterinarioId) {
@@ -86,7 +88,7 @@ public class ClienteController {
         return "modificar_cliente";
     }
 
-    // http://localhost:8080/clientes/modificar/{id}
+    
     @PutMapping("/update")
     public void modificarCliente(@RequestBody Cliente cliente) {
         Cliente original = service.findById(cliente.getId());

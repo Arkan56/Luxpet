@@ -1,80 +1,51 @@
 package com.example.demo.servicio;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entidades.Cliente;
-import com.example.demo.entidades.Mascota;
 import com.example.demo.entidades.Veterinario;
-import com.example.demo.repositorio.ClienteRepository;
-import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
 
-import jakarta.persistence.EntityNotFoundException;
 @Service
-
 public class VeterinarioServiceImpl implements VeterinarioService {
-    @Autowired
-    VeterinarioRepository veterinarioRepository;
 
     @Autowired
-    MascotaRepository mascotaRepository;
+    private VeterinarioRepository repo;
 
     @Override
-    public Veterinario searchById(Long id) {
-        return veterinarioRepository.findById(id).get();
+    public Veterinario findById(Long id) {
+        return repo.findById(id).get();
     }
 
     @Override
-    public List<Veterinario> searchAll() {
-        return veterinarioRepository.findAll();
+    public Veterinario findByCedula(int cedula) {
+        return repo.findByCedula(cedula);
     }
-
-  @Override
-public void deleteById(Long id) {
-    // Obtener el cliente por su ID
-    Veterinario veterinario = veterinarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Cliente no encontrado"));
-
-    // Obtener la lista de mascotas asociadas al cliente
-    List<Mascota> mascotas = veterinario.getMascotas();
-
-    // Borrar cada mascota de la lista
-    for (Mascota mascota : mascotas) {
-        mascotaRepository.deleteById(mascota.getId());
-    }
-
-    // Borrar el cliente
-    veterinarioRepository.deleteById(id);
-}
 
     @Override
-    public void update(Veterinario veterinario) {
-        veterinarioRepository.save(veterinario);
+    public List<Veterinario> findAll() {
+        return repo.findAll();
     }
 
     @Override
     public void add(Veterinario veterinario) {
-        veterinarioRepository.save(veterinario);
+        repo.save(veterinario);
     }
 
     @Override
-    public Veterinario searchByCedula(String cedula) {
-        return veterinarioRepository.findByCedula(cedula);
+    public void deleteById(Long id) {
+        repo.deleteById(id);
     }
 
     @Override
-    public void addMascota(String cedula, Mascota mascota){
-        Veterinario veterinario = veterinarioRepository.findByCedula(cedula);
-        veterinario.getMascotas().add(mascota);
-        veterinarioRepository.save(veterinario);
+    public void update(Veterinario veterinario) {
+        repo.save(veterinario);
     }
 
     @Override
-    public void deleteMascota(String cedula, Long id){
-        Veterinario veterinario = veterinarioRepository.findByCedula(cedula);
-        veterinario.getMascotas().removeIf(mascota -> mascota.getId() == id);
-        veterinarioRepository.save(veterinario);
+    public int countByEstado(boolean estado) {
+        return repo.countByEstado(estado);
     }
-    
 }

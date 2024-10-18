@@ -24,12 +24,12 @@ public class DrogaController {
     
     @GetMapping("/all")
     public List<Droga> mostrarDrogas() {
-        return drogaService.searchAll();
+        return drogaService.findAll();
     }
 
     @GetMapping("/find/{id}")
     public Droga mostrarDroga(@PathVariable("id") Long identificacion) {
-        Droga droga = drogaService.searchById(identificacion);
+        Droga droga = drogaService.findById(identificacion);
         if (droga != null) {
             //model.addAttribute("cliente", clienteService.searchById(identificacion));
             //return clienteService.searchById(identificacion);

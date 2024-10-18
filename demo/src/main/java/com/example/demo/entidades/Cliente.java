@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -36,18 +38,11 @@ public class Cliente {
         
     }
 
-   
-
-    public Cliente() {
-
-    }
-
-    public int getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
+    public Cliente(int cedula, String nombre, String correo, int celular) {
+        this.nombre = nombre;
         this.cedula = cedula;
+        this.celular = celular;
+        this.correo = correo;
     }
 
     public String getNombre() {
@@ -58,28 +53,28 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public String getCorreo() {
-        return correo;
+    public int getCedula() {
+        return cedula;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setCedula(int cedula) {
+        this.cedula = cedula;
     }
 
     public int getCelular() {
         return celular;
     }
 
-    public void setCelular(String celular) {
+    public void setCelular(int celular) {
         this.celular = celular;
     }
 
-    public List<Mascota> getMascotas() {
-        return mascotas;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setMascotas(List<Mascota> mascotas) {
-        this.mascotas = mascotas;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
 
@@ -91,4 +86,11 @@ public class Cliente {
         this.id = id;
     }
 
+    public List<Mascota> getMascotas() {
+        return mascotas;
+    }
+
+    public void setMascotas(List<Mascota> mascotas) {
+        this.mascotas = mascotas;
+    }
 }

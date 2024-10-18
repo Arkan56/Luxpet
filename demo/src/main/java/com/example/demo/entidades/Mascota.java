@@ -1,4 +1,17 @@
 package com.example.demo.entidades;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 public class Mascota {
     
@@ -21,19 +34,25 @@ public class Mascota {
     @JsonIgnoreProperties("mascota")
     @OneToMany(mappedBy = "mascota")
     private List<Consulta> consulta = new ArrayList<>();
-    public Mascota(String nombre, String raza, int edad, float peso, String foto, String enfermedad, boolean estado) {
-        this.id = id;
+    public Mascota(String nombre, String raza, int edad, float peso, String foto, String enfermedad ) {
+       
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
         this.peso = peso;
         this.foto = foto;
         this.enfermedad = enfermedad;
-        this.estado = estado;
+        this.estado = true;
       
     }
 
-    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -71,8 +90,24 @@ public class Mascota {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFotoURL(String foto) {
         this.foto = foto;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public String getEnfermedad() {
@@ -83,43 +118,11 @@ public class Mascota {
         this.enfermedad = enfermedad;
     }
 
-    public boolean getEstado() {
-        return estado;
+    public List<Consulta> getConsulta() {
+        return consulta;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setConsulta(List<Consulta> consulta) {
+        this.consulta = consulta;
     }
-
-
-
-    public Integer getId() {
-        return id;
-    }
-
-
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-
-
-    public void setCliente(Cliente cliente) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setCliente'");
-    }
-
-
-
-    public Cliente getCliente() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCliente'");
-    }
-    
-
-    
-
-    
-    
 }
