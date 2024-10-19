@@ -1,11 +1,17 @@
 package com.example.demo.entidades;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -32,8 +38,9 @@ public class Mascota {
     private Veterinario veterinario;
 
     @JsonIgnore
-    @OneToOne (mappedBy = "mascota")
-    private Tratamiento tratamiento;
+    @OneToMany
+    @JoinColumn(name = "Tratamiento_id", nullable = true)
+    private List<Tratamiento> tratamiento;
 
     public Mascota(String nombre, String raza, int edad, float peso, String foto, String enfermedad, String estado) {
         this.nombre = nombre;

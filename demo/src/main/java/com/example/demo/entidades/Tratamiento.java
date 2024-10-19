@@ -1,11 +1,15 @@
 package com.example.demo.entidades;
 import java.time.LocalDate;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -16,8 +20,9 @@ public class Tratamiento {
     @ManyToOne
     private Droga droga;
 
-    @OneToOne
-    @JoinColumn(name = "Mascotas_id")
+    @ManyToOne
+    @JoinColumn(name = "Mascota_id", nullable = true)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private Mascota mascota;
 
     @Id
