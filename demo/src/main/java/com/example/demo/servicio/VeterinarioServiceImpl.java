@@ -33,7 +33,7 @@ public class VeterinarioServiceImpl implements VeterinarioService{
 
     @Override
     public void deleteById(Long id) {
-    Veterinario veterinario = veterinarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Cliente no encontrado"));
+        veterinarioRepository.deleteById(id);
     }
 
     @Override
