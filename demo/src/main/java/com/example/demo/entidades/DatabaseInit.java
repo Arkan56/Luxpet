@@ -420,7 +420,7 @@ public class DatabaseInit implements ApplicationRunner {
                                 drogaRepository.save(new Droga("Fluoxetina", 170000, 160000, 45, 20));
                                 drogaRepository.save(new Droga("Fenobarbital", 190000, 180000, 50, 25));
                               
-                                
+
         ArrayList<Droga> drogas = new ArrayList<>(drogaRepository.findAll());
 
         for (int i = 0; i < 10; i++) {

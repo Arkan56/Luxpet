@@ -21,7 +21,7 @@ import com.example.demo.servicio.VeterinarioService;
 
 @RestController
 @RequestMapping("/veterinario")
-@CrossOrigin("Localhost:4200")
+@CrossOrigin("http://localhost:4200")
 public class VeterinarioController {
     @Autowired
     VeterinarioService veterinarioService;
@@ -54,7 +54,7 @@ public class VeterinarioController {
     public void eliminarVeterinario(@PathVariable("id") Long id) {
         veterinarioService.deleteById(id);
     }
-
+    
     @PutMapping("/update/{id}")
     public void modificarVeterinario(@RequestBody Veterinario veterinario, @PathVariable("id") Long id) {
         veterinarioService.update(veterinario);
