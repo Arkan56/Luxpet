@@ -2,6 +2,8 @@ package com.example.demo.entidades;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Random;
+
 import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.TratamientoRepository;
+import com.example.demo.repositorio.VeterinarioRepository;
 import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.entidades.Cliente;
 
@@ -30,6 +33,9 @@ public class DatabaseInit implements ApplicationRunner {
 
         @Autowired
         DrogaRepository drogaRepository;
+
+        @Autowired
+        VeterinarioRepository veterinarioRepository;
 
         @Override
         public void run(ApplicationArguments args) throws Exception {
@@ -468,7 +474,27 @@ public class DatabaseInit implements ApplicationRunner {
                                 mascotaRepository.save(mascota2);
                         }
                 }
-
         }
+                veterinarioRepository.save(new Veterinario("VET123456", "pass123", "Cardiología", "foto1.jpg", 50, "Dr. Juan Pérez"));
+                veterinarioRepository.save(new Veterinario("VET123457", "secure456", "Dermatología", "foto2.jpg", 30, "Dra. María Gómez"));
+                veterinarioRepository.save(new Veterinario("VET123458", "vetsecure789", "Oncología", "foto3.jpg", 80, "Dr. Luis Martínez"));
+                veterinarioRepository.save(new Veterinario("VET123459", "petsrule", "Neurología", "foto4.jpg", 100, "Dra. Ana Rodríguez"));
+                veterinarioRepository.save(new Veterinario("VET123460", "dogcat123", "Oftalmología", "foto5.jpg", 40, "Dr. Carlos Fernández"));
+                veterinarioRepository.save(new Veterinario("VET123461", "securevet", "Cirugía", "foto6.jpg", 120, "Dra. Laura González"));
+                veterinarioRepository.save(new Veterinario("VET123462", "mypassword1", "Medicina Interna", "foto7.jpg", 90, "Dr. Jorge Ruiz"));
+                veterinarioRepository.save(new Veterinario("VET123463", "passvet2", "Radiología", "foto8.jpg", 65, "Dra. Andrea Morales"));
+                veterinarioRepository.save(new Veterinario("VET123464", "supersecure", "Ortopedia", "foto9.jpg", 55, "Dr. Santiago López"));
+                veterinarioRepository.save(new Veterinario("VET123465", "clinicvet", "Dermatología", "foto10.jpg", 70, "Dra. Paula Jiménez"));
+                veterinarioRepository.save(new Veterinario("VET123466", "vetclinic456", "Endocrinología", "foto11.jpg", 45, "Dr. Roberto Ortiz"));
+                veterinarioRepository.save(new Veterinario("VET123467", "password789", "Reproducción Animal", "foto12.jpg", 110, "Dra. Gabriela Soto"));
+                veterinarioRepository.save(new Veterinario("VET123468", "vetpass321", "Oncología", "foto13.jpg", 95, "Dr. Manuel García"));
+                veterinarioRepository.save(new Veterinario("VET123469", "safepass1", "Anestesiología", "foto14.jpg", 105, "Dra. Elena Castillo"));
+                veterinarioRepository.save(new Veterinario("VET123470", "mypassword2", "Urgencias", "foto15.jpg", 75, "Dr. Daniel Morales"));
+                veterinarioRepository.save(new Veterinario("VET123471", "supervet123", "Medicina General", "foto16.jpg", 85, "Dra. Cecilia Paredes"));
+                veterinarioRepository.save(new Veterinario("VET123472", "pass123456", "Nutrición", "foto17.jpg", 60, "Dr. Esteban Ramírez"));
+                veterinarioRepository.save(new Veterinario("VET123473", "securepass", "Comportamiento Animal", "foto18.jpg", 125, "Dra. Verónica Herrera"));
+                veterinarioRepository.save(new Veterinario("VET123474", "vetsecure001", "Geriatría", "foto19.jpg", 100, "Dr. Enrique Vargas"));
+                veterinarioRepository.save(new Veterinario("VET123475", "clinicpass789", "Nefrología", "foto20.jpg", 115, "Dra. Patricia Mendoza"));
+        
         }
 }

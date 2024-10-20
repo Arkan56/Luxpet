@@ -13,7 +13,7 @@ public interface ClienteService  {
 
     public void deleteById(Long id);
 
-    public void update(Cliente cliente);
+    public void update(Cliente cliente); //Sirve, pero no estamos buscando el Cliente por su ID
 
     public void add(Cliente cliente);
 

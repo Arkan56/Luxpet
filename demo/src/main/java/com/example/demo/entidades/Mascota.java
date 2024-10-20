@@ -35,10 +35,6 @@ public class Mascota {
     private Cliente cliente;
 
     @JsonIgnore
-    @ManyToOne
-    private Veterinario veterinario;
-
-    @JsonIgnore
     @OneToMany
     @JoinColumn(name = "Tratamiento_id", nullable = true)
     private List<Tratamiento> tratamiento;
@@ -127,13 +123,4 @@ public class Mascota {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
-    public Veterinario getVeterinario() {
-        return veterinario;
-    }
-
-    public void setVeterinario(Veterinario veterinario) {
-        this.veterinario = veterinario;
-    }
-
 }

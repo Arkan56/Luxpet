@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 @Entity
@@ -16,21 +17,24 @@ public class Veterinario {
     private String especialidad;
     private String foto;
     private int numAtenciones;
+    private String nombre;
 
     @JsonIgnore
-    @OneToMany (mappedBy = "veterinario")
-    private List<Mascota> mascotas = new ArrayList<>();
+    @OneToMany
+    @JoinColumn(name = "Tratamiento_id", nullable = true)
+    private List<Tratamiento> tratamiento;
 
     @Id
     @GeneratedValue
     private Long id;
 
-    public Veterinario(String cedula, String contrasenia, String especialidad, String foto, int numAtenciones) {
+    public Veterinario(String cedula, String contrasenia, String especialidad, String foto, int numAtenciones, String nombre) {
         this.cedula = cedula;
         this.contrasenia = contrasenia;
         this.especialidad = especialidad;
         this.foto = foto;
         this.numAtenciones = numAtenciones;
+        this.nombre = nombre;
     }
 
     public Veterinario() {
@@ -85,6 +89,13 @@ public class Veterinario {
         this.id = id;
     }
 
-    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     
 }

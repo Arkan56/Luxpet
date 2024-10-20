@@ -32,7 +32,6 @@ public class ClienteController {
 
     @GetMapping("/all")
     public List<Cliente> mostrarClientes(Model model) {
-        //model.addAttribute("clientes", clienteService.searchAll());
         return clienteService.searchAll();
     }
 
@@ -51,31 +50,6 @@ public class ClienteController {
         return cliente;
     }
 
-
-/*    @GetMapping("/portal/{id}")
-    public String mostrarClientePortal(Model model, @PathVariable("id") Long identificacion) {
-
-        Cliente cliente = clienteService.searchById(identificacion);
-        System.out.println(cliente.toString());
-
-        if (cliente != null) {
-            model.addAttribute("cliente", clienteService.searchById(identificacion));
-        } else {
-            // throw new NotFoundException(identificacion);
-        }
-        return "portalCliente";
-    } */
-
-    /*@GetMapping("/add")
-    public String mostrarFormularioCrear(Model model) {
-
-        Cliente cliente = new Cliente("", "", "", "");
-
-        model.addAttribute("cliente", cliente);
-
-        return "crearCliente";
-    }*/
-
     @PostMapping("/add")
     public void agregarCliente(@RequestBody Cliente cliente) {
         clienteService.add(cliente);
@@ -85,12 +59,6 @@ public class ClienteController {
     public void eliminarCliente(@PathVariable("id") Long id) {
         clienteService.deleteById(id);
     }
-
-   /*  @GetMapping("/update/{id}")
-    public String mostrarFormularioUpdate(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("cliente", clienteService.searchById(id));
-        return "modificarCliente";
-    } */
 
     @PutMapping("/update/{id}")
     public void modificarCliente(@RequestBody Cliente cliente, @PathVariable("id") int id) {
