@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entidades.Cliente;
+import com.example.demo.entidades.LoginRequest;
+import com.example.demo.entidades.Veterinario;
 import com.example.demo.servicio.ClienteService;
+import com.example.demo.servicio.VeterinarioService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -23,24 +26,16 @@ public class LoginController {
     @Autowired
     ClienteService service;
 
-    /*
-    @GetMapping("/")
-    public String mostrarLogin(Model model) {
-        model.addAttribute("cedula", "");
-        return "inicioSesion";
-    }*/
-
-    /*
-    @GetMapping("/loginVeterinario")
-    public String mostrarPortalVet(Model model) {
-        model.addAttribute("cedula", "");
-        model.addAttribute("password", "");
-        return "inicioSesionVeterinario";
-    }*/
+    @Autowired
+    VeterinarioService vetService;
 
     @PostMapping("/loginVeterinario")
-    public String confirmarLoginVet() {
-        return "redirect:/cliente/all";
+    public Veterinario confirmarLoginVet(@RequestBody LoginRequest loginRequest) {
+        Veterinario vet = vetService.searchByCedula(loginRequest.getCedula());
+        if(vet != null && vet.getContrasenia().equals(loginRequest.getPassword())) {
+            return vet;
+        }
+        return null;
     }
 
     @PostMapping("/")
