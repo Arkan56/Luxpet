@@ -13,10 +13,12 @@ import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.MascotaService;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -81,16 +83,20 @@ public class MascotaController {
     }*/
 
     @PostMapping("/add")
-    public void agregarMascota(@RequestBody Mascota mascota,
-            @RequestParam String cliente) throws Exception {
-        Cliente aux = clienteService.searchByCedula(cliente);
+    public void agregarMascota(@RequestBody Mascota mascota, @RequestParam String cedula) throws Exception {
+        Cliente aux = clienteService.searchByCedula(cedula);
         mascota.setCliente(aux);
-        mascotaService.add(mascota);
+        if (mascota.getId() == null || mascota.getId() == 0) {
+            mascotaService.add(mascota);
+        } else {
+            // Si el ID es válido, actualizar la mascota existente
+            mascotaService.update(mascota);
+        }
+        
         clienteService.addMascota(mascota.getCliente().getCedula(), mascota);
-        return;
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String eliminarMascota(@PathVariable("id") Long id) {
         mascotaService.deleteById(id);
         return "redirect:/mascota/all";
@@ -106,18 +112,24 @@ public class MascotaController {
         return "modificarMascota";
     }*/
 
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public void modificarMascota(@RequestBody Mascota mascota, @PathVariable("id") Long id,
-            @RequestBody Cliente cliente,
-            @RequestBody String clienteSeleccionado) {
-        if (cliente.getCedula() != null) {
-            clienteService.deleteMascota(cliente.getCedula(), id);
+                                 @RequestParam String clienteSeleccionado) {
+        // Buscar y eliminar la mascota antigua del cliente
+        for (Cliente cliente : clienteService.searchAll()) {
+            for (Mascota mascotaAux : cliente.getMascotas()) {
+                if (mascotaAux.getId().equals(id)) {
+                    clienteService.deleteMascota(cliente.getCedula(), id);
+                    break;
+                }
+            }
         }
-        Cliente aux = clienteService.searchByCedula(clienteSeleccionado);
-        mascota.setCliente(aux);
+    
+        // Asociar la mascota actualizada con el nuevo cliente
+        Cliente nuevoCliente = clienteService.searchByCedula(clienteSeleccionado);
+        mascota.setCliente(nuevoCliente);
         mascotaService.update(mascota);
         clienteService.addMascota(clienteSeleccionado, mascota);
-        return;
     }
 
 }

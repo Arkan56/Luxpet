@@ -8,10 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -79,18 +81,18 @@ public class ClienteController {
         clienteService.add(cliente);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void eliminarCliente(@PathVariable("id") Long id) {
         clienteService.deleteById(id);
     }
 
-    /*@GetMapping("/update/{id}")
+   /*  @GetMapping("/update/{id}")
     public String mostrarFormularioUpdate(Model model, @PathVariable("id") Long id) {
         model.addAttribute("cliente", clienteService.searchById(id));
         return "modificarCliente";
-    }*/
+    } */
 
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public void modificarCliente(@RequestBody Cliente cliente, @PathVariable("id") int id) {
         clienteService.update(cliente);
     }
