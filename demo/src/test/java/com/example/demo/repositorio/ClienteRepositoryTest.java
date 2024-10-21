@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.example.demo.entidades.Cliente;
+import com.example.demo.entidades.Mascota;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -84,7 +86,7 @@ public class ClienteRepositoryTest {
         Assertions.assertThat(cliente).isNotNull();
         
     }
-    
+
     @Test
     void ClienteRepository_findByName_Cliente(){
         //arrange
@@ -97,9 +99,82 @@ public class ClienteRepositoryTest {
         Assertions.assertThat(updated).isNotNull();
         Assertions.assertThat(updated.getNombre()).isEqualTo("modificado");
     }
-   
-    
 
-   
-       
+    //Prueba Consulta 1
+    @Test
+    void ClienteRepository_findByEmail_Cliente() {
+    // arrange
+    String email = "cirogamer@gmail.com";
+    
+    // act
+    Cliente cliente = clienteRepository.findByCorreo(email);
+    
+    // assert
+    Assertions.assertThat(cliente).isNotNull();
+    Assertions.assertThat(cliente.getCorreo()).isEqualTo(email);
+    }
+
+    //Prueba Consulta 2
+    @Test
+    void ClienteRepository_findByCelular_Cliente() {
+        // arrange
+        String celular = "3184406521";
+        
+        // act
+        Cliente cliente = clienteRepository.findByCelular(celular);
+        
+        // assert
+        Assertions.assertThat(cliente).isNotNull();
+        Assertions.assertThat(cliente.getCelular()).isEqualTo(celular);
+    }
+
+    //Prueba Consulta 3
+    @Test
+    void ClienteRepository_findByMascotasIsEmpty_Clientes() {
+    // act
+    List<Cliente> clientes = clienteRepository.findByMascotasIsEmpty();
+    
+    // assert
+    Assertions.assertThat(clientes).isNotEmpty();
+    for (Cliente cliente : clientes) {
+        Assertions.assertThat(cliente.getMascotas()).isEmpty();
+    }
+    }
+
+
+    
+    //Prueba Consulta 4
+    @Test
+    void ClienteRepository_findByNombreAndCorreo_Cliente() {
+    // arrange
+    String nombre = "miguelito";
+    String correo = "miguelelpro@gmail.com";
+    
+    // act
+    Cliente cliente = clienteRepository.findByNombreAndCorreo(nombre, correo);
+    
+    // assert
+    Assertions.assertThat(cliente).isNotNull();
+    Assertions.assertThat(cliente.getNombre()).isEqualTo(nombre);
+    Assertions.assertThat(cliente.getCorreo()).isEqualTo(correo);
+    }
+
+    @Test
+    void ClienteRepository_findByCorreoContaining_CorreoParcial() {
+    // arrange
+    Cliente cliente1 = new Cliente("789012", "luis", "luisito@gmail.com", "3101234567");
+    Cliente cliente2 = new Cliente("654321", "carlos", "carlitos@yahoo.com", "3127654321");
+
+    clienteRepository.save(cliente1);
+    clienteRepository.save(cliente2);
+
+    // act
+    List<Cliente> clientesConGmail = clienteRepository.findByCorreoContaining("gmail");
+
+    // assert
+    Assertions.assertThat(clientesConGmail).isNotEmpty();
+    Assertions.assertThat(clientesConGmail).contains(cliente1);
+    Assertions.assertThat(clientesConGmail).doesNotContain(cliente2);
+    }
+
 }

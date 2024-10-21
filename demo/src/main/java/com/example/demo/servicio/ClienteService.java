@@ -22,4 +22,15 @@ public interface ClienteService  {
     public void addMascota(String cedula, Mascota mascota);
 
     public void deleteMascota(String cedula, Long id);
+
+    Cliente searchByCorreo(String correo);
+
+    Cliente searchByCelular(String celular);
+
+    List<Cliente> searchByClientesSinMascotas();
+
+    Cliente searchByNombreAndCorreo(String nombre, String correo);
+    
+    public List<Cliente> searchByCorreoContaining(String dominio);
+
 }
