@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -23,70 +25,60 @@ import com.example.demo.entidades.Mascota;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.MascotaService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping("/cliente")
 @CrossOrigin(origins = "http://localhost:4200")
 public class ClienteController {
+    
     @Autowired
     ClienteService clienteService;
 
     @GetMapping("/all")
-    public List<Cliente> mostrarClientes(Model model) {
-        return clienteService.searchAll();
+    @Operation(summary = "Encuentra a todos los clientes")
+    public ResponseEntity<List<Cliente>> mostrarClientes(Model model) {
+        List<Cliente> clientes = clienteService.searchAll();
+        ResponseEntity<List<Cliente>> response = new ResponseEntity<>(clientes, HttpStatus.OK);
+        return response;
     }
 
+
     @GetMapping("/find/{id}")
-    public Cliente mostrarCliente(Model model, @PathVariable("id") Long identificacion) {
-
+    public ResponseEntity<Cliente> mostrarCliente(Model model, @PathVariable("id") Long identificacion) {
         Cliente cliente = clienteService.searchById(identificacion);
-        System.out.println(cliente.toString());
-
-        if (cliente != null) {
-            //model.addAttribute("cliente", clienteService.searchById(identificacion));
-            //return clienteService.searchById(identificacion);
-        } else {
-            // throw new NotFoundException(identificacion);
+        
+        if(cliente == null){
+            return new ResponseEntity<Cliente>(cliente, HttpStatus.NOT_FOUND);
         }
-        return cliente;
+
+        return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
     }
 
     @PostMapping("/add")
-    public void agregarCliente(@RequestBody Cliente cliente) {
-        clienteService.add(cliente);
+    public ResponseEntity<Cliente> agregarCliente(@RequestBody Cliente cliente) {
+        Cliente newCliente = clienteService.add(cliente);
+
+        if(newCliente == null){
+            return new ResponseEntity<Cliente>(newCliente, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Cliente>(newCliente, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void eliminarCliente(@PathVariable("id") Long id) {
+    public ResponseEntity<String> eliminarCliente(@PathVariable("id") Long id) {
         clienteService.deleteById(id);
+        return new ResponseEntity<>("Cliente eliminado", HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update/{id}")
-    public void modificarCliente(@RequestBody Cliente cliente, @PathVariable("id") int id) {
-        clienteService.update(cliente);
-    }
-    @GetMapping("/findByEmail/{email}")
-    public Cliente mostrarClientePorCorreo(@PathVariable("email") String correo) {
-        return clienteService.searchByCorreo(correo);
-    }
+    public ResponseEntity<Cliente> modificarCliente(@RequestBody Cliente cliente, @PathVariable("id") Long id) {
+     
+        Cliente clientFind = clienteService.searchById(id);
+        cliente.setId(clientFind.getId());
+        Cliente clienteUpdated = clienteService.update(cliente);
+        return new ResponseEntity<>(clienteUpdated, HttpStatus.OK);
 
-    @GetMapping("/findByCelular/{celular}")
-    public Cliente mostrarClientePorCelular(@PathVariable("celular") String celular) {
-    return clienteService.searchByCelular(celular);
     }
-    @GetMapping("/findByClientesSinMascotas")
-    public List<Cliente> mostrarClientesSinMascotas() {
-    return clienteService.searchByClientesSinMascotas();
-    }
-
-    @GetMapping("/findByNombreAndCorreo/{nombre}/{correo}")
-    public Cliente mostrarClientePorNombreYCorreo(@PathVariable("nombre") String nombre, @PathVariable("correo") String correo) {
-    return clienteService.searchByNombreAndCorreo(nombre, correo);
-    }
-    
-     // Nuevo endpoint: Buscar clientes por dominio de correo
-     @GetMapping("/findByCorreo/{dominio}")
-     public List<Cliente> mostrarClientesPorCorreo(@PathVariable("dominio") String dominio) {
-         return clienteService.searchByCorreoContaining(dominio);
-     }
 
 }

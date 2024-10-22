@@ -15,7 +15,7 @@ public interface VeterinarioService {
 
     public void update(Veterinario veterinario); //Sirve, pero no estamos buscando el Veterianio por su ID
 
-    public void add(Veterinario veterinario);
+    public Veterinario add(Veterinario veterinario);
 
     public Veterinario searchByCedula(String cedula);
 }

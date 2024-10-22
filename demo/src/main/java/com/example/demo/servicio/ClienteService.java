@@ -13,9 +13,9 @@ public interface ClienteService  {
 
     public void deleteById(Long id);
 
-    public void update(Cliente cliente); //Sirve, pero no estamos buscando el Cliente por su ID
+    public Cliente update(Cliente cliente); //Sirve, pero no estamos buscando el Cliente por su ID
 
-    public void add(Cliente cliente);
+    public Cliente add(Cliente cliente);
 
     public Cliente searchByCedula(String cedula);
 
