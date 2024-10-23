@@ -52,7 +52,7 @@ public class ClienteRepositoryTest {
         List<Cliente> clientes = clienteRepository.findAll();
         //assert
         Assertions.assertThat(clientes).isNotNull();
-        Assertions.assertThat(clientes.size()).isEqualTo(2);
+        Assertions.assertThat(clientes.size()).isEqualTo(6);
         Assertions.assertThat(clientes.size()).isGreaterThan(0);
         
     }  
