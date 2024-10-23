@@ -1,6 +1,8 @@
 package com.example.demo.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,16 +31,16 @@ public class LoginController {
     @Autowired
     VeterinarioService vetService;
 
-    @PostMapping("/loginVeterinario")
+    @PostMapping("/loginveterinario")
     public Veterinario confirmarLoginVet(@RequestBody LoginRequest loginRequest) {
         Veterinario vet = vetService.searchByCedula(loginRequest.getCedula());
-        if(vet != null && vet.getContrasenia().equals(loginRequest.getPassword())) {
+        if (vet != null && vet.getContrasenia().equals(loginRequest.getPassword())) {
             return vet;
         }
-        return null;
+        return null;    
     }
 
-    @PostMapping("/")
+    @PostMapping("/logincliente")
     public Cliente confirmarLogin(@RequestBody String cedula) {
         Cliente aux = service.searchByCedula(cedula);
         return aux; //SI encuentra el usuario lo devuelve, de lo contrario es null

@@ -13,7 +13,7 @@ public interface VeterinarioService {
 
     public void deleteById(Long id);
 
-    public void update(Veterinario veterinario); //Sirve, pero no estamos buscando el Veterianio por su ID
+    public Veterinario update(Veterinario veterinario); //Sirve, pero no estamos buscando el Veterianio por su ID
 
     public Veterinario add(Veterinario veterinario);
 

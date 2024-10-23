@@ -3,6 +3,8 @@ package com.example.demo.controlador;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,8 @@ import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.Mascota;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.MascotaService;
+
+import io.swagger.v3.oas.annotations.Operation;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,56 +38,75 @@ public class MascotaController {
     ClienteService clienteService;
 
     @GetMapping("/all")
-    public List<Mascota> mostrarMascotas() {
-        //model.addAttribute("mascotas", mascotaService.searchAll());
-        return mascotaService.searchAll();
+    @Operation(summary = "Encuentra a todos las mascotas")
+    public ResponseEntity<List<Mascota>> mostrarMascotas() {
+        List<Mascota> mascotas = mascotaService.searchAll();
+        ResponseEntity<List<Mascota>> response = new ResponseEntity<>(mascotas, HttpStatus.OK);
+        return response;
     }
 
     @GetMapping("/find/{id}")
-    public Mascota mostrarMascota(@PathVariable("id") Long identificacion) {
-
+    public ResponseEntity<Mascota> mostrarMascota(@PathVariable("id") Long identificacion) {
         Mascota mascota = mascotaService.searchById(identificacion);
-        return mascota;
+        
+        if(mascota == null){
+            return new ResponseEntity<Mascota>(mascota, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<Mascota>(mascota, HttpStatus.OK);
     }
 
     @PostMapping("/add")
-    public void agregarMascota(@RequestBody Mascota mascota, @RequestParam String cedula) throws Exception {
-        Cliente aux = clienteService.searchByCedula(cedula);
-        mascota.setCliente(aux);
-        if (mascota.getId() == null || mascota.getId() == 0) {
-            mascotaService.add(mascota);
-        } else {
-            // Si el ID es válido, actualizar la mascota existente
-            mascotaService.update(mascota);
+    public ResponseEntity<Mascota> agregarMascota(@RequestBody Mascota mascota, @RequestParam String cedula) throws Exception {
+        Mascota newMascota = mascotaService.add(mascota);
+
+        if(newMascota == null){
+            return new ResponseEntity<Mascota>(newMascota, HttpStatus.BAD_REQUEST);
         }
-        
         clienteService.addMascota(mascota.getCliente().getCedula(), mascota);
+        return new ResponseEntity<Mascota>(newMascota, HttpStatus.CREATED);
+        
     }
 
     @DeleteMapping("/delete/{id}")
-    public String eliminarMascota(@PathVariable("id") Long id) {
+    public ResponseEntity<String> eliminarMascota(@PathVariable("id") Long id) {
         mascotaService.deleteById(id);
-        return "redirect:/mascota/all";
+        return new ResponseEntity<>("Mascota eliminada", HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update/{id}")
-    public void modificarMascota(@RequestBody Mascota mascota, @PathVariable("id") Long id,
-                                 @RequestParam String clienteSeleccionado) {
-        // Buscar y eliminar la mascota antigua del cliente
-        for (Cliente cliente : clienteService.searchAll()) {
-            for (Mascota mascotaAux : cliente.getMascotas()) {
-                if (mascotaAux.getId().equals(id)) {
-                    clienteService.deleteMascota(cliente.getCedula(), id);
-                    break;
-                }
-            }
-        }
+public ResponseEntity<Mascota> modificarMascota(@RequestBody Mascota mascota, @PathVariable("id") Long id,
+                             @RequestParam String clienteSeleccionado) {
+    // Buscar la mascota por ID
+    Mascota mascotaFind = mascotaService.searchById(id);
     
-        // Asociar la mascota actualizada con el nuevo cliente
-        Cliente nuevoCliente = clienteService.searchByCedula(clienteSeleccionado);
-        mascota.setCliente(nuevoCliente);
-        mascotaService.update(mascota);
-        clienteService.addMascota(clienteSeleccionado, mascota);
+    // Si la mascota no se encuentra, devolver un error
+    if (mascotaFind == null) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    // Eliminar la mascota antigua del cliente
+    clienteService.deleteMascota(mascotaFind.getCliente().getCedula(), id);
+
+    // Buscar el nuevo cliente por cédula
+    Cliente nuevoCliente = clienteService.searchByCedula(clienteSeleccionado);
+    
+    // Si el cliente no se encuentra, devolver un error
+    if (nuevoCliente == null) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    // Asociar la mascota actualizada con el nuevo cliente
+    mascota.setCliente(nuevoCliente);
+    
+    // Actualizar la mascota
+    Mascota mascotaActualizada = mascotaService.update(mascota);
+    
+    // Añadir la mascota al nuevo cliente
+    clienteService.addMascota(clienteSeleccionado, mascotaActualizada);
+    
+    // Devolver la respuesta con la mascota actualizada
+    return new ResponseEntity<>(mascotaActualizada, HttpStatus.OK);
+}
 
 }

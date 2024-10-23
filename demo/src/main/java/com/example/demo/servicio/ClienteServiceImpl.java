@@ -49,13 +49,15 @@ public void deleteById(Long id) {
 }
 
     @Override
-    public void update(Cliente cliente) {
+    public Cliente update(Cliente cliente) {
         clienteRepository.save(cliente);
+        return cliente;
     }
 
     @Override
-    public void add(Cliente cliente) {
+    public Cliente add(Cliente cliente) {
         clienteRepository.save(cliente);
+        return cliente;
     }
 
     @Override

@@ -65,7 +65,10 @@ public class VeterinarioController {
     }
     
     @PutMapping("/update/{id}")
-    public void modificarVeterinario(@RequestBody Veterinario veterinario, @PathVariable("id") Long id) {
-        veterinarioService.update(veterinario);
+    public ResponseEntity<Veterinario> modificarVeterinario(@RequestBody Veterinario veterinario, @PathVariable("id") Long id) {
+        Veterinario vetFind = veterinarioService.searchById(id);
+        veterinario.setId(vetFind.getId());
+        Veterinario vetUpdated = veterinarioService.update(veterinario);
+        return new ResponseEntity<>(vetUpdated, HttpStatus.OK);
     }
 }

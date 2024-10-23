@@ -30,13 +30,15 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public void update(Mascota mascota) {
+    public Mascota update(Mascota mascota) {
         repo.save(mascota);
+        return mascota;
     }
 
     @Override
-    public void add(Mascota mascota) {
+    public Mascota add(Mascota mascota) {
         repo.save(mascota);
+        return mascota;
     }
 
 }
