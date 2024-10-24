@@ -18,10 +18,15 @@ public class Tratamiento {
     private LocalDate fecha;
 
     @ManyToOne
+    @JoinColumn(name = "droga_id", nullable = true)
     private Droga droga;
 
     @ManyToOne
-    @JoinColumn(name = "Mascota_id", nullable = true)
+    @JoinColumn(name = "veterinario_id")
+    private Veterinario veterinario;
+
+    @ManyToOne
+    @JoinColumn(name = "mascota_id", nullable = true)
     @OnDelete(action = OnDeleteAction.SET_NULL)
     private Mascota mascota;
 

@@ -2,9 +2,11 @@ package com.example.demo.servicio;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.example.demo.entidades.Droga;
 import com.example.demo.entidades.Tratamiento;
-
+@Service
 public interface DrogaService {
     public Droga searchById(Long id);
 
