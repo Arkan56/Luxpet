@@ -453,14 +453,12 @@ public class DatabaseInit implements ApplicationRunner {
 
 
                 
-                int mascotaTratamientoIndex = 0;
 
-                                for(Tratamiento tratamiento2 : tratamientos){   
-                                        if (mascotaTratamientoIndex < mascotas.size()) {
-                                        Mascota mascota = mascotas.get(mascotaTratamientoIndex++);
+                                for(Tratamiento tratamiento2 : tratamientos){
+                                        int randomIndex = (int) (Math.random() * mascotas.size());
+                                        Mascota mascota = mascotas.get(randomIndex);
                                         tratamiento2.setMascota(mascota);
                                         tratamientoRepository.save(tratamiento2);
-                                        }
                                 }
 
                 int mascotaIndex = 0;
@@ -497,6 +495,17 @@ public class DatabaseInit implements ApplicationRunner {
                 veterinarioRepository.save(new Veterinario("VET123473", "securepass", "Comportamiento Animal", "foto18.jpg", 125, "Dra. Verónica Herrera"));
                 veterinarioRepository.save(new Veterinario("VET123474", "vetsecure001", "Geriatría", "foto19.jpg", 100, "Dr. Enrique Vargas"));
                 veterinarioRepository.save(new Veterinario("VET123475", "clinicpass789", "Nefrología", "foto20.jpg", 115, "Dra. Patricia Mendoza"));
+
+                ArrayList<Veterinario> veterinarios = new ArrayList<>(veterinarioRepository.findAll());
+
+                for (Tratamiento tratamiento : tratamientos) {
+                        int randomIndex = (int) (Math.random() * veterinarios.size());    
+                        Veterinario veterinario = veterinarios.get(randomIndex);
+                        tratamiento.setVeterinario(veterinario);
+                        tratamientoRepository.save(tratamiento);
+                }
+
+
         
         }
 }

@@ -21,7 +21,7 @@ public class Veterinario {
 
     @JsonIgnore
     @OneToMany
-    @JoinColumn(name = "Tratamiento_id", nullable = true)
+    @JoinColumn(name = "Veterinario_id", nullable = true)
     private List<Tratamiento> tratamiento;
 
     @Id

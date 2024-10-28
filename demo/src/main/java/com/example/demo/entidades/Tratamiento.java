@@ -76,6 +76,16 @@ public class Tratamiento {
         this.mascota = mascota;
     }
 
+    public Veterinario getVeterinario() {
+        return veterinario;
+    }
+
+    public void setVeterinario(Veterinario veterinario) {
+        this.veterinario = veterinario;
+    }
+
+    
+
     
 
     

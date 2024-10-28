@@ -36,7 +36,7 @@ public class Mascota {
 
     @JsonIgnore
     @OneToMany
-    @JoinColumn(name = "Tratamiento_id", nullable = true)
+    @JoinColumn(name = "Mascota_id", nullable = true)
     private List<Tratamiento> tratamiento;
 
     public Mascota(String nombre, String raza, int edad, float peso, String foto, String enfermedad, String estado) {

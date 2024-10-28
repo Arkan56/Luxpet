@@ -5,10 +5,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.example.demo.entidades.Mascota;
 
 @Repository
 public interface MascotaRepository extends JpaRepository<Mascota, Long> {
+
+    @Query("SELECT COUNT(m) FROM Mascota m WHERE m.estado = :estado")
+    Long countMascotasActivas(@Param("estado") String estado);
 
 }
