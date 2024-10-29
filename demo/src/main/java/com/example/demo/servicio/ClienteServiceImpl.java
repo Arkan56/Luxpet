@@ -60,7 +60,8 @@ public void deleteById(Long id) {
 
     @Override
     public Cliente searchByCedula(String cedula) {
-        return clienteRepository.findByCedula(cedula);
+        Cliente retorno = clienteRepository.findByCedula(cedula);
+        return retorno;
     }
 
     @Override

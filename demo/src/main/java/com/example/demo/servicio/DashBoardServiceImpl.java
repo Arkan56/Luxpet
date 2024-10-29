@@ -93,7 +93,9 @@ public class DashBoardServiceImpl implements DashBoardService {
 
     @Override
     public List<Droga> top3DrogasTratamientos() {
-        return tratamientoRepository.findTop3DrogasByUso();
+        List<Droga> drogas = tratamientoRepository.findTop3DrogasByUso();
+        List<Droga> aux = drogas.subList(0, 3);
+        return aux;
     }
     
 }
