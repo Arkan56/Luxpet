@@ -2,6 +2,7 @@ package com.example.demo.repositorio;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -23,6 +24,5 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     Cliente findByNombreAndCorreo(String nombre, String correo);
 
     List<Cliente> findByCorreoContaining(String dominio);
-    
 
 }

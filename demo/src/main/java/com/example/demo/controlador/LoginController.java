@@ -41,6 +41,6 @@ public class LoginController {
     @PostMapping("/")
     public Cliente confirmarLogin(@RequestBody String cedula) {
         Cliente aux = service.searchByCedula(cedula);
-        return aux; //SI encuentra el usuario lo devuelve, de lo contrario es null
+        return aux;
     }
 }

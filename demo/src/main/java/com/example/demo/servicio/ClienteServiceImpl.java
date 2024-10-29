@@ -76,27 +76,10 @@ public void deleteById(Long id) {
         cliente.getMascotas().removeIf(mascota -> mascota.getId() == id);
         clienteRepository.save(cliente);
     }
-    @Override
-    public Cliente searchByCorreo(String correo) {
-        return clienteRepository.findByCorreo(correo);
-    }
 
     @Override
-    public Cliente searchByCelular(String celular) {
-        return clienteRepository.findByCelular(celular);
-    }
-    @Override
-    public List<Cliente> searchByClientesSinMascotas() {
-    return clienteRepository.findByMascotasIsEmpty();
-    }
-    @Override
-    public Cliente searchByNombreAndCorreo(String nombre, String correo) {
-    return clienteRepository.findByNombreAndCorreo(nombre, correo);
-    }
-
-    @Override
-    public List<Cliente> searchByCorreoContaining(String dominio) {
-        return clienteRepository.findByCorreoContaining(dominio);
+    public List<Mascota> searchMascotas(Long id) {
+        return mascotaRepository.countMascotasByClient(id);
     }
 
 }

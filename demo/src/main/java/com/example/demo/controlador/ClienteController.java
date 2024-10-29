@@ -64,29 +64,10 @@ public class ClienteController {
     public void modificarCliente(@RequestBody Cliente cliente, @PathVariable("id") int id) {
         clienteService.update(cliente);
     }
-    @GetMapping("/findByEmail/{email}")
-    public Cliente mostrarClientePorCorreo(@PathVariable("email") String correo) {
-        return clienteService.searchByCorreo(correo);
-    }
 
-    @GetMapping("/findByCelular/{celular}")
-    public Cliente mostrarClientePorCelular(@PathVariable("celular") String celular) {
-    return clienteService.searchByCelular(celular);
+    @GetMapping("/mascotas/{id}")
+    public List<Mascota> mostrarMascotas(@PathVariable("id") Long id) {
+        return clienteService.searchMascotas(id);
     }
-    @GetMapping("/findByClientesSinMascotas")
-    public List<Cliente> mostrarClientesSinMascotas() {
-    return clienteService.searchByClientesSinMascotas();
-    }
-
-    @GetMapping("/findByNombreAndCorreo/{nombre}/{correo}")
-    public Cliente mostrarClientePorNombreYCorreo(@PathVariable("nombre") String nombre, @PathVariable("correo") String correo) {
-    return clienteService.searchByNombreAndCorreo(nombre, correo);
-    }
-    
-     // Nuevo endpoint: Buscar clientes por dominio de correo
-     @GetMapping("/findByCorreo/{dominio}")
-     public List<Cliente> mostrarClientesPorCorreo(@PathVariable("dominio") String dominio) {
-         return clienteService.searchByCorreoContaining(dominio);
-     }
 
 }
