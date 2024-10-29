@@ -39,8 +39,8 @@ public class LoginController {
     }
 
     @PostMapping("/")
-    public Cliente confirmarLogin(@RequestBody String cedula) {
-        Cliente aux = service.searchByCedula(cedula);
+    public Cliente confirmarLogin(@RequestBody LoginRequest loginRequest) {
+        Cliente aux = service.searchByCedula(loginRequest.getCedula());
         return aux;
     }
 }

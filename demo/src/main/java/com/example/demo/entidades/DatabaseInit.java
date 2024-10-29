@@ -411,16 +411,16 @@ public class DatabaseInit implements ApplicationRunner {
                                 "https://www.orchardroadanimalhospital.com/sites/default/files/styles/large/public/shih-tzu-dog-breed-info.jpg?itok=CwWMOPs2",
                                 "ninguna", "Activo"));
 
-                                drogaRepository.save(new Droga("Carprofeno", 200000, 180000, 50, 30));
-                                drogaRepository.save(new Droga("Tramadol", 150000, 140000, 40, 25));
-                                drogaRepository.save(new Droga("Apoquel (Oclacitinib)", 300000, 290000, 60, 35));
-                                drogaRepository.save(new Droga("Gabapentina", 120000, 110000, 45, 20));
-                                drogaRepository.save(new Droga("Metronidazol", 100000, 95000, 35, 15));
-                                drogaRepository.save(new Droga("Prednisona", 180000, 170000, 55, 25));
-                                drogaRepository.save(new Droga("Cerenia (Maropitant)", 250000, 240000, 50, 30));
-                                drogaRepository.save(new Droga("Benazepril", 220000, 210000, 60, 40));
-                                drogaRepository.save(new Droga("Fluoxetina", 170000, 160000, 45, 20));
-                                drogaRepository.save(new Droga("Fenobarbital", 190000, 180000, 50, 25));
+                                drogaRepository.save(new Droga("Carprofeno", 180000, 200000, 50, 30));
+                                drogaRepository.save(new Droga("Tramadol", 140000, 150000, 40, 25));
+                                drogaRepository.save(new Droga("Apoquel (Oclacitinib)", 290000, 300000, 60, 35));
+                                drogaRepository.save(new Droga("Gabapentina", 100000, 120000, 45, 20));
+                                drogaRepository.save(new Droga("Metronidazol", 95000, 100000, 35, 15));
+                                drogaRepository.save(new Droga("Prednisona", 160000, 170000, 55, 25));
+                                drogaRepository.save(new Droga("Cerenia (Maropitant)", 220000, 240000, 50, 30));
+                                drogaRepository.save(new Droga("Benazepril", 200000, 210000, 60, 40));
+                                drogaRepository.save(new Droga("Fluoxetina", 140000, 160000, 45, 20));
+                                drogaRepository.save(new Droga("Fenobarbital", 150000, 180000, 50, 25));
                               
 
         ArrayList<Droga> drogas = new ArrayList<>(drogaRepository.findAll());
