@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entidades.Admin;
 import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.LoginRequest;
 import com.example.demo.entidades.Veterinario;
+import com.example.demo.servicio.AdminService;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.VeterinarioService;
 
@@ -31,6 +33,9 @@ public class LoginController {
 
     @Autowired
     VeterinarioService vetService;
+
+    @Autowired
+    AdminService adminService;
 
     @PostMapping("/loginVeterinario")
     public ResponseEntity<Veterinario> confirmarLoginVet(@RequestBody LoginRequest loginRequest) {
@@ -50,4 +55,15 @@ public class LoginController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    @PostMapping("/loginAdmin")
+    public ResponseEntity<Admin> confirmarLoginAdmin(@RequestBody LoginRequest loginRequest) {
+        Admin admin = adminService.searchByCedula(loginRequest.getCedula());
+        if(admin != null && admin.getContrasenia().equals(loginRequest.getPassword())) {
+            return ResponseEntity.ok(admin);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+
 }

@@ -11,6 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 
+import com.example.demo.repositorio.AdminRepository;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.TratamientoRepository;
@@ -39,8 +40,14 @@ public class DatabaseInit implements ApplicationRunner {
         @Autowired
         VeterinarioRepository veterinarioRepository;
 
+        @Autowired
+        AdminRepository adminRepository;
+
+
         @Override
         public void run(ApplicationArguments args) throws Exception {
+                adminRepository.save(new Admin("admin", "admin"));
+
                 clienteRepository.save(new Cliente("0000000000", "Juan Angarita", "angarita@example.com", "000-0000"));
                 clienteRepository.save(
                                 new Cliente("0000000001", "Nicolas Camacho", "nicoCamacho@example.com", "000-1111"));
