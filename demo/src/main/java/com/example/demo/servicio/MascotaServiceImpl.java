@@ -6,13 +6,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.Mascota;
+import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
 
 @Service
 public class MascotaServiceImpl implements MascotaService {
     @Autowired
     MascotaRepository repo;
+
+    @Autowired
+    ClienteRepository repoCli;
 
     @Override
     public Mascota searchById(Long id) {
@@ -37,6 +42,12 @@ public class MascotaServiceImpl implements MascotaService {
     @Override
     public void add(Mascota mascota) {
         repo.save(mascota);
+    }
+
+    @Override
+    public Cliente searchDuenioMascota(Long id) {
+        Mascota mascota = searchById(id);
+        return repoCli.duenioMascotaByCliente(mascota.getCliente().getId());
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.demo.repositorio;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -24,5 +25,13 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     Cliente findByNombreAndCorreo(String nombre, String correo);
 
     List<Cliente> findByCorreoContaining(String dominio);
+
+    /*
+     * @Query("SELECT m FROM Mascota m WHERE m.cliente.id = :id")
+    List<Mascota> countMascotasByClient(@Param("id") Long id);
+     */
+
+     @Query("SELECT c FROM Cliente c WHERE c.id = :id")
+     Cliente duenioMascotaByCliente(@Param("id") Long id);
 
 }

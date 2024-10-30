@@ -86,4 +86,9 @@ public class MascotaController {
         clienteService.addMascota(clienteSeleccionado, mascota);
     }
 
+    @GetMapping("/duenio/{id}")
+    public Cliente mostrarDuenioMascota(@PathVariable("id") Long id) {
+        return mascotaService.searchDuenioMascota(id);
+    }
+
 }

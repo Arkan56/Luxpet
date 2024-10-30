@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.Mascota;
 
 public interface MascotaService {
@@ -17,4 +18,6 @@ public interface MascotaService {
     public void update(Mascota mascota);
 
     public void add(Mascota mascota);
+
+    public Cliente searchDuenioMascota(Long id);
 }
