@@ -39,5 +39,8 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     @Query("SELECT d FROM Droga d JOIN d.tratamientos t GROUP BY d ORDER BY COUNT(t) DESC")
     List<Droga> findTop3DrogasByUso();
 
+    @Query("SELECT t FROM Tratamiento t WHERE t.mascota.id = :id")
+    List<Tratamiento> findTratamientosByMascota(@Param("id") Long id);
+
 }
 

@@ -20,6 +20,8 @@ import com.example.demo.entidades.Tratamiento;
 import com.example.demo.servicio.DrogaService;
 import com.example.demo.servicio.TratamientoService;
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/tratamiento")
@@ -76,5 +78,11 @@ public class TratamientoController {
 
         return new ResponseEntity<>(tramientoUpdated, HttpStatus.OK);
     }
+
+    @GetMapping("/findByMascota/{id}")
+    public List<Tratamiento> tratamientoByMascotaId(@RequestParam Long id) {
+        return tratamientoService.tratamientosMascota(id);
+    }
+    
     
 }
