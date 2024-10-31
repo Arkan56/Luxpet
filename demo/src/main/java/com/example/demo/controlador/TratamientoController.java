@@ -80,9 +80,9 @@ public class TratamientoController {
     }
 
     @GetMapping("/findByMascota/{id}")
-    public List<Tratamiento> tratamientoByMascotaId(@RequestParam Long id) {
-        return tratamientoService.tratamientosMascota(id);
+    public ResponseEntity<List<Tratamiento>> tratamientoByMascotaId(@PathVariable("id") Long identificacion) {
+        List<Tratamiento> tratamientos = tratamientoService.searchByMascotaId(identificacion);
+        return new ResponseEntity<>(tratamientos, HttpStatus.OK);
     }
-    
     
 }
