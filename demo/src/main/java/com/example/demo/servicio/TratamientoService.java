@@ -23,5 +23,7 @@ public interface TratamientoService {
     public List<Tratamiento> searchByDrogaId(Long id);
 
     public List<Tratamiento> searchByVeterinario(Long id);
+
+    public List<Tratamiento> tratamientosMascota(Long id);
         
 }
