@@ -3,11 +3,15 @@ package com.example.demo.e2e;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.Duration;
+import java.util.List;
 
+import org.assertj.core.api.Assertions;
 import org.junit.After; // JUnit 4
 import org.junit.Before; // JUnit 4
 import org.junit.Test; // JUnit 4
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -57,67 +61,10 @@ public class NewUser {
         seleccionarVeterinario();
     }
 
-    // Método de validación de error de inicio de sesión
-    private void validarErrorLogin() {
-        WebElement errorMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("alerta")));
-        assertEquals("Credenciales incorrectas. Intente de nuevo.", errorMsg.getText().trim());
+    @Test
+    public void CasoDeUso2_NuevoTratamiento(){
+        segundoCasoDeUso();
     }
-    
-
-    // Método para agregar cliente con un error en el formulario
-        private void agregarClienteConError(String nombre, String cedula, String celular, String correo) {
-       
-        // WebElement agregarCliente = wait.until(ExpectedConditions.elementToBeClickable(By.id("agregarCliente"))); // Este ID no existe
-        // No es necesario hacer clic aquí ya que el botón de envío se encargará de eso.
-    
-        WebElement inputNombre = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nombre")));
-        WebElement inputCedulaCliente = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cedula")));
-        WebElement inputCelular = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("celular")));
-        WebElement inputCorreo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("correo"))); 
-    
-        inputNombre.sendKeys(nombre);
-        inputCedulaCliente.sendKeys(cedula);
-        inputCelular.sendKeys(celular);
-        inputCorreo.sendKeys(correo);
-    
-       
-        WebElement btnAgregar = wait.until(ExpectedConditions.elementToBeClickable(By.id("crearClienteBtn")));
-        btnAgregar.click();
-    
-        
-        WebElement errorMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("errorCorreo")));
-        assertEquals("Correo no válido.", errorMsg.getText().trim());
-    
-        // Limpiar el campo de correo para corregir el error
-        inputCorreo.clear();
-    }
-    
-    
-
-    // Método para agregar cliente sin errores
-    private void agregarCliente(String nombre, String cedula, String celular, String correo) {
-        try {
-            WebElement inputNombre = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nombre")));
-            WebElement inputCedulaCliente = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cedula")));
-            WebElement inputCelular = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("celular")));
-            WebElement inputCorreo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("correo"))); // Cambié 'email' a 'correo'
-    
-            inputNombre.sendKeys(nombre);
-            inputCedulaCliente.sendKeys(cedula);
-            inputCelular.sendKeys(celular);
-            inputCorreo.sendKeys(correo);
-    
-            WebElement btnAgregar = wait.until(ExpectedConditions.elementToBeClickable(By.id("crearClienteBtn"))); // Cambié 'btnAgregar' a 'crearClienteBtn'
-            btnAgregar.click();
-    
-            // Confirmar que el cliente fue registrado exitosamente
-            WebElement confirmMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("registroExitoso")));
-            assertEquals("Cliente registrado con éxito.", confirmMsg.getText().trim());
-        } catch (Exception e) {
-            System.err.println("Error al agregar cliente: " + e.getMessage());
-        }
-    }
-    
     
 
     private void navegarALogin() {
@@ -201,12 +148,214 @@ public class NewUser {
 
         // Seleccionar valores de los dropdowns
         dropdownEstado.selectByValue("Activo");
-        dropdownCliente.selectByValue("123456"); // Reemplaza "123456" con el valor adecuado para el cliente
+        dropdownCliente.selectByValue("123456");
 
         // Hacer clic en el botón para agregar la mascota
-        WebElement btnAgregarMascota = driver.findElement(By.id("btnAgregar"));
-        btnAgregarMascota.click();
+        WebElement element = driver.findElement(By.id("btnAgregar"));
+        long lastHeight = (long) ((JavascriptExecutor) driver).executeScript("return document.body.scrollHeight");
+
+        while (true) {
+            ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            
+            // Espera un momento para permitir la carga de nuevo contenido
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }  // Ajusta el tiempo según sea necesario
+        
+            long newHeight = (long) ((JavascriptExecutor) driver).executeScript("return document.body.scrollHeight");
+            if (newHeight == lastHeight) {
+                break;
+            }
+            lastHeight = newHeight;
+        }
+        element.click();
+
+
+       for (int i = 0; i < 3; i++) {
+    try {
+        WebElement cerrarSesion = driver.findElement(By.id("cerrarSesion"));
+        cerrarSesion.click();
+        break; // Salir del bucle si se realiza el clic exitosamente
+    } catch (StaleElementReferenceException e) {
+        // Espera breve antes de volver a intentar encontrar el elemento
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
     }
+}
+
+        WebElement paginaPrincipal = wait.until(ExpectedConditions.elementToBeClickable(By.id("paginaPrincipal")));
+        paginaPrincipal.click();
+
+        WebElement iniciarSesion = wait.until(ExpectedConditions.elementToBeClickable(By.id("iniciarSesion")));
+        iniciarSesion.click();
+
+        WebElement inputCedula2 = driver.findElement(By.id("cedulaInput"));
+
+        inputCedula2.sendKeys("123456");
+
+        WebElement btnIniciarSesion2 = wait.until(ExpectedConditions.elementToBeClickable(By.className("login-button")));
+        btnIniciarSesion2.click(); 
+
+
+        WebElement verDetallesMascota = wait.until(ExpectedConditions.elementToBeClickable(By.id("verDetalles")));
+        verDetallesMascota.click(); 
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("nombreMascota")));
+        WebElement nombreMascota = driver.findElement(By.cssSelector("#nombreMascota span"));
+        WebElement razaMascota = driver.findElement(By.cssSelector("#razaMascota span"));
+        WebElement edadMascota = driver.findElement(By.cssSelector("#edadMascota span"));
+        WebElement enfermedadMascota = driver.findElement(By.cssSelector("#enfermedadMascota span"));
+        WebElement duenioMascota = driver.findElement(By.cssSelector("#duenioMascota span"));
+        WebElement estadoMascota = driver.findElement(By.cssSelector("#estadoMascota span"));
+
+        String expectedName = "Bobby";
+        String expectedRaza = "Golden Retriever";
+        String expectedEdad = "3";
+        String expectedEnfermedad = "Alergias";
+        String duenio = "miguelito";
+        String estado = "Activo";
+
+        Assertions.assertThat(nombreMascota.getText()).isEqualTo(expectedName);
+        Assertions.assertThat(razaMascota.getText()).isEqualTo(expectedRaza);
+        Assertions.assertThat(edadMascota.getText()).isEqualTo(expectedEdad);
+        Assertions.assertThat(enfermedadMascota.getText()).isEqualTo(expectedEnfermedad);
+        Assertions.assertThat(duenioMascota.getText()).isEqualTo(duenio);
+        Assertions.assertThat(estadoMascota.getText()).isEqualTo(estado);
+        
+
+        
+
+
+
+
+
+
+
+
+}
+
+public void segundoCasoDeUso(){
+
+    driver.get("http://localhost:4200/admin/login");
+
+    WebElement inputCedula = driver.findElement(By.id("cedula"));
+    WebElement inputPassword = driver.findElement(By.id("password"));
+
+    inputCedula.sendKeys("admin");
+    inputPassword.sendKeys("admin");
+
+    WebElement btnIniciarSesion = wait.until(ExpectedConditions.elementToBeClickable(By.className("login-button")));
+    btnIniciarSesion.click();
+
+    WebElement dashboard = wait.until(ExpectedConditions.elementToBeClickable(By.id("dashboard")));
+    dashboard.click();
+
+    WebElement tratamientos = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("numTratamientos")));
+    WebElement ventasTotales = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ventasTotales")));
+    WebElement gananciasTotales = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("gananciasTotales")));
+
+    int numTratamientos = Integer.parseInt(tratamientos.getText());
+    int ventasTotalesx = Integer.parseInt(ventasTotales.getText());
+    int gananciasTotalesx = Integer.parseInt(gananciasTotales.getText());
+
+    driver.get("http://localhost:4200/vet/login");
+
+    WebElement inputCedula1 = driver.findElement(By.id("cedula"));
+    WebElement inputPassword1 = driver.findElement(By.id("password"));
     
+    // Primer intento de inicio de sesión
+    inputCedula1.sendKeys("VET123456");
+    inputPassword1.sendKeys("pass123");
+    WebElement btnIniciarSesion1 = wait.until(ExpectedConditions.elementToBeClickable(By.className("login-button")));
+    btnIniciarSesion1.click(); 
+
+    WebElement barraBusqueda = wait.until(ExpectedConditions.elementToBeClickable(By.id("barraDeBusqueda")));
+
+    barraBusqueda.sendKeys("Pepe");
+
+    WebElement tratamientoBtn = wait.until(ExpectedConditions.elementToBeClickable(By.id("tratamiento")));
+
+    tratamientoBtn.click();
+
+    WebElement fecha = wait.until(ExpectedConditions.elementToBeClickable(By.id("fecha")));
+    fecha.sendKeys("31-10-2024");
+
+
+    WebElement selectDroga = driver.findElement(By.id("drogas"));
+    Select dropdownDrogas = new Select(selectDroga);
+
+    dropdownDrogas.selectByValue("1");
+
+    WebElement addTratamiento = wait.until(ExpectedConditions.elementToBeClickable(By.id("addTratamiento")));
+    addTratamiento.click();
+
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    WebElement barraDeBusqueda = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("barraDeBusqueda")));
+    barraDeBusqueda.sendKeys("Pepe");
+
+    WebElement verDetalles = wait.until(ExpectedConditions.elementToBeClickable(By.id("verDetalles")));
+    verDetalles.click();
+
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("nombreMascota")));
+    List<WebElement> list = driver.findElements(By.cssSelector(".liTratamientoVet"));
+    List<WebElement> list2 = driver.findElements(By.cssSelector(".liTratamientoDroga"));
+    List<WebElement> list3 = driver.findElements(By.cssSelector(".liTratamientoFecha"));
+
+    String expectedVeterinario = "Dr. Juan Pérez";
+    String expectedDroga = "Carprofeno";
+    String expectedFecha = "2024-10-31";
+
+    Assertions.assertThat(list.get(0).getText().trim()).isEqualTo(expectedVeterinario);
+    Assertions.assertThat(list2.get(0).getText().trim()).isEqualTo(expectedDroga);
+    Assertions.assertThat(list3.get(0).getText().trim()).isEqualTo(expectedFecha);
+
+
+    driver.get("http://localhost:4200/admin/login");
+
+    WebElement inputCedula3 = driver.findElement(By.id("cedula"));
+    WebElement inputPassword3 = driver.findElement(By.id("password"));
+
+    inputCedula3.sendKeys("admin");
+    inputPassword3.sendKeys("admin");
+
+    WebElement btnIniciarSesion3 = wait.until(ExpectedConditions.elementToBeClickable(By.className("login-button")));
+    btnIniciarSesion3.click();
+
+    WebDriverWait wait3 = new WebDriverWait(driver, Duration.ofSeconds(10));
+    WebElement dashboard3 = wait3.until(ExpectedConditions.elementToBeClickable(By.id("dashboard")));
+    dashboard3.click();
+
+    WebElement tratamientos3 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("numTratamientos")));
+    WebElement ventasTotales3 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ventasTotales")));
+    WebElement gananciasTotales3 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("gananciasTotales")));
+
+    int numTratamientosy = Integer.parseInt(tratamientos3.getText());
+    int ventasTotalesy = Integer.parseInt(ventasTotales3.getText());
+    int gananciasTotalesy = Integer.parseInt(gananciasTotales3.getText());
+
+
+    Assertions.assertThat(numTratamientosy).isEqualTo(numTratamientos + 1);
+    Assertions.assertThat(ventasTotalesy).isEqualTo(ventasTotalesx + 200000);
+    Assertions.assertThat(gananciasTotalesy).isEqualTo(gananciasTotalesx + 20000);
+
+
+
+
+
+
+
+
+
+
+
+}
+
 
 }
