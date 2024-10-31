@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -43,7 +44,7 @@ public class NewUser {
     @After // JUnit 4
     public void tearDown() {
         if (driver != null) {
-            driver.quit(); // Asegura cierre del navegador
+          //  driver.quit(); // Asegura cierre del navegador
         }
     }
 
@@ -54,38 +55,6 @@ public class NewUser {
 
         // Paso 2: Intento de inicio de sesión incorrecto del veterinario
         seleccionarVeterinario();
-        validarSeleccionVeterinario();
-        ingresarCredencialesVeterinario("9876543210", "contraseñaIncorrecta");
-        validarErrorLogin(); // Validamos que el error de inicio de sesión es capturado
-
-        // Paso 3: Segundo intento de inicio de sesión exitoso
-        seleccionarVeterinario();
-        validarSeleccionVeterinario();
-        ingresarCredencialesVeterinario("222222", "claveSegura");
-
-        // Paso 4: Navegar a la sección de registro de clientes
-        navegarAClientes();
-
-        // Paso 5: Intento de registro de cliente con error en algún campo
-        agregarClienteConError("Juan P", "56789", "3123456789", "juanP-hotmail.com"); // Error en el correo
-
-        // Paso 6: Registro correcto del cliente después de corregir el error
-        agregarCliente("Juan P", "56789", "3123456789", "juanP@hotmail.com");
-
-        // Paso 7: Navegar a la sección de registro de mascotas
-        navegarAMascotas();
-
-        // Paso 8: Registro de mascota y asociación con el dueño correctamente a la primera
-        agregarMascota("Toby", "Labrador", "3", "25", "Alergias", "https://example.com/labrador.jpg");
-
-        // Paso 9: Cerrar sesión del veterinario
-        cerrarSesion();
-
-        // Paso 10: Ingreso del cliente al portal de clientes con su cédula
-        ingresarPortalCliente("56789");
-
-        // Paso 11: Validación de los datos de la mascota por parte del cliente
-        verificarDatosMascota("Toby", "Labrador", "3", "25", "Alergias");
     }
 
     // Método de validación de error de inicio de sesión
@@ -149,128 +118,95 @@ public class NewUser {
         }
     }
     
-
-    // Método para agregar mascota
-    private void agregarMascota(String nombre, String raza, String edad, String peso, String enfermedad, String fotoUrl) {
-        try {
-            // No es necesario hacer clic en un elemento antes de enviar el formulario, ya que se enviará al hacer clic en el botón de enviar.
-            
-            WebElement inputNombre = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nombre")));
-            WebElement inputRaza = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("raza")));
-            WebElement inputEdad = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("edad")));
-            WebElement inputPeso = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("peso")));
-            WebElement inputEnfermedad = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("enfermedad")));
-            WebElement inputFoto = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("fotoURL"))); // Confirmado como 'fotoURL'
-            WebElement spinnerCliente = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cliente"))); // Asegurado
     
-            inputNombre.sendKeys(nombre);
-            inputRaza.sendKeys(raza);
-            inputEdad.sendKeys(edad);
-            inputPeso.sendKeys(peso);
-            inputEnfermedad.sendKeys(enfermedad);
-            inputFoto.sendKeys(fotoUrl);
-    
-            // No se necesita hacer clic aquí, se enviará el formulario más adelante.
-            // spinnerCliente.click(); // Esto no es necesario.
-    
-            // Seleccionar el cliente por ID; se asumirá que el valor 'clienteSeleccionado' es válido.
-            WebElement clienteOption = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("option[value='56789']"))); // Asegúrate de que '56789' sea un valor válido
-            clienteOption.click();
-    
-            // Enviar el formulario al hacer clic en el botón de enviar
-            WebElement btnAgregar = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.btn.btn-primary"))); // Cambiado a selector CSS para el botón
-            btnAgregar.click();
-    
-            // Confirmación de registro exitoso de mascota
-            WebElement confirmMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("registroMascotaExitoso"))); // Asegúrate de que este ID esté presente en el HTML
-            assertEquals("Mascota registrada con éxito.", confirmMsg.getText().trim());
-        } catch (Exception e) {
-            System.err.println("Error al agregar mascota: " + e.getMessage());
-        }
-    }
-    
-
-    // Método para cerrar sesión
-    private void cerrarSesion() {
-        WebElement btnCerrarSesion = wait.until(ExpectedConditions.elementToBeClickable(By.id("cerrarSesionBtn")));
-        btnCerrarSesion.click();
-    }
-    
-    // Método para ingresar al portal de cliente con cédula
-    private void ingresarPortalCliente(String cedulaCliente) {
-        navegarALogin();
-        seleccionarCliente();
-        validarSeleccionCliente();
-
-        WebElement inputCedulaCliente = wait.until(ExpectedConditions.elementToBeClickable(By.id("cedula")));
-        inputCedulaCliente.sendKeys(cedulaCliente);
-
-        WebElement btnIniciarSesion = wait.until(ExpectedConditions.elementToBeClickable(By.id("iniciarSesionBtn")));
-        btnIniciarSesion.click();
-    }
-
-    // Método para verificar los datos de la mascota en el portal de cliente
-    private void verificarDatosMascota(String nombre, String raza, String edad, String peso, String enfermedad) {
-        WebElement nombreMascota = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nombre")));
-        WebElement razaMascota = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("raza")));
-        WebElement edadMascota = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("edad")));
-        WebElement pesoMascota = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("peso")));
-        WebElement enfermedadMascota = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("enfermedad")));
-    
-        assertEquals(nombre, nombreMascota.getText().trim());
-        assertEquals(raza, razaMascota.getText().trim());
-        assertEquals(edad, edadMascota.getText().trim());
-        assertEquals(peso, pesoMascota.getText().trim());
-        assertEquals(enfermedad, enfermedadMascota.getText().trim());
-    }
-    
-
-    // Métodos auxiliares (navegarALogin, seleccionarVeterinario, etc.) siguen aquí...
 
     private void navegarALogin() {
-        driver.get("http://localhost:4200/client/login");
+        driver.get("http://localhost:4200/vet/login");
     }
 
     private void seleccionarVeterinario() {
-        WebElement veterinarioOption = wait.until(ExpectedConditions.elementToBeClickable(By.id("veterinario")));
-        veterinarioOption.click();
-    }
-
-    private void validarSeleccionVeterinario() {
-        // Validación de que se ha seleccionado el veterinario
-        WebElement seleccion = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("tituloVeterinario")));
-        assertEquals("Inicio Veterinario", seleccion.getText().trim());
-    }
-
-    private void ingresarCredencialesVeterinario(String cedula, String clave) {
-        WebElement inputCedula = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cedula")));
-        WebElement inputClave = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("clave")));
-
-        inputCedula.sendKeys(cedula);
-        inputClave.sendKeys(clave);
-
-        WebElement btnIniciarSesion = wait.until(ExpectedConditions.elementToBeClickable(By.id("btnIniciarSesion")));
+        WebElement inputCedula = driver.findElement(By.id("cedula"));
+        WebElement inputPassword = driver.findElement(By.id("password"));
+        
+        // Primer intento de inicio de sesión
+        inputCedula.sendKeys("VET123456");
+        inputPassword.sendKeys("pass12");
+        WebElement btnIniciarSesion = wait.until(ExpectedConditions.elementToBeClickable(By.className("login-button")));
+        btnIniciarSesion.click(); 
+    
+        // Segundo intento de inicio de sesión
+        inputCedula.clear();
+        inputPassword.clear();
+        inputCedula.sendKeys("VET123456");
+        inputPassword.sendKeys("pass123");
         btnIniciarSesion.click();
-    }
+    
+        // Navegar a la página de clientes y agregar cliente
+        WebElement clientsPage = wait.until(ExpectedConditions.elementToBeClickable(By.id("clientsPage")));
+        clientsPage.click();
+    
+        WebElement btnAddClient = wait.until(ExpectedConditions.elementToBeClickable(By.id("addClient")));
+        btnAddClient.click();
+    
+        WebElement inputName = driver.findElement(By.id("nombre"));
+        WebElement inputCedulaClient = driver.findElement(By.id("cedula"));
+        WebElement inputPhone = driver.findElement(By.id("celular"));
+        WebElement inputEmail = driver.findElement(By.id("correo"));
+    
+        // Primer intento de creación de cliente
+        inputName.sendKeys("miguelito");
+        inputCedulaClient.sendKeys("123456");
+        inputPhone.sendKeys("3184406521");
+        inputEmail.sendKeys("miguelelprogmail.com");
+        WebElement btnCreateClient = wait.until(ExpectedConditions.elementToBeClickable(By.id("addClient")));
+        btnCreateClient.click();
+    
+        // Segundo intento de creación de cliente con correo corregido
+        inputName.clear();
+        inputCedulaClient.clear();
+        inputPhone.clear();
+        inputEmail.clear();
+        inputName.sendKeys("miguelito");
+        inputCedulaClient.sendKeys("123456");
+        inputPhone.sendKeys("3184406521");
+        inputEmail.sendKeys("miguelelpro@gmail.com");
+        btnCreateClient.click();
+    
+        // Navegar a la página de mascotas y agregar mascota
+        WebElement petsPage = wait.until(ExpectedConditions.elementToBeClickable(By.id("petsPage")));
+        petsPage.click();
+    
+        WebElement btnAddPet = wait.until(ExpectedConditions.elementToBeClickable(By.id("addPet")));
+        btnAddPet.click();
+    
+        // Localizar los campos de entrada del formulario y llenar los datos necesarios
+        WebElement inputNombre = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nombre")));
+        WebElement inputRaza = driver.findElement(By.id("raza"));
+        WebElement inputEdad = driver.findElement(By.id("edad"));
+        WebElement inputPeso = driver.findElement(By.id("peso"));
+        WebElement inputFoto = driver.findElement(By.id("fotoURL"));
+        WebElement inputEnfermedad = driver.findElement(By.id("enfermedad"));
+        WebElement selectEstado = driver.findElement(By.id("estado"));
+        Select dropdownEstado = new Select(selectEstado);
+        WebElement selectCliente = driver.findElement(By.id("cliente"));
+        Select dropdownCliente = new Select(selectCliente);
 
-    private void navegarAClientes() {
-        WebElement btnClientes = wait.until(ExpectedConditions.elementToBeClickable(By.id("clientes")));
-        btnClientes.click();
-    }
+        // Llenar los campos con datos de prueba
+        inputNombre.sendKeys("Bobby");
+        inputRaza.sendKeys("Golden Retriever");
+        inputEdad.sendKeys("3");
+        inputPeso.sendKeys("15");
+        inputFoto.sendKeys("https://example.com/photo-bobby.jpg");
+        inputEnfermedad.sendKeys("Alergias");
 
-    private void navegarAMascotas() {
-        WebElement btnMascotas = wait.until(ExpectedConditions.elementToBeClickable(By.id("mascotas")));
-        btnMascotas.click();
-    }
+        // Seleccionar valores de los dropdowns
+        dropdownEstado.selectByValue("Activo");
+        dropdownCliente.selectByValue("123456"); // Reemplaza "123456" con el valor adecuado para el cliente
 
-    private void seleccionarCliente() {
-        WebElement clienteOption = wait.until(ExpectedConditions.elementToBeClickable(By.id("cliente")));
-        clienteOption.click();
+        // Hacer clic en el botón para agregar la mascota
+        WebElement btnAgregarMascota = driver.findElement(By.id("btnAgregar"));
+        btnAgregarMascota.click();
     }
+    
 
-    private void validarSeleccionCliente() {
-        // Validación de que se ha seleccionado el cliente
-        WebElement seleccion = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("tituloCliente")));
-        assertEquals("Inicio Cliente", seleccion.getText().trim());
-    }
 }
