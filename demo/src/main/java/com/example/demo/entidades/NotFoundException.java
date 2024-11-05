@@ -1,5 +1,8 @@
 package com.example.demo.entidades;
 
+import lombok.Data;
+
+@Data
 public class NotFoundException extends RuntimeException {
 
     private int id;
@@ -8,11 +11,5 @@ public class NotFoundException extends RuntimeException {
         this.id = id;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+   
 }

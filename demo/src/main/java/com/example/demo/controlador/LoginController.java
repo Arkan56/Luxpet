@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.DTOS.AdminDTO;
+import com.example.demo.DTOS.AdminMapper;
+import com.example.demo.DTOS.VeterinarioDTO;
+import com.example.demo.DTOS.VeterinarioMapper;
 import com.example.demo.entidades.Admin;
 import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.LoginRequest;
@@ -38,13 +42,21 @@ public class LoginController {
     AdminService adminService;
 
     @PostMapping("/loginVeterinario")
-    public ResponseEntity<Veterinario> confirmarLoginVet(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity confirmarLoginVet(@RequestBody LoginRequest loginRequest) {
         Veterinario vet = vetService.searchByCedula(loginRequest.getCedula());
-        if(vet != null && vet.getContrasenia().equals(loginRequest.getPassword())) {
-            return ResponseEntity.ok(vet);
+        
+        if (vet == null) {
+            return new ResponseEntity<>(("Usuario no encontrado"), HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        
+        VeterinarioDTO vetDTO = VeterinarioMapper.INSTANCE.convert(vet);
+        if (vet.getContrasenia().equals(loginRequest.getPassword())) {
+            return new ResponseEntity<>(vetDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(vetDTO, HttpStatus.BAD_REQUEST);
+        }
     }
+
 
     @PostMapping("/")
     public ResponseEntity<Cliente> confirmarLogin(@RequestBody LoginRequest loginRequest) {
@@ -57,13 +69,21 @@ public class LoginController {
     }
 
     @PostMapping("/loginAdmin")
-    public ResponseEntity<Admin> confirmarLoginAdmin(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity confirmarLoginAdmin(@RequestBody LoginRequest loginRequest) {
         Admin admin = adminService.searchByCedula(loginRequest.getCedula());
-        if(admin != null && admin.getContrasenia().equals(loginRequest.getPassword())) {
-            return ResponseEntity.ok(admin);
+        
+        if (admin == null) {
+            return new ResponseEntity<>("Usuario no encontrado", HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        
+        AdminDTO adminDTO = AdminMapper.INSTANCE.convert(admin);
+        if (admin.getContrasenia().equals(loginRequest.getPassword())) {
+            return new ResponseEntity<>(adminDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(adminDTO, HttpStatus.BAD_REQUEST);
+        }
     }
+
 
 
 }

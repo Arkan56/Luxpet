@@ -1,5 +1,8 @@
 package com.example.demo.entidades;
 
+import lombok.Data;
+
+@Data
 public class DrogaTratamientoCount {
     private String nombreDroga;
     private Long cantidadTratamientos;
@@ -9,12 +12,5 @@ public class DrogaTratamientoCount {
         this.cantidadTratamientos = cantidadTratamientos;
     }
 
-    public String getNombreDroga() {
-        return nombreDroga;
-    }
-
-    public Long getCantidadTratamientos() {
-        return cantidadTratamientos;
-    }
 }
 

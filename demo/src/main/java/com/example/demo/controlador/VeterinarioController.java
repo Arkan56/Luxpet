@@ -3,6 +3,8 @@ package com.example.demo.controlador;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.DTOS.VeterinarioDTO;
+import com.example.demo.DTOS.VeterinarioMapper;
 import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.Veterinario;
 import com.example.demo.servicio.ClienteService;
@@ -46,9 +50,17 @@ public class VeterinarioController {
     }
 
     @PostMapping("/add")
-    public void agregarVeterinario(@RequestBody Veterinario veterinario) {
-        veterinarioService.add(veterinario);
+    public ResponseEntity<VeterinarioDTO> addVeterinario(@RequestBody Veterinario veterinario) {
+    Veterinario newVeterinario = veterinarioService.add(veterinario);
+    
+    
+    VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(newVeterinario);
+    if (newVeterinario == null) {
+        return new ResponseEntity<>(veterinarioDTO, HttpStatus.BAD_REQUEST);
     }
+    return new ResponseEntity<>(veterinarioDTO, HttpStatus.CREATED);
+}
+
 
     @DeleteMapping("/delete/{id}")
     public void eliminarVeterinario(@PathVariable("id") Long id) {

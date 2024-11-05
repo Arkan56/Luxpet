@@ -9,12 +9,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class Cliente {
 
     private String cedula;
@@ -28,6 +32,7 @@ public class Cliente {
 
     @Id
     @GeneratedValue
+   
     private Long id;
 
     public Cliente(Long id, String cedula, String nombre, String correo, String celular) {

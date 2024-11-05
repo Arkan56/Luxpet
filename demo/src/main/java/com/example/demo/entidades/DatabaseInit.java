@@ -48,65 +48,160 @@ public class DatabaseInit implements ApplicationRunner {
         public void run(ApplicationArguments args) throws Exception {
                 adminRepository.save(new Admin("admin", "admin"));
 
-                clienteRepository.save(new Cliente("0000000000", "Juan Angarita", "angarita@example.com", "000-0000"));
-                clienteRepository.save(
-                                new Cliente("0000000001", "Nicolas Camacho", "nicoCamacho@example.com", "000-1111"));
-                clienteRepository.save(new Cliente("1234567890", "Miguel Angel", "mangel@example.com", "555-1234"));
-                clienteRepository.save(new Cliente("2345678901", "Juan Perez", "juan@example.com", "555-2345"));
-                clienteRepository.save(
-                                new Cliente("3456789012", "Sebastian Lopez", "sebastian@example.com", "555-3456"));
-                clienteRepository.save(new Cliente("4567890123", "Carlos Martinez", "carlos@example.com", "555-4567"));
-                clienteRepository.save(new Cliente("5678901234", "Luis Rodriguez", "luis@example.com", "555-5678"));
-                clienteRepository.save(new Cliente("6789012345", "Ana Garcia", "ana@example.com", "555-6789"));
-                clienteRepository.save(new Cliente("7890123456", "Maria Sanchez", "maria@example.com", "555-7890"));
-                clienteRepository.save(new Cliente("8901234567", "Lucia Ramirez", "lucia@example.com", "555-8901"));
-                clienteRepository.save(new Cliente("9012345678", "Sofia Torres", "sofia@example.com", "555-9012"));
-                clienteRepository.save(new Cliente("0123456789", "Laura Flores", "laura@example.com", "555-0123"));
-                clienteRepository.save(new Cliente("1123456789", "Pedro Gomez", "pedro@example.com", "555-1123"));
-                clienteRepository.save(new Cliente("2123456789", "Jorge Diaz", "jorge@example.com", "555-2123"));
-                clienteRepository.save(new Cliente("3123456789", "Raul Fernandez", "raul@example.com", "555-3123"));
-                clienteRepository.save(new Cliente("4123456789", "Andres Morales", "andres@example.com", "555-4123"));
-                clienteRepository.save(new Cliente("5123456789", "Diego Herrera", "diego@example.com", "555-5123"));
-                clienteRepository.save(new Cliente("6123456789", "Oscar Castro", "oscar@example.com", "555-6123"));
-                clienteRepository.save(new Cliente("7123456789", "Ricardo Vargas", "ricardo@example.com", "555-7123"));
-                clienteRepository.save(new Cliente("8123456789", "Fernando Rojas", "fernando@example.com", "555-8123"));
-                clienteRepository.save(new Cliente("9123456789", "Alberto Mendoza", "alberto@example.com", "555-9123"));
-                clienteRepository.save(new Cliente("1023456789", "Rafael Guzman", "rafael@example.com", "555-1023"));
-                clienteRepository.save(new Cliente("2023456789", "Victor Ortiz", "victor@example.com", "555-2023"));
-                clienteRepository.save(new Cliente("3023456789", "Hector Soto", "hector@example.com", "555-3023"));
-                clienteRepository.save(new Cliente("4023456789", "Eduardo Silva", "eduardo@example.com", "555-4023"));
-                clienteRepository.save(
-                                new Cliente("5023456789", "Francisco Reyes", "francisco@example.com", "555-5023"));
-                clienteRepository.save(new Cliente("6023456789", "Manuel Ruiz", "manuel@example.com", "555-6023"));
-                clienteRepository.save(new Cliente("7023456789", "Javier Paredes", "javier@example.com", "555-7023"));
-                clienteRepository.save(new Cliente("8023456789", "Rodrigo Campos", "rodrigo@example.com", "555-8023"));
-                clienteRepository.save(new Cliente("9023456789", "Adrian Vega", "adrian@example.com", "555-9023"));
-                clienteRepository.save(new Cliente("1034567890", "Pablo Navarro", "pablo@example.com", "555-1034"));
-                clienteRepository.save(new Cliente("2034567890", "Gustavo Peña", "gustavo@example.com", "555-2034"));
-                clienteRepository.save(new Cliente("3034567890", "Felipe Salazar", "felipe@example.com", "555-3034"));
-                clienteRepository.save(
-                                new Cliente("4034567890", "Santiago Aguilar", "santiago@example.com", "555-4034"));
-                clienteRepository
-                                .save(new Cliente("5034567890", "Antonio Cardenas", "antonio@example.com", "555-5034"));
-                clienteRepository.save(new Cliente("6034567890", "Mario Espinoza", "mario@example.com", "555-6034"));
-                clienteRepository.save(
-                                new Cliente("7034567890", "Alejandro Fuentes", "alejandro@example.com", "555-7034"));
-                clienteRepository.save(
-                                new Cliente("8034567890", "Guillermo Nunez", "guillermo@example.com", "555-8034"));
-                clienteRepository.save(new Cliente("9034567890", "Hugo Cabrera", "hugo@example.com", "555-9034"));
-                clienteRepository.save(new Cliente("1045678901", "Emilio Leon", "emilio@example.com", "555-1045"));
-                clienteRepository.save(new Cliente("2045678901", "Ivan Molina", "ivan@example.com", "555-2045"));
-                clienteRepository.save(new Cliente("3045678901", "Julio Ramos", "julio@example.com", "555-3045"));
-                clienteRepository.save(new Cliente("4045678901", "Ruben Romero", "ruben@example.com", "555-4045"));
-                clienteRepository.save(new Cliente("5045678901", "Angel Medina", "angel@example.com", "555-5045"));
-                clienteRepository.save(new Cliente("6045678901", "Martin Ortiz", "martin@example.com", "555-6045"));
-                clienteRepository.save(new Cliente("7045678901", "Samuel Delgado", "samuel@example.com", "555-7045"));
-                clienteRepository.save(
-                                new Cliente("8045678901", "Cristian Herrera", "cristian@example.com", "555-8045"));
-                clienteRepository.save(new Cliente("9045678901", "Joaquin Vargas", "joaquin@example.com", "555-9045"));
-                clienteRepository.save(new Cliente("1056789012", "Vicente Castro", "vicente@example.com", "555-1056"));
-                clienteRepository.save(new Cliente("2056789012", "Elias Rojas", "elias@example.com", "555-2056"));
-                clienteRepository.save(new Cliente("3056789012", "Nicolas Guzman", "nicolas@example.com", "555-3056"));
+                Cliente clienteEntity =  Cliente.builder().cedula("0000000000").nombre("Juan Angarita").correo("angarita@example.com").celular("000-0000").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("0000000001").nombre("Nicolas Camacho").correo("nicoCamacho@example.com").celular("000-1111").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("1234567890").nombre("Miguel Angel").correo("mangel@example.com").celular("555-1234").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("2345678901").nombre("Juan Perez").correo("juan@example.com").celular("555-2345").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("3456789012").nombre("Sebastian Lopez").correo("sebastian@example.com").celular("555-3456").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("4567890123").nombre("Carlos Martinez").correo("carlos@example.com").celular("555-4567").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("5678901234").nombre("Luis Rodriguez").correo("luis@example.com").celular("555-5678").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("6789012345").nombre("Ana Garcia").correo("ana@example.com").celular("555-6789").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("7890123456").nombre("Maria Sanchez").correo("maria@example.com").celular("555-7890").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("8901234567").nombre("Lucia Ramirez").correo("lucia@example.com").celular("555-8901").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("9012345678").nombre("Sofia Torres").correo("sofia@example.com").celular("555-9012").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("0123456789").nombre("Laura Flores").correo("laura@example.com").celular("555-0123").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("1123456789").nombre("Pedro Gomez").correo("pedro@example.com").celular("555-1123").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("2123456789").nombre("Jorge Diaz").correo("jorge@example.com").celular("555-2123").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("3123456789").nombre("Raul Fernandez").correo("raul@example.com").celular("555-3123").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("4123456789").nombre("Andres Morales").correo("andres@example.com").celular("555-4123").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("5123456789").nombre("Diego Herrera").correo("diego@example.com").celular("555-5123").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("6123456789").nombre("Oscar Castro").correo("oscar@example.com").celular("555-6123").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("7123456789").nombre("Ricardo Vargas").correo("ricardo@example.com").celular("555-7123").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("8123456789").nombre("Fernando Rojas").correo("fernando@example.com").celular("555-8123").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("9123456789").nombre("Alberto Mendoza").correo("alberto@example.com").celular("555-9123").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("1023456789").nombre("Rafael Guzman").correo("rafael@example.com").celular("555-1023").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("2023456789").nombre("Victor Ortiz").correo("victor@example.com").celular("555-2023").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("3023456789").nombre("Hector Soto").correo("hector@example.com").celular("555-3023").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("4023456789").nombre("Eduardo Silva").correo("eduardo@example.com").celular("555-4023").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("5023456789").nombre("Francisco Reyes").correo("francisco@example.com").celular("555-5023").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("6023456789").nombre("Manuel Ruiz").correo("manuel@example.com").celular("555-6023").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("7023456789").nombre("Javier Paredes").correo("javier@example.com").celular("555-7023").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("8023456789").nombre("Rodrigo Campos").correo("rodrigo@example.com").celular("555-8023").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("9023456789").nombre("Adrian Vega").correo("adrian@example.com").celular("555-9023").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("1034567890").nombre("Pablo Navarro").correo("pablo@example.com").celular("555-1034").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("2034567890").nombre("Gustavo Peña").correo("gustavo@example.com").celular("555-2034").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("3034567890").nombre("Felipe Salazar").correo("felipe@example.com").celular("555-3034").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("4034567890").nombre("Santiago Aguilar").correo("santiago@example.com").celular("555-4034").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("5034567890").nombre("Antonio Cardenas").correo("antonio@example.com").celular("555-5034").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("6034567890").nombre("Mario Espinoza").correo("mario@example.com").celular("555-6034").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("7034567890").nombre("Alejandro Fuentes").correo("alejandro@example.com").celular("555-7034").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("8034567890").nombre("Guillermo Nunez").correo("guillermo@example.com").celular("555-8034").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("9034567890").nombre("Hugo Cabrera").correo("hugo@example.com").celular("555-9034").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("1045678901").nombre("Emilio Leon").correo("emilio@example.com").celular("555-1045").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("2045678901").nombre("Ivan Molina").correo("ivan@example.com").celular("555-2045").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("3045678901").nombre("Julio Ramos").correo("julio@example.com").celular("555-3045").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("4045678901").nombre("Ruben Romero").correo("ruben@example.com").celular("555-4045").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("5045678901").nombre("Angel Medina").correo("angel@example.com").celular("555-5045").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("6045678901").nombre("Martin Ortiz").correo("martin@example.com").celular("555-6045").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("7045678901").nombre("Samuel Delgado").correo("samuel@example.com").celular("555-7045").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("8045678901").nombre("Cristian Herrera").correo("cristian@example.com").celular("555-8045").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("9045678901").nombre("Joaquin Vargas").correo("joaquin@example.com").celular("555-9045").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("1056789012").nombre("Vicente Castro").correo("vicente@example.com").celular("555-1056").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("2056789012").nombre("Elias Rojas").correo("elias@example.com").celular("555-2056").build();
+                clienteRepository.save(clienteEntity);
+
+                clienteEntity = Cliente.builder().cedula("3056789012").nombre("Nicolas Guzman").correo("nicolas@example.com").celular("555-3056").build();
+                clienteRepository.save(clienteEntity);
+
+
 
                 mascotaRepository.save(new Mascota("Pepe", "Pitbull", 10, 10.f,
                                 "https://images.ctfassets.net/denf86kkcx7r/339lIrj1wg9bpirJBfHn3X/a2be2e619c8c6dea173b50b6b2c80356/pitbull_seguro_santevet-33",
