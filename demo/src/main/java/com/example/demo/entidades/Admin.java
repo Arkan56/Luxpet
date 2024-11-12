@@ -1,8 +1,10 @@
 package com.example.demo.entidades;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +12,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Admin {
+
+       @OneToOne(cascade=CascadeType.ALL)
+        private UserEntity userEntity;
 
     private String cedula;
     private String contrasenia;

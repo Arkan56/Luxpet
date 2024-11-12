@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +22,9 @@ import com.example.demo.DTOS.VeterinarioDTO;
 import com.example.demo.DTOS.VeterinarioMapper;
 import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.Veterinario;
+import com.example.demo.repositorio.UserRepository;
+import com.example.demo.security.CustomUserDetailService;
+import com.example.demo.security.JWTGenerator;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.VeterinarioService;
 
@@ -29,6 +34,18 @@ import com.example.demo.servicio.VeterinarioService;
 public class VeterinarioController {
     @Autowired
     VeterinarioService veterinarioService;
+
+     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    CustomUserDetailService customUserDetailService;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    JWTGenerator JWTGenerator;
 
     @GetMapping("/all")
     public List<Veterinario> mostrarVeterinarios() {
@@ -71,4 +88,18 @@ public class VeterinarioController {
     public void modificarVeterinario(@RequestBody Veterinario veterinario, @PathVariable("id") Long id) {
         veterinarioService.update(veterinario);
     }
+
+
+      @GetMapping("/details")
+    public ResponseEntity<Veterinario> buscarVeterinario() {
+        Veterinario veterinario = veterinarioService.searchByCedula(
+            SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+
+        if (veterinario == null) {
+            return new ResponseEntity<Veterinario>(HttpStatus.NOT_FOUND);
+        }
+        
+        return new ResponseEntity<Veterinario>(veterinario, HttpStatus.OK);
+    } 
 }

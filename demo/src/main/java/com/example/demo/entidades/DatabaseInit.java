@@ -3,18 +3,22 @@ package com.example.demo.entidades;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.List;
 
-import org.hibernate.mapping.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import com.example.demo.repositorio.AdminRepository;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.RoleRepository;
 import com.example.demo.repositorio.TratamientoRepository;
+import com.example.demo.repositorio.UserRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
 import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.entidades.Cliente;
@@ -43,165 +47,292 @@ public class DatabaseInit implements ApplicationRunner {
         @Autowired
         AdminRepository adminRepository;
 
+          //Seguridad
+         @Autowired
+        PasswordEncoder passwordEncoder;
+
+        @Autowired
+        RoleRepository roleRepository;
+
+        @Autowired
+        UserRepository userRepository;
+
 
         @Override
         public void run(ApplicationArguments args) throws Exception {
-                adminRepository.save(new Admin("admin", "admin"));
 
-                Cliente clienteEntity =  Cliente.builder().cedula("0000000000").nombre("Juan Angarita").correo("angarita@example.com").celular("000-0000").build();
-                clienteRepository.save(clienteEntity);
+         //Roles
+        roleRepository.save(new Role("ADMIN"));
+        roleRepository.save(new Role("VETERINARIO"));
+        roleRepository.save(new Role("CLIENTE"));
 
-                clienteEntity = Cliente.builder().cedula("0000000001").nombre("Nicolas Camacho").correo("nicoCamacho@example.com").celular("000-1111").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("1234567890").nombre("Miguel Angel").correo("mangel@example.com").celular("555-1234").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("2345678901").nombre("Juan Perez").correo("juan@example.com").celular("555-2345").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("3456789012").nombre("Sebastian Lopez").correo("sebastian@example.com").celular("555-3456").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("4567890123").nombre("Carlos Martinez").correo("carlos@example.com").celular("555-4567").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("5678901234").nombre("Luis Rodriguez").correo("luis@example.com").celular("555-5678").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("6789012345").nombre("Ana Garcia").correo("ana@example.com").celular("555-6789").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("7890123456").nombre("Maria Sanchez").correo("maria@example.com").celular("555-7890").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("8901234567").nombre("Lucia Ramirez").correo("lucia@example.com").celular("555-8901").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("9012345678").nombre("Sofia Torres").correo("sofia@example.com").celular("555-9012").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("0123456789").nombre("Laura Flores").correo("laura@example.com").celular("555-0123").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("1123456789").nombre("Pedro Gomez").correo("pedro@example.com").celular("555-1123").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("2123456789").nombre("Jorge Diaz").correo("jorge@example.com").celular("555-2123").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("3123456789").nombre("Raul Fernandez").correo("raul@example.com").celular("555-3123").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("4123456789").nombre("Andres Morales").correo("andres@example.com").celular("555-4123").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("5123456789").nombre("Diego Herrera").correo("diego@example.com").celular("555-5123").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("6123456789").nombre("Oscar Castro").correo("oscar@example.com").celular("555-6123").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("7123456789").nombre("Ricardo Vargas").correo("ricardo@example.com").celular("555-7123").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("8123456789").nombre("Fernando Rojas").correo("fernando@example.com").celular("555-8123").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("9123456789").nombre("Alberto Mendoza").correo("alberto@example.com").celular("555-9123").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("1023456789").nombre("Rafael Guzman").correo("rafael@example.com").celular("555-1023").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("2023456789").nombre("Victor Ortiz").correo("victor@example.com").celular("555-2023").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("3023456789").nombre("Hector Soto").correo("hector@example.com").celular("555-3023").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("4023456789").nombre("Eduardo Silva").correo("eduardo@example.com").celular("555-4023").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("5023456789").nombre("Francisco Reyes").correo("francisco@example.com").celular("555-5023").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("6023456789").nombre("Manuel Ruiz").correo("manuel@example.com").celular("555-6023").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("7023456789").nombre("Javier Paredes").correo("javier@example.com").celular("555-7023").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("8023456789").nombre("Rodrigo Campos").correo("rodrigo@example.com").celular("555-8023").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("9023456789").nombre("Adrian Vega").correo("adrian@example.com").celular("555-9023").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("1034567890").nombre("Pablo Navarro").correo("pablo@example.com").celular("555-1034").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("2034567890").nombre("Gustavo Peña").correo("gustavo@example.com").celular("555-2034").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("3034567890").nombre("Felipe Salazar").correo("felipe@example.com").celular("555-3034").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("4034567890").nombre("Santiago Aguilar").correo("santiago@example.com").celular("555-4034").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("5034567890").nombre("Antonio Cardenas").correo("antonio@example.com").celular("555-5034").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("6034567890").nombre("Mario Espinoza").correo("mario@example.com").celular("555-6034").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("7034567890").nombre("Alejandro Fuentes").correo("alejandro@example.com").celular("555-7034").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("8034567890").nombre("Guillermo Nunez").correo("guillermo@example.com").celular("555-8034").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("9034567890").nombre("Hugo Cabrera").correo("hugo@example.com").celular("555-9034").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("1045678901").nombre("Emilio Leon").correo("emilio@example.com").celular("555-1045").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("2045678901").nombre("Ivan Molina").correo("ivan@example.com").celular("555-2045").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("3045678901").nombre("Julio Ramos").correo("julio@example.com").celular("555-3045").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("4045678901").nombre("Ruben Romero").correo("ruben@example.com").celular("555-4045").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("5045678901").nombre("Angel Medina").correo("angel@example.com").celular("555-5045").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("6045678901").nombre("Martin Ortiz").correo("martin@example.com").celular("555-6045").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("7045678901").nombre("Samuel Delgado").correo("samuel@example.com").celular("555-7045").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("8045678901").nombre("Cristian Herrera").correo("cristian@example.com").celular("555-8045").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("9045678901").nombre("Joaquin Vargas").correo("joaquin@example.com").celular("555-9045").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("1056789012").nombre("Vicente Castro").correo("vicente@example.com").celular("555-1056").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("2056789012").nombre("Elias Rojas").correo("elias@example.com").celular("555-2056").build();
-                clienteRepository.save(clienteEntity);
-
-                clienteEntity = Cliente.builder().cedula("3056789012").nombre("Nicolas Guzman").correo("nicolas@example.com").celular("555-3056").build();
-                clienteRepository.save(clienteEntity);
+        Cliente clienteSave;
+        UserEntity userEntity; 
+        
+        Admin adminSave = new Admin("admin", "admin");
+        userEntity = saveUserAdministrador(adminSave);
+        adminSave.setUserEntity(userEntity);
+        adminRepository.save(adminSave);
 
 
+               
+
+
+             
+clienteSave = new Cliente("Juan Angarita", "angarita@example.com", "0000000000", "000-0000", "contrasenia123");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Nicolas Camacho", "nicoCamacho@example.com", "0000000001", "000-1111", "contrasenia234");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Miguel Angel", "mangel@example.com", "1234567890", "555-1234", "contrasenia345");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Juan Perez", "juan@example.com", "2345678901", "555-2345", "contrasenia456");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Sebastian Lopez", "sebastian@example.com", "3456789012", "555-3456", "contrasenia567");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Carlos Martinez", "carlos@example.com", "4567890123", "555-4567", "contrasenia678");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Luis Rodriguez", "luis@example.com", "5678901234", "555-5678", "contrasenia789");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Ana Garcia", "ana@example.com", "6789012345", "555-6789", "contrasenia890");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Maria Sanchez", "maria@example.com", "7890123456", "555-7890", "contrasenia901");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Lucia Ramirez", "lucia@example.com", "8901234567", "555-8901", "contrasenia012");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Sofia Torres", "sofia@example.com", "9012345678", "555-9012", "contrasenia123");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Laura Flores", "laura@example.com", "0123456789", "555-0123", "contrasenia234");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Pedro Gomez", "pedro@example.com", "1123456789", "555-1123", "contrasenia345");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Jorge Diaz", "jorge@example.com", "2123456789", "555-2123", "contrasenia456");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Raul Fernandez", "raul@example.com", "3123456789", "555-3123", "contrasenia567");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Andres Morales", "andres@example.com", "4123456789", "555-4123", "contrasenia678");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Diego Herrera", "diego@example.com", "5123456789", "555-5123", "contrasenia789");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Oscar Castro", "oscar@example.com", "6123456789", "555-6123", "contrasenia890");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Ricardo Vargas", "ricardo@example.com", "7123456789", "555-7123", "contrasenia901");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Fernando Rojas", "fernando@example.com", "8123456789", "555-8123", "contrasenia012");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Alberto Mendoza", "alberto@example.com", "9123456789", "555-9123", "contrasenia123");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Rafael Guzman", "rafael@example.com", "1023456789", "555-1023", "contrasenia234");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Victor Ortiz", "victor@example.com", "2023456789", "555-2023", "contrasenia345");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Hector Soto", "hector@example.com", "3023456789", "555-3023", "contrasenia456");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Eduardo Silva", "eduardo@example.com", "4023456789", "555-4023", "contrasenia567");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Francisco Reyes", "francisco@example.com", "5023456789", "555-5023", "contrasenia678");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Manuel Ruiz", "manuel@example.com", "6023456789", "555-6023", "contrasenia789");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Javier Paredes", "javier@example.com", "7023456789", "555-7023", "contrasenia890");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Rodrigo Campos", "rodrigo@example.com", "8023456789", "555-8023", "contrasenia901");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Adrian Vega", "adrian@example.com", "9023456789", "555-9023", "contrasenia012");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Pablo Navarro", "pablo@example.com", "1034567890", "555-1034", "contrasenia123");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Gustavo Peña", "gustavo@example.com", "2034567890", "555-2034", "contrasenia234");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Felipe Salazar", "felipe@example.com", "3034567890", "555-3034", "contrasenia345");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Santiago Aguilar", "santiago@example.com", "4034567890", "555-4034", "contrasenia456");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Antonio Cardenas", "antonio@example.com", "5034567890", "555-5034", "contrasenia567");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Mario Espinoza", "mario@example.com", "6034567890", "555-6034", "contrasenia678");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Alejandro Fuentes", "alejandro@example.com", "7034567890", "555-7034", "contrasenia789");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Guillermo Nunez", "guillermo@example.com", "8034567890", "555-8034", "contrasenia890");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Hugo Cabrera", "hugo@example.com", "9034567890", "555-9034", "contrasenia901");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Emilio Leon", "emilio@example.com", "1045678901", "555-1045", "contrasenia012");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Ivan Molina", "ivan@example.com", "2045678901", "555-2045", "contrasenia123");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Julio Ramos", "julio@example.com", "3045678901", "555-3045", "contrasenia234");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Ruben Romero", "ruben@example.com", "4045678901", "555-4045", "contrasenia345");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Angel Medina", "angel@example.com", "5045678901", "555-5045", "contrasenia456");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Martin Ortiz", "martin@example.com", "6045678901", "555-6045", "contrasenia567");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Samuel Delgado", "samuel@example.com", "7045678901", "555-7045", "contrasenia678");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Cristian Herrera", "cristian@example.com", "8045678901", "555-8045", "contrasenia789");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Joaquin Vargas", "joaquin@example.com", "9045678901", "555-9045", "contrasenia890");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Vicente Castro", "vicente@example.com", "1056789012", "555-1056", "contrasenia901");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Elias Rojas", "elias@example.com", "2056789012", "555-2056", "contrasenia012");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
+
+clienteSave = new Cliente("Nicolas Guzman", "nicolas@example.com", "3056789012", "555-3056", "contrasenia123");
+userEntity = saveUserCliente(clienteSave);
+clienteSave.setUserEntity(userEntity);
+clienteRepository.save(clienteSave);
 
                 mascotaRepository.save(new Mascota("Pepe", "Pitbull", 10, 10.f,
                                 "https://images.ctfassets.net/denf86kkcx7r/339lIrj1wg9bpirJBfHn3X/a2be2e619c8c6dea173b50b6b2c80356/pitbull_seguro_santevet-33",
@@ -577,26 +708,111 @@ public class DatabaseInit implements ApplicationRunner {
                         }
                 }
         }
-                veterinarioRepository.save(new Veterinario("VET123456", "pass123", "Cardiología", "foto1.jpg", 50, "Dr. Juan Pérez"));
-                veterinarioRepository.save(new Veterinario("VET123457", "secure456", "Dermatología", "foto2.jpg", 30, "Dra. María Gómez"));
-                veterinarioRepository.save(new Veterinario("VET123458", "vetsecure789", "Oncología", "foto3.jpg", 80, "Dr. Luis Martínez"));
-                veterinarioRepository.save(new Veterinario("VET123459", "petsrule", "Neurología", "foto4.jpg", 100, "Dra. Ana Rodríguez"));
-                veterinarioRepository.save(new Veterinario("VET123460", "dogcat123", "Oftalmología", "foto5.jpg", 40, "Dr. Carlos Fernández"));
-                veterinarioRepository.save(new Veterinario("VET123461", "securevet", "Cirugía", "foto6.jpg", 120, "Dra. Laura González"));
-                veterinarioRepository.save(new Veterinario("VET123462", "mypassword1", "Medicina Interna", "foto7.jpg", 90, "Dr. Jorge Ruiz"));
-                veterinarioRepository.save(new Veterinario("VET123463", "passvet2", "Radiología", "foto8.jpg", 65, "Dra. Andrea Morales"));
-                veterinarioRepository.save(new Veterinario("VET123464", "supersecure", "Ortopedia", "foto9.jpg", 55, "Dr. Santiago López"));
-                veterinarioRepository.save(new Veterinario("VET123465", "clinicvet", "Dermatología", "foto10.jpg", 70, "Dra. Paula Jiménez"));
-                veterinarioRepository.save(new Veterinario("VET123466", "vetclinic456", "Endocrinología", "foto11.jpg", 45, "Dr. Roberto Ortiz"));
-                veterinarioRepository.save(new Veterinario("VET123467", "password789", "Reproducción Animal", "foto12.jpg", 110, "Dra. Gabriela Soto"));
-                veterinarioRepository.save(new Veterinario("VET123468", "vetpass321", "Oncología", "foto13.jpg", 95, "Dr. Manuel García"));
-                veterinarioRepository.save(new Veterinario("VET123469", "safepass1", "Anestesiología", "foto14.jpg", 105, "Dra. Elena Castillo"));
-                veterinarioRepository.save(new Veterinario("VET123470", "mypassword2", "Urgencias", "foto15.jpg", 75, "Dr. Daniel Morales"));
-                veterinarioRepository.save(new Veterinario("VET123471", "supervet123", "Medicina General", "foto16.jpg", 85, "Dra. Cecilia Paredes"));
-                veterinarioRepository.save(new Veterinario("VET123472", "pass123456", "Nutrición", "foto17.jpg", 60, "Dr. Esteban Ramírez"));
-                veterinarioRepository.save(new Veterinario("VET123473", "securepass", "Comportamiento Animal", "foto18.jpg", 125, "Dra. Verónica Herrera"));
-                veterinarioRepository.save(new Veterinario("VET123474", "vetsecure001", "Geriatría", "foto19.jpg", 100, "Dr. Enrique Vargas"));
-                veterinarioRepository.save(new Veterinario("VET123475", "clinicpass789", "Nefrología", "foto20.jpg", 115, "Dra. Patricia Mendoza"));
+
+
+        Veterinario veterinarioSave;
+
+
+        
+        veterinarioSave = Veterinario.builder().nombre("Dr. House").cedula("9991234").especialidad("Tratamientos Oculares").numAtenciones(18).contrasenia("contrasenia123").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dra. María Gómez").cedula("9991235").especialidad("Dermatología").numAtenciones(30).contrasenia("secure456").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dr. Luis Martínez").cedula("9991236").especialidad("Oncología").numAtenciones(80).contrasenia("vetsecure789").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dra. Ana Rodríguez").cedula("9991237").especialidad("Neurología").numAtenciones(100).contrasenia("petsrule").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dr. Carlos Fernández").cedula("9991238").especialidad("Oftalmología").numAtenciones(40).contrasenia("dogcat123").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dra. Laura González").cedula("9991239").especialidad("Cirugía").numAtenciones(120).contrasenia("securevet").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dr. Jorge Ruiz").cedula("9991240").especialidad("Medicina Interna").numAtenciones(90).contrasenia("mypassword1").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dra. Andrea Morales").cedula("9991241").especialidad("Radiología").numAtenciones(65).contrasenia("passvet2").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dr. Santiago López").cedula("9991242").especialidad("Ortopedia").numAtenciones(55).contrasenia("supersecure").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dra. Paula Jiménez").cedula("9991243").especialidad("Dermatología").numAtenciones(70).contrasenia("clinicvet").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dr. Roberto Ortiz").cedula("9991244").especialidad("Endocrinología").numAtenciones(45).contrasenia("vetclinic456").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dra. Gabriela Soto").cedula("9991245").especialidad("Reproducción Animal").numAtenciones(110).contrasenia("password789").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dr. Manuel García").cedula("9991246").especialidad("Oncología").numAtenciones(95).contrasenia("vetpass321").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dra. Elena Castillo").cedula("9991247").especialidad("Anestesiología").numAtenciones(105).contrasenia("safepass1").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dr. Daniel Morales").cedula("9991248").especialidad("Urgencias").numAtenciones(75).contrasenia("mypassword2").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dra. Cecilia Paredes").cedula("9991249").especialidad("Medicina General").numAtenciones(85).contrasenia("supervet123").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dr. Esteban Ramírez").cedula("9991250").especialidad("Nutrición").numAtenciones(60).contrasenia("pass123456").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dra. Verónica Herrera").cedula("9991251").especialidad("Comportamiento Animal").numAtenciones(125).contrasenia("securepass").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dr. Enrique Vargas").cedula("9991252").especialidad("Geriatría").numAtenciones(100).contrasenia("vetsecure001").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
+        
+        veterinarioSave = Veterinario.builder().nombre("Dra. Patricia Mendoza").cedula("9991253").especialidad("Nefrología").numAtenciones(115).contrasenia("clinicpass789").build();
+        userEntity = saveUserVeterinario(veterinarioSave);
+        veterinarioSave.setUserEntity(userEntity);
+        veterinarioRepository.save(veterinarioSave);
 
                 ArrayList<Veterinario> veterinarios = new ArrayList<>(veterinarioRepository.findAll());
 
@@ -608,6 +824,35 @@ public class DatabaseInit implements ApplicationRunner {
                 }
 
 
-        
         }
-}
+     
+
+        private UserEntity saveUserCliente(Cliente cliente) {
+                UserEntity userEntity = new UserEntity();
+                userEntity.setUsername(String.valueOf(cliente.getCedula()));
+                Role roles = roleRepository.findByName("CLIENTE").get();
+                userEntity.setRoles(List.of(roles));
+                return userRepository.save(userEntity);
+            }
+        
+            private UserEntity saveUserVeterinario(Veterinario veterinario) {
+                UserEntity userEntity = new UserEntity();
+                userEntity.setUsername(String.valueOf(veterinario.getCedula()));
+                userEntity.setPassword(passwordEncoder.encode(veterinario.getContrasenia())); 
+                Role roles = roleRepository.findByName("VETERINARIO").get();
+                userEntity.setRoles(List.of(roles));
+                return userRepository.save(userEntity);
+            }
+        
+            private UserEntity saveUserAdministrador(Admin administrador) {
+                UserEntity userEntity = new UserEntity();
+                userEntity.setUsername(String.valueOf(administrador.getCedula()));
+                userEntity.setPassword(passwordEncoder.encode(administrador.getContrasenia())); 
+                Role roles = roleRepository.findByName("ADMIN").get();
+                userEntity.setRoles(List.of(roles));
+                return userRepository.save(userEntity);
+            }
+
+        }
+
+     

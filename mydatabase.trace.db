@@ -569,3 +569,7 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 94 more
+2024-11-11 23:18:57.765152-05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "SELECT * FROM ROLES USERS_ROLES [*]ADMIN"
+Syntax error in SQL statement "SELECT * FROM ROLES USERS_ROLES [*]ADMIN"; SQL statement:
+SELECT * FROM ROLES USERS_ROLES ADMIN [42000-224]

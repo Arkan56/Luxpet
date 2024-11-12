@@ -4,6 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -20,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.Mascota;
+import com.example.demo.security.CustomUserDetailService;
+import com.example.demo.security.JWTGenerator;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.MascotaService;
 
@@ -29,6 +35,16 @@ import com.example.demo.servicio.MascotaService;
 public class ClienteController {
     @Autowired
     ClienteService clienteService;
+
+      @Autowired
+    CustomUserDetailService customUserDetailService;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+
+    @Autowired
+    JWTGenerator JWTGenerator;
 
     @GetMapping("/all")
     public List<Cliente> mostrarClientes(Model model) {
@@ -70,4 +86,18 @@ public class ClienteController {
         return clienteService.searchMascotas(id);
     }
 
+
+     @GetMapping("/details")
+    public ResponseEntity<Cliente> buscarCliente() {
+        Cliente cliente = clienteService.searchByCedula(
+            SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+        
+        if (cliente == null) {
+            return new ResponseEntity<Cliente>(HttpStatus.NOT_FOUND);
+        }
+        
+        return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
+    }
+    
 }

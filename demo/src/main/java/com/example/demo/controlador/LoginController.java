@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,6 +24,7 @@ import com.example.demo.entidades.Admin;
 import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.LoginRequest;
 import com.example.demo.entidades.Veterinario;
+import com.example.demo.security.JWTGenerator;
 import com.example.demo.servicio.AdminService;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.VeterinarioService;
@@ -40,6 +43,13 @@ public class LoginController {
 
     @Autowired
     AdminService adminService;
+
+
+       @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    JWTGenerator JWTGenerator;
 
     @PostMapping("/loginVeterinario")
     public ResponseEntity confirmarLoginVet(@RequestBody LoginRequest loginRequest) {
@@ -82,6 +92,19 @@ public class LoginController {
         } else {
             return new ResponseEntity<>(adminDTO, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/details")
+    public ResponseEntity<Admin> buscarAdministrador() {
+        Admin administrador = adminService.searchByCedula(
+            SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+        
+        if (administrador == null) {
+            return new ResponseEntity<Admin>(HttpStatus.NOT_FOUND);
+        }
+        
+        return new ResponseEntity<Admin>(administrador, HttpStatus.OK);
     }
 
 
