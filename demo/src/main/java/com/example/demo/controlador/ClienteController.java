@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -20,6 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.Mascota;
+import com.example.demo.repositorio.UserRepository;
+import com.example.demo.security.CustomUserDetailService;
+import com.example.demo.security.JWTGenerator;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.MascotaService;
 
@@ -29,6 +33,19 @@ import com.example.demo.servicio.MascotaService;
 public class ClienteController {
     @Autowired
     ClienteService clienteService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private CustomUserDetailService customUserDetailService;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    JWTGenerator jwtGenerator;
+
 
     @GetMapping("/all")
     public List<Cliente> mostrarClientes(Model model) {

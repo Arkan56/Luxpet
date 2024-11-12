@@ -4,6 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,10 +25,16 @@ import com.example.demo.DTOS.VeterinarioMapper;
 import com.example.demo.entidades.Admin;
 import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.LoginRequest;
+import com.example.demo.entidades.UserEntity;
 import com.example.demo.entidades.Veterinario;
+import com.example.demo.repositorio.UserRepository;
+import com.example.demo.security.CustomUserDetailService;
+import com.example.demo.security.JWTGenerator;
 import com.example.demo.servicio.AdminService;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.VeterinarioService;
+
+
 
 
 @RestController
@@ -40,6 +50,18 @@ public class LoginController {
 
     @Autowired
     AdminService adminService;
+
+     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private CustomUserDetailService customUserDetailService;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    JWTGenerator jwtGenerator;
 
     @PostMapping("/loginVeterinario")
     public ResponseEntity confirmarLoginVet(@RequestBody LoginRequest loginRequest) {
@@ -68,20 +90,17 @@ public class LoginController {
         }
     }
 
-    @PostMapping("/loginAdmin")
-    public ResponseEntity confirmarLoginAdmin(@RequestBody LoginRequest loginRequest) {
-        Admin admin = adminService.searchByCedula(loginRequest.getCedula());
-        
-        if (admin == null) {
-            return new ResponseEntity<>("Usuario no encontrado", HttpStatus.NOT_FOUND);
-        }
-        
-        AdminDTO adminDTO = AdminMapper.INSTANCE.convert(admin);
-        if (admin.getContrasenia().equals(loginRequest.getPassword())) {
-            return new ResponseEntity<>(adminDTO, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(adminDTO, HttpStatus.BAD_REQUEST);
-        }
+     @PostMapping("/loginAdmin")
+        public ResponseEntity loginAdminEntity(@RequestBody UserEntity user) {
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = jwtGenerator.generateToken(authentication);
+
+        return new ResponseEntity<String>(token, HttpStatus.OK);
     }
 
 

@@ -41,6 +41,10 @@ public class Veterinario {
         this.nombre = nombre;
     }
 
+    public CharSequence getClave() {
+        return this.contrasenia;
+    }
+
     
 
     

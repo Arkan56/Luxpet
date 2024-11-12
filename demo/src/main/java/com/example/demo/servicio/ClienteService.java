@@ -7,7 +7,10 @@ import com.example.demo.entidades.Mascota;
 
 
 public interface ClienteService  {
-    public Cliente searchById(Long id);
+    public static Cliente searchById(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'searchById'");
+    }
 
     public List<Cliente> searchAll();
 
@@ -15,7 +18,7 @@ public interface ClienteService  {
 
     public void update(Cliente cliente); //Sirve, pero no estamos buscando el Cliente por su ID
 
-    public void add(Cliente cliente);
+    public Cliente add(Cliente cliente);
 
     public Cliente searchByCedula(String cedula);
 
