@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -24,6 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.Mascota;
+import com.example.demo.entidades.UserEntity;
+import com.example.demo.repositorio.UserRepository;
 import com.example.demo.security.CustomUserDetailService;
 import com.example.demo.security.JWTGenerator;
 import com.example.demo.servicio.ClienteService;
@@ -36,15 +40,18 @@ public class ClienteController {
     @Autowired
     ClienteService clienteService;
 
-      @Autowired
+    @Autowired
     CustomUserDetailService customUserDetailService;
 
     @Autowired
     AuthenticationManager authenticationManager;
 
+    @Autowired
+    UserRepository userRepository; 
+
 
     @Autowired
-    JWTGenerator JWTGenerator;
+    JWTGenerator jtwGenerator;
 
     @GetMapping("/all")
     public List<Cliente> mostrarClientes(Model model) {
@@ -52,10 +59,9 @@ public class ClienteController {
     }
 
     @GetMapping("/find/{id}")
-    public Cliente mostrarCliente(Model model, @PathVariable("id") Long identificacion) {
+    public Cliente mostrarCliente(@PathVariable("id") Long identificacion) {
 
         Cliente cliente = clienteService.searchById(identificacion);
-        System.out.println(cliente.toString());
 
         if (cliente != null) {
             //model.addAttribute("cliente", clienteService.searchById(identificacion));
@@ -67,8 +73,29 @@ public class ClienteController {
     }
 
     @PostMapping("/add")
-    public void agregarCliente(@RequestBody Cliente cliente) {
-        clienteService.add(cliente);
+    public ResponseEntity<Cliente> agregarCliente(@RequestBody Cliente cliente) {
+        if(userRepository.existsByUsername(cliente.getCedula())) {
+            return new ResponseEntity<Cliente>(HttpStatus.BAD_REQUEST);
+        }
+        UserEntity user = customUserDetailService.ClienteToUser(cliente);
+        cliente.setUserEntity(user);
+
+        Cliente c = clienteService.add(cliente);
+        if(c != null) {
+            return new ResponseEntity<Cliente>(c, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Cliente>(c, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity loginCliente(@RequestBody() Cliente cliente) {
+                Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(cliente.getCedula(), "123"));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = jtwGenerator.generateToken(authentication);
+
+        return new ResponseEntity<String>(token, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

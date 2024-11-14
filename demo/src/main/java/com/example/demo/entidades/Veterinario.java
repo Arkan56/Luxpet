@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Transient;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Veterinario {
     private String cedula;
+    @Transient
     private String contrasenia;
     private String especialidad;
     private String foto;
@@ -33,6 +35,7 @@ public class Veterinario {
     private List<Tratamiento> tratamiento;
 
     @OneToOne(cascade=CascadeType.ALL)
+    @JsonIgnore
     private UserEntity userEntity;
 
     @Id

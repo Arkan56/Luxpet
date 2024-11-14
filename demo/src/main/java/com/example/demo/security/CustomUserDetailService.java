@@ -44,7 +44,6 @@ public class CustomUserDetailService implements UserDetailsService {
         );
 
         UserDetails userDetails = new User(userDB.getUsername(), userDB.getPassword(), mapToGrantedAuthoritys(userDB.getRoles()));
-        
         return userDetails;
     }
 
@@ -55,7 +54,7 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserEntity ClienteToUser(Cliente cliente) {
         UserEntity user = new UserEntity();
         user.setUsername(String.valueOf(cliente.getCedula()));
-        user.setPassword(passwordEncoder.encode(cliente.getContrasenia()));
+        user.setPassword(passwordEncoder.encode("123"));
         
         Role roles = roleRepository.findByName("CLIENTE").get();
         user.setRoles(List.of(roles));

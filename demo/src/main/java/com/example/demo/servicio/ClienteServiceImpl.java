@@ -10,6 +10,8 @@ import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.Mascota;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.UserRepository;
+import com.example.demo.security.CustomUserDetailService;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -54,8 +56,8 @@ public void deleteById(Long id) {
     }
 
     @Override
-    public void add(Cliente cliente) {
-        clienteRepository.save(cliente);
+    public Cliente add(Cliente cliente) {
+        return clienteRepository.save(cliente);
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.example.demo.DTOS;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-import com.example.demo.entidades.Cliente;
 import com.example.demo.entidades.Veterinario;
 
 @Mapper

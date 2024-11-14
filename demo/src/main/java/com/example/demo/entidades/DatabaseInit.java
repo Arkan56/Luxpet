@@ -79,260 +79,261 @@ public class DatabaseInit implements ApplicationRunner {
 
 
              
-clienteSave = new Cliente("Juan Angarita", "angarita@example.com", "0000000000", "000-0000", "contrasenia123");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
+        clienteSave = new Cliente("0000000000", "Juan Angarita", "angarita@example.com", "000-0000");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("0000000001", "Nicolas Camacho", "nicoCamacho@example.com", "000-1111");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("1234567890", "Miguel Angel", "mangel@example.com", "555-1234");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("2345678901", "Juan Perez", "juan@example.com", "555-2345");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("3456789012", "Sebastian Lopez", "sebastian@example.com", "555-3456");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("4567890123", "Carlos Martinez", "carlos@example.com", "555-4567");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("5678901234", "Luis Rodriguez", "luis@example.com", "555-5678");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("6789012345", "Ana Garcia", "ana@example.com", "555-6789");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("7890123456", "Maria Sanchez", "maria@example.com", "555-7890");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("8901234567", "Lucia Ramirez", "lucia@example.com", "555-8901");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("9012345678", "Sofia Torres", "sofia@example.com", "555-9012");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("0123456789", "Laura Flores", "laura@example.com", "555-0123");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("1123456789", "Pedro Gomez", "pedro@example.com", "555-1123");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("2123456789", "Jorge Diaz", "jorge@example.com", "555-2123");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("3123456789", "Raul Fernandez", "raul@example.com", "555-3123");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("4123456789", "Andres Morales", "andres@example.com", "555-4123");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("5123456789", "Diego Herrera", "diego@example.com", "555-5123");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("6123456789", "Oscar Castro", "oscar@example.com", "555-6123");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("7123456789", "Ricardo Vargas", "ricardo@example.com", "555-7123");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("8123456789", "Fernando Rojas", "fernando@example.com", "555-8123");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("9123456789", "Alberto Mendoza", "alberto@example.com", "555-9123");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("1023456789", "Rafael Guzman", "rafael@example.com", "555-1023");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("2023456789", "Victor Ortiz", "victor@example.com", "555-2023");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("3023456789", "Hector Soto", "hector@example.com", "555-3023");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("4023456789", "Eduardo Silva", "eduardo@example.com", "555-4023");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("5023456789", "Francisco Reyes", "francisco@example.com", "555-5023");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("6023456789", "Manuel Ruiz", "manuel@example.com", "555-6023");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("7023456789", "Javier Paredes", "javier@example.com", "555-7023");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("8023456789", "Rodrigo Campos", "rodrigo@example.com", "555-8023");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("9023456789", "Adrian Vega", "adrian@example.com", "555-9023");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("1034567890", "Pablo Navarro", "pablo@example.com", "555-1034");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("2034567890", "Gustavo Peña", "gustavo@example.com", "555-2034");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("3034567890", "Felipe Salazar", "felipe@example.com", "555-3034");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("4034567890", "Santiago Aguilar", "santiago@example.com", "555-4034");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("5034567890", "Antonio Cardenas", "antonio@example.com", "555-5034");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("6034567890", "Mario Espinoza", "mario@example.com", "555-6034");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("7034567890", "Alejandro Fuentes", "alejandro@example.com", "555-7034");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("8034567890", "Guillermo Nunez", "guillermo@example.com", "555-8034");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("9034567890", "Hugo Cabrera", "hugo@example.com", "555-9034");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
 
-clienteSave = new Cliente("Nicolas Camacho", "nicoCamacho@example.com", "0000000001", "000-1111", "contrasenia234");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Miguel Angel", "mangel@example.com", "1234567890", "555-1234", "contrasenia345");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Juan Perez", "juan@example.com", "2345678901", "555-2345", "contrasenia456");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Sebastian Lopez", "sebastian@example.com", "3456789012", "555-3456", "contrasenia567");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Carlos Martinez", "carlos@example.com", "4567890123", "555-4567", "contrasenia678");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Luis Rodriguez", "luis@example.com", "5678901234", "555-5678", "contrasenia789");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Ana Garcia", "ana@example.com", "6789012345", "555-6789", "contrasenia890");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Maria Sanchez", "maria@example.com", "7890123456", "555-7890", "contrasenia901");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Lucia Ramirez", "lucia@example.com", "8901234567", "555-8901", "contrasenia012");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Sofia Torres", "sofia@example.com", "9012345678", "555-9012", "contrasenia123");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Laura Flores", "laura@example.com", "0123456789", "555-0123", "contrasenia234");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Pedro Gomez", "pedro@example.com", "1123456789", "555-1123", "contrasenia345");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Jorge Diaz", "jorge@example.com", "2123456789", "555-2123", "contrasenia456");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Raul Fernandez", "raul@example.com", "3123456789", "555-3123", "contrasenia567");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Andres Morales", "andres@example.com", "4123456789", "555-4123", "contrasenia678");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Diego Herrera", "diego@example.com", "5123456789", "555-5123", "contrasenia789");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Oscar Castro", "oscar@example.com", "6123456789", "555-6123", "contrasenia890");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Ricardo Vargas", "ricardo@example.com", "7123456789", "555-7123", "contrasenia901");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Fernando Rojas", "fernando@example.com", "8123456789", "555-8123", "contrasenia012");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Alberto Mendoza", "alberto@example.com", "9123456789", "555-9123", "contrasenia123");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Rafael Guzman", "rafael@example.com", "1023456789", "555-1023", "contrasenia234");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Victor Ortiz", "victor@example.com", "2023456789", "555-2023", "contrasenia345");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Hector Soto", "hector@example.com", "3023456789", "555-3023", "contrasenia456");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Eduardo Silva", "eduardo@example.com", "4023456789", "555-4023", "contrasenia567");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Francisco Reyes", "francisco@example.com", "5023456789", "555-5023", "contrasenia678");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Manuel Ruiz", "manuel@example.com", "6023456789", "555-6023", "contrasenia789");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Javier Paredes", "javier@example.com", "7023456789", "555-7023", "contrasenia890");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Rodrigo Campos", "rodrigo@example.com", "8023456789", "555-8023", "contrasenia901");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Adrian Vega", "adrian@example.com", "9023456789", "555-9023", "contrasenia012");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Pablo Navarro", "pablo@example.com", "1034567890", "555-1034", "contrasenia123");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Gustavo Peña", "gustavo@example.com", "2034567890", "555-2034", "contrasenia234");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Felipe Salazar", "felipe@example.com", "3034567890", "555-3034", "contrasenia345");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Santiago Aguilar", "santiago@example.com", "4034567890", "555-4034", "contrasenia456");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Antonio Cardenas", "antonio@example.com", "5034567890", "555-5034", "contrasenia567");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Mario Espinoza", "mario@example.com", "6034567890", "555-6034", "contrasenia678");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Alejandro Fuentes", "alejandro@example.com", "7034567890", "555-7034", "contrasenia789");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Guillermo Nunez", "guillermo@example.com", "8034567890", "555-8034", "contrasenia890");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Hugo Cabrera", "hugo@example.com", "9034567890", "555-9034", "contrasenia901");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Emilio Leon", "emilio@example.com", "1045678901", "555-1045", "contrasenia012");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Ivan Molina", "ivan@example.com", "2045678901", "555-2045", "contrasenia123");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Julio Ramos", "julio@example.com", "3045678901", "555-3045", "contrasenia234");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Ruben Romero", "ruben@example.com", "4045678901", "555-4045", "contrasenia345");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Angel Medina", "angel@example.com", "5045678901", "555-5045", "contrasenia456");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Martin Ortiz", "martin@example.com", "6045678901", "555-6045", "contrasenia567");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Samuel Delgado", "samuel@example.com", "7045678901", "555-7045", "contrasenia678");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Cristian Herrera", "cristian@example.com", "8045678901", "555-8045", "contrasenia789");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Joaquin Vargas", "joaquin@example.com", "9045678901", "555-9045", "contrasenia890");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Vicente Castro", "vicente@example.com", "1056789012", "555-1056", "contrasenia901");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Elias Rojas", "elias@example.com", "2056789012", "555-2056", "contrasenia012");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
-
-clienteSave = new Cliente("Nicolas Guzman", "nicolas@example.com", "3056789012", "555-3056", "contrasenia123");
-userEntity = saveUserCliente(clienteSave);
-clienteSave.setUserEntity(userEntity);
-clienteRepository.save(clienteSave);
+        clienteSave = new Cliente("1045678901", "Emilio Leon", "emilio@example.com", "555-1045");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("2045678901", "Ivan Molina", "ivan@example.com", "555-2045");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("3045678901", "Julio Ramos", "julio@example.com", "555-3045");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("4045678901", "Ruben Romero", "ruben@example.com", "555-4045");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("5045678901", "Angel Medina", "angel@example.com", "555-5045");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("6045678901", "Martin Ortiz", "martin@example.com", "555-6045");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("7045678901", "Samuel Delgado", "samuel@example.com", "555-7045");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("8045678901", "Cristian Herrera", "cristian@example.com", "555-8045");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("9045678901", "Joaquin Vargas", "joaquin@example.com", "555-9045");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("1056789012", "Vicente Castro", "vicente@example.com", "555-1056");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("2056789012", "Elias Rojas", "elias@example.com", "555-2056");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
+        clienteSave = new Cliente("3056789012", "Nicolas Guzman", "nicolas@example.com", "555-3056");
+        userEntity = saveUserCliente(clienteSave);
+        clienteSave.setUserEntity(userEntity);
+        clienteRepository.save(clienteSave);
+        
 
                 mascotaRepository.save(new Mascota("Pepe", "Pitbull", 10, 10.f,
                                 "https://images.ctfassets.net/denf86kkcx7r/339lIrj1wg9bpirJBfHn3X/a2be2e619c8c6dea173b50b6b2c80356/pitbull_seguro_santevet-33",
@@ -830,6 +831,7 @@ clienteRepository.save(clienteSave);
         private UserEntity saveUserCliente(Cliente cliente) {
                 UserEntity userEntity = new UserEntity();
                 userEntity.setUsername(String.valueOf(cliente.getCedula()));
+                userEntity.setPassword(passwordEncoder.encode("123"));
                 Role roles = roleRepository.findByName("CLIENTE").get();
                 userEntity.setRoles(List.of(roles));
                 return userRepository.save(userEntity);

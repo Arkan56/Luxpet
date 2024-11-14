@@ -2,10 +2,13 @@ package com.example.demo.controlador;
 
 import java.util.List;
 
+import org.h2.engine.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.DTOS.VeterinarioDTO;
 import com.example.demo.DTOS.VeterinarioMapper;
 import com.example.demo.entidades.Cliente;
+import com.example.demo.entidades.UserEntity;
 import com.example.demo.entidades.Veterinario;
 import com.example.demo.repositorio.UserRepository;
 import com.example.demo.security.CustomUserDetailService;
@@ -35,7 +39,7 @@ public class VeterinarioController {
     @Autowired
     VeterinarioService veterinarioService;
 
-     @Autowired
+    @Autowired
     UserRepository userRepository;
 
     @Autowired
@@ -45,7 +49,7 @@ public class VeterinarioController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    JWTGenerator JWTGenerator;
+    JWTGenerator jwtGenerator;
 
     @GetMapping("/all")
     public List<Veterinario> mostrarVeterinarios() {
@@ -53,9 +57,10 @@ public class VeterinarioController {
     }
 
     @GetMapping("/find/{id}")
-    public Veterinario mostrarVeterinario(@PathVariable("id") Long identificacion) {
+    public ResponseEntity<VeterinarioDTO> mostrarVeterinario(@PathVariable("id") Long identificacion) {
 
         Veterinario veterinario = veterinarioService.searchById(identificacion);
+        VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(veterinario);
 
         if (veterinario != null) {
             //model.addAttribute("cliente", clienteService.searchById(identificacion));
@@ -63,20 +68,38 @@ public class VeterinarioController {
         } else {
             // throw new NotFoundException(identificacion);
         }
-        return veterinario;
+        return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.OK);
     }
 
     @PostMapping("/add")
     public ResponseEntity<VeterinarioDTO> addVeterinario(@RequestBody Veterinario veterinario) {
-    Veterinario newVeterinario = veterinarioService.add(veterinario);
+
+        if(userRepository.existsByUsername(veterinario.getCedula())) {
+            return new ResponseEntity<VeterinarioDTO>(HttpStatus.BAD_REQUEST);
+        }
+
+        UserEntity user = customUserDetailService.VeterinarioToUser(veterinario);
+        veterinario.setUserEntity(user);
+
+        Veterinario newVeterinario = veterinarioService.add(veterinario);
     
-    
-    VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(newVeterinario);
-    if (newVeterinario == null) {
-        return new ResponseEntity<>(veterinarioDTO, HttpStatus.BAD_REQUEST);
+        VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(newVeterinario);
+        if (newVeterinario == null) {
+            return new ResponseEntity<>(veterinarioDTO, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(veterinarioDTO, HttpStatus.CREATED);
     }
-    return new ResponseEntity<>(veterinarioDTO, HttpStatus.CREATED);
-}
+
+    @PostMapping("/login")
+    public ResponseEntity loginVeterinario(@RequestBody() Veterinario veterinario) {
+                Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(veterinario.getCedula(), veterinario.getContrasenia()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = jwtGenerator.generateToken(authentication);
+
+        return new ResponseEntity<String>(token, HttpStatus.OK);
+    }
 
 
     @DeleteMapping("/delete/{id}")
